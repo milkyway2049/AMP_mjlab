@@ -1,0 +1,354 @@
+{
+  "schema_version": 1,
+  "robot": "hunter130",
+  "task": "Hunter130-AMP-Flat",
+  "policy_frequency_hz": 50,
+  "policy_period_s": 0.02,
+  "simulation_timestep_s": 0.005,
+  "input_name": "obs",
+  "input_dtype": "float32",
+  "input_shape": [
+    1,
+    336
+  ],
+  "output_name": "actions",
+  "output_dtype": "float32",
+  "output_shape": [
+    1,
+    25
+  ],
+  "history_length": 4,
+  "history_order": "oldest_to_newest",
+  "history_layout": "time_major",
+  "history_reset": "repeat_first_observation",
+  "frame_size": 84,
+  "observation_normalization": "embedded_in_onnx",
+  "observation_clip": null,
+  "action_clip": null,
+  "quaternion_convention": "wxyz",
+  "body_frame": "pelvis (x forward, y left, z up)",
+  "observation_terms": [
+    {
+      "name": "base_ang_vel",
+      "start": 0,
+      "stop": 3,
+      "scale": 1.0
+    },
+    {
+      "name": "projected_gravity",
+      "start": 3,
+      "stop": 6,
+      "scale": 1.0
+    },
+    {
+      "name": "command",
+      "start": 6,
+      "stop": 9,
+      "scale": 1.0
+    },
+    {
+      "name": "joint_pos_rel",
+      "start": 9,
+      "stop": 34,
+      "scale": 1.0
+    },
+    {
+      "name": "joint_vel_rel",
+      "start": 34,
+      "stop": 59,
+      "scale": 1.0
+    },
+    {
+      "name": "previous_action",
+      "start": 59,
+      "stop": 84,
+      "scale": 1.0
+    }
+  ],
+  "action_transform": "default_position + action_scale * action",
+  "joints": [
+    {
+      "index": 0,
+      "name": "left_hip_pitch_joint",
+      "default_position": -0.1,
+      "kp": 99.09842777666111,
+      "kd": 6.308801853496639,
+      "action_scale": 0.37841165436563773,
+      "position_min": -2.7925268,
+      "position_max": 2.7925268,
+      "torque_limit": 150.0
+    },
+    {
+      "index": 1,
+      "name": "left_hip_roll_joint",
+      "default_position": 0.0,
+      "kp": 99.09842777666111,
+      "kd": 6.308801853496639,
+      "action_scale": 0.37841165436563773,
+      "position_min": -0.5235988,
+      "position_max": 2.9670597,
+      "torque_limit": 150.0
+    },
+    {
+      "index": 2,
+      "name": "left_hip_yaw_joint",
+      "default_position": 0.0,
+      "kp": 40.17923863450712,
+      "kd": 2.557889775413375,
+      "action_scale": 0.9333178346439319,
+      "position_min": -2.7925268,
+      "position_max": 2.7925268,
+      "torque_limit": 150.0
+    },
+    {
+      "index": 3,
+      "name": "left_knee_joint",
+      "default_position": 0.3,
+      "kp": 99.09842777666111,
+      "kd": 6.308801853496639,
+      "action_scale": 0.37841165436563773,
+      "position_min": -0.0872665,
+      "position_max": 2.6179939,
+      "torque_limit": 150.0
+    },
+    {
+      "index": 4,
+      "name": "left_ankle_pitch_joint",
+      "default_position": -0.2,
+      "kp": 28.50124619574858,
+      "kd": 1.814445686584846,
+      "action_scale": 0.7017237022773876,
+      "position_min": -0.8726646,
+      "position_max": 0.5235988,
+      "torque_limit": 80.0
+    },
+    {
+      "index": 5,
+      "name": "left_ankle_roll_joint",
+      "default_position": 0.0,
+      "kp": 28.50124619574858,
+      "kd": 1.814445686584846,
+      "action_scale": 0.3333187585817591,
+      "position_min": -0.2617994,
+      "position_max": 0.2617994,
+      "torque_limit": 38.0
+    },
+    {
+      "index": 6,
+      "name": "right_hip_pitch_joint",
+      "default_position": -0.1,
+      "kp": 99.09842777666111,
+      "kd": 6.308801853496639,
+      "action_scale": 0.37841165436563773,
+      "position_min": -2.7925268,
+      "position_max": 2.7925268,
+      "torque_limit": 150.0
+    },
+    {
+      "index": 7,
+      "name": "right_hip_roll_joint",
+      "default_position": 0.0,
+      "kp": 99.09842777666111,
+      "kd": 6.308801853496639,
+      "action_scale": 0.37841165436563773,
+      "position_min": -2.9670597,
+      "position_max": 0.5235988,
+      "torque_limit": 150.0
+    },
+    {
+      "index": 8,
+      "name": "right_hip_yaw_joint",
+      "default_position": 0.0,
+      "kp": 40.17923863450712,
+      "kd": 2.557889775413375,
+      "action_scale": 0.9333178346439319,
+      "position_min": -2.7925268,
+      "position_max": 2.7925268,
+      "torque_limit": 150.0
+    },
+    {
+      "index": 9,
+      "name": "right_knee_joint",
+      "default_position": 0.3,
+      "kp": 99.09842777666111,
+      "kd": 6.308801853496639,
+      "action_scale": 0.37841165436563773,
+      "position_min": -0.0872665,
+      "position_max": 2.6179939,
+      "torque_limit": 150.0
+    },
+    {
+      "index": 10,
+      "name": "right_ankle_pitch_joint",
+      "default_position": -0.2,
+      "kp": 28.50124619574858,
+      "kd": 1.814445686584846,
+      "action_scale": 0.7017237022773876,
+      "position_min": -0.8726646,
+      "position_max": 0.5235988,
+      "torque_limit": 80.0
+    },
+    {
+      "index": 11,
+      "name": "right_ankle_roll_joint",
+      "default_position": 0.0,
+      "kp": 28.50124619574858,
+      "kd": 1.814445686584846,
+      "action_scale": 0.3333187585817591,
+      "position_min": -0.2617994,
+      "position_max": 0.2617994,
+      "torque_limit": 38.0
+    },
+    {
+      "index": 12,
+      "name": "waist_yaw_joint",
+      "default_position": 0.0,
+      "kp": 40.17923863450712,
+      "kd": 2.557889775413375,
+      "action_scale": 0.9333178346439319,
+      "position_min": -2.0071286,
+      "position_max": 3.577925,
+      "torque_limit": 150.0
+    },
+    {
+      "index": 13,
+      "name": "waist_roll_joint",
+      "default_position": 0.0,
+      "kp": 28.50124619574858,
+      "kd": 1.814445686584846,
+      "action_scale": 1.2280164789854282,
+      "position_min": -0.5235988,
+      "position_max": 0.5235988,
+      "torque_limit": 140.0
+    },
+    {
+      "index": 14,
+      "name": "waist_pitch_joint",
+      "default_position": 0.0,
+      "kp": 28.50124619574858,
+      "kd": 1.814445686584846,
+      "action_scale": 0.9867989563275762,
+      "position_min": -0.5235988,
+      "position_max": 0.5235988,
+      "torque_limit": 112.5
+    },
+    {
+      "index": 15,
+      "name": "left_shoulder_pitch_joint",
+      "default_position": 0.2,
+      "kp": 14.25062309787429,
+      "kd": 0.907222843292423,
+      "action_scale": 0.5262927767080406,
+      "position_min": -3.577925,
+      "position_max": 2.0071286,
+      "torque_limit": 30.0
+    },
+    {
+      "index": 16,
+      "name": "left_shoulder_roll_joint",
+      "default_position": 0.18,
+      "kp": 14.25062309787429,
+      "kd": 0.907222843292423,
+      "action_scale": 0.5262927767080406,
+      "position_min": -0.1745329,
+      "position_max": 3.577925,
+      "torque_limit": 30.0
+    },
+    {
+      "index": 17,
+      "name": "left_shoulder_yaw_joint",
+      "default_position": 0.0,
+      "kp": 14.25062309787429,
+      "kd": 0.907222843292423,
+      "action_scale": 0.5262927767080406,
+      "position_min": -2.7925268,
+      "position_max": 2.7925268,
+      "torque_limit": 30.0
+    },
+    {
+      "index": 18,
+      "name": "left_elbow_joint",
+      "default_position": 0.6,
+      "kp": 14.25062309787429,
+      "kd": 0.907222843292423,
+      "action_scale": 0.5262927767080406,
+      "position_min": -0.6108652,
+      "position_max": 2.0943951,
+      "torque_limit": 30.0
+    },
+    {
+      "index": 19,
+      "name": "left_wrist_roll_joint",
+      "default_position": 0.0,
+      "kp": 14.25062309787429,
+      "kd": 0.907222843292423,
+      "action_scale": 0.5262927767080406,
+      "position_min": -2.7925268,
+      "position_max": 2.7925268,
+      "torque_limit": 30.0
+    },
+    {
+      "index": 20,
+      "name": "right_shoulder_pitch_joint",
+      "default_position": 0.2,
+      "kp": 14.25062309787429,
+      "kd": 0.907222843292423,
+      "action_scale": 0.5262927767080406,
+      "position_min": -3.577925,
+      "position_max": 2.0071286,
+      "torque_limit": 30.0
+    },
+    {
+      "index": 21,
+      "name": "right_shoulder_roll_joint",
+      "default_position": -0.18,
+      "kp": 14.25062309787429,
+      "kd": 0.907222843292423,
+      "action_scale": 0.5262927767080406,
+      "position_min": -3.577925,
+      "position_max": 0.1745329,
+      "torque_limit": 30.0
+    },
+    {
+      "index": 22,
+      "name": "right_shoulder_yaw_joint",
+      "default_position": 0.0,
+      "kp": 14.25062309787429,
+      "kd": 0.907222843292423,
+      "action_scale": 0.5262927767080406,
+      "position_min": -2.7925268,
+      "position_max": 2.7925268,
+      "torque_limit": 30.0
+    },
+    {
+      "index": 23,
+      "name": "right_elbow_joint",
+      "default_position": 0.6,
+      "kp": 14.25062309787429,
+      "kd": 0.907222843292423,
+      "action_scale": 0.5262927767080406,
+      "position_min": -0.6108652,
+      "position_max": 2.0943951,
+      "torque_limit": 30.0
+    },
+    {
+      "index": 24,
+      "name": "right_wrist_roll_joint",
+      "default_position": 0.0,
+      "kp": 14.25062309787429,
+      "kd": 0.907222843292423,
+      "action_scale": 0.5262927767080406,
+      "position_min": -2.7925268,
+      "position_max": 2.7925268,
+      "torque_limit": 30.0
+    }
+  ],
+  "reference_artifact": {
+    "path": "logs/rsl_rl/hunter130_amp_locomotion/2026-10-13_13-54-20/policy.onnx",
+    "sha256": "04e9f4e9132ebd42d4df3ba058ef01df2654345de6b2388843371923825155b0",
+    "opset": 18,
+    "verified_on": "2026-10-14",
+    "numeric_check": "ONNX ReferenceEvaluator versus PyTorch reconstructed from the same ONNX initializers; not target-device ONNX Runtime"
+  },
+  "parameter_source": "Current hunter130 EntityCfg; exported ONNX metadata rounds numerical values to 3 decimals. Compare the selected run parameters before deployment."
+}

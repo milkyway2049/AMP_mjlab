@@ -242,9 +242,16 @@ def run_sim(
 
   robot: Entity = scene["robot"]
   robot_joint_indexes = robot.find_joints(joint_names, preserve_order=True)[0]
+  if motion.motion_dof_poss.shape[1] != len(joint_names):
+    raise ValueError(
+      f"CSV contains {motion.motion_dof_poss.shape[1]} joint columns; "
+      f"selected robot requires {len(joint_names)} in this order: {joint_names}"
+    )
 
   log: dict[str, Any] = {
     "fps": [output_fps],
+    "joint_names": np.asarray(robot.joint_names),
+    "body_names": np.asarray(robot.body_names),
     "joint_pos": [],
     "joint_vel": [],
     "body_pos_w": [],
@@ -409,10 +416,12 @@ def main(
   video_output: str | None = None,
   render_entity_name: str | None = "robot",
   line_range: tuple[int, int] | None = None,
+  robot: Literal["g1", "hunter130", "hunter180"] = "g1",
 ):
   """Replay motion from CSV file and output to npz file.
 
   Args:
+    robot: Robot used for forward kinematics; CSV joints must be retargeted to it.
     input_file: Path to a single input CSV file.
     output_name: Output npz filename (used with input_file).
     input_dir: Directory containing CSV files for batch conversion.
@@ -445,7 +454,18 @@ def main(
   sim_cfg = SimulationCfg()
   sim_cfg.mujoco.timestep = 1.0 / output_fps
 
-  scene = Scene(unitree_g1_flat_tracking_env_cfg().scene, device=device)
+  if robot in ("hunter130", "hunter180"):
+    from mjlab.scene import SceneCfg
+    from mjlab.terrains import TerrainEntityCfg
+    from src.assets.robots import get_hunter130_robot_cfg, get_hunter180_robot_cfg
+
+    scene_cfg = SceneCfg(
+      entities={"robot": (get_hunter130_robot_cfg() if robot == "hunter130" else get_hunter180_robot_cfg())}, num_envs=1, extent=2.0,
+      terrain=TerrainEntityCfg(terrain_type="plane"),
+    )
+  else:
+    scene_cfg = unitree_g1_flat_tracking_env_cfg().scene
+  scene = Scene(scene_cfg, device=device)
   model = scene.compile()
 
   sim = Simulation(num_envs=1, cfg=sim_cfg, model=model, device=device)
@@ -508,6 +528,14 @@ def main(
     "right_wrist_pitch_joint",
     "right_wrist_yaw_joint",
   ]
+  if robot == "hunter130":
+    from src.assets.robots.hunter130.hunter130_constants import HUNTER130_JOINT_NAMES
+
+    joint_names = list(HUNTER130_JOINT_NAMES)
+  elif robot == "hunter180":
+    from src.assets.robots.hunter180.hunter180_constants import HUNTER180_JOINT_NAMES
+
+    joint_names = list(HUNTER180_JOINT_NAMES)
 
   for i, (cur_input_file, cur_output_name) in enumerate(file_pairs):
     if len(file_pairs) > 1:

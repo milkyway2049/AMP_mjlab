@@ -1,0 +1,428 @@
+{
+  "source_dir": "/home/milkyway/mjlab/AMP_mjlab/src/assets/motions/g1/amp",
+  "output_dir": "/home/milkyway/mjlab/AMP_mjlab/src/assets/motions/hunter130/amp",
+  "clips": 18,
+  "frames": 9992,
+  "dropped_joints": [
+    "left_wrist_pitch_joint",
+    "left_wrist_yaw_joint",
+    "right_wrist_pitch_joint",
+    "right_wrist_yaw_joint"
+  ],
+  "method": "Shared joint mapping, target limit clipping, per-frame ground clearance matching, target FK and link-origin velocities; no IK/dynamics solve.",
+  "motions": [
+    {
+      "path": "Recovery/fallAndGetUp1_subject1.npz",
+      "file": "fallAndGetUp1_subject1.npz",
+      "frames": 2575,
+      "fps": 50.0,
+      "clipped_joint_samples": 846,
+      "clipped_joints": {
+        "left_knee_joint": 22,
+        "right_knee_joint": 18,
+        "left_shoulder_roll_joint": 112,
+        "left_elbow_joint": 266,
+        "right_shoulder_roll_joint": 155,
+        "right_elbow_joint": 273
+      },
+      "root_z_offset_range": [
+        -0.13773103980948997,
+        0.12506258705891804
+      ],
+      "source_ground_clearance_range": [
+        -0.10778053552612397,
+        0.06640067346798462
+      ],
+      "target_ground_clearance_range": [
+        0.0,
+        0.06640067346798462
+      ]
+    },
+    {
+      "path": "WalkandRun/arc_jog_left_loop_002__A029.npz",
+      "file": "arc_jog_left_loop_002__A029.npz",
+      "frames": 345,
+      "fps": 50.0,
+      "clipped_joint_samples": 423,
+      "clipped_joints": {
+        "left_ankle_pitch_joint": 7,
+        "left_ankle_roll_joint": 86,
+        "right_ankle_pitch_joint": 3,
+        "right_ankle_roll_joint": 98,
+        "left_elbow_joint": 196,
+        "right_elbow_joint": 33
+      },
+      "root_z_offset_range": [
+        -0.1175784183043398,
+        -0.05511410432428895
+      ],
+      "source_ground_clearance_range": [
+        -0.03436228504509922,
+        0.05444887245080762
+      ],
+      "target_ground_clearance_range": [
+        0.0,
+        0.05444887245080762
+      ]
+    },
+    {
+      "path": "WalkandRun/arc_walk_left_loop_001__A029.npz",
+      "file": "arc_walk_left_loop_001__A029.npz",
+      "frames": 621,
+      "fps": 50.0,
+      "clipped_joint_samples": 15,
+      "clipped_joints": {
+        "right_ankle_roll_joint": 15
+      },
+      "root_z_offset_range": [
+        -0.11161604426577157,
+        -0.06245299566447019
+      ],
+      "source_ground_clearance_range": [
+        -0.03719679380578628,
+        0.010081864151922006
+      ],
+      "target_ground_clearance_range": [
+        0.0,
+        0.010081864151922006
+      ]
+    },
+    {
+      "path": "WalkandRun/idle_turn_270_001__A048.npz",
+      "file": "idle_turn_270_001__A048.npz",
+      "frames": 298,
+      "fps": 50.0,
+      "clipped_joint_samples": 0,
+      "clipped_joints": {},
+      "root_z_offset_range": [
+        -0.11208730242683049,
+        -0.0937468066551485
+      ],
+      "source_ground_clearance_range": [
+        -0.010928890013783776,
+        0.0004139894214526575
+      ],
+      "target_ground_clearance_range": [
+        0.0,
+        0.0004139894214526575
+      ]
+    },
+    {
+      "path": "WalkandRun/idle_turn_360_001__A047.npz",
+      "file": "idle_turn_360_001__A047.npz",
+      "frames": 371,
+      "fps": 50.0,
+      "clipped_joint_samples": 35,
+      "clipped_joints": {
+        "left_ankle_roll_joint": 8,
+        "right_ankle_roll_joint": 27
+      },
+      "root_z_offset_range": [
+        -0.11989811944587549,
+        -0.09177662186321298
+      ],
+      "source_ground_clearance_range": [
+        -0.007815856723232628,
+        -0.0013194039440367726
+      ],
+      "target_ground_clearance_range": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "path": "WalkandRun/jog_arc_cw_loop_004__A045.npz",
+      "file": "jog_arc_cw_loop_004__A045.npz",
+      "frames": 443,
+      "fps": 50.0,
+      "clipped_joint_samples": 212,
+      "clipped_joints": {
+        "left_ankle_roll_joint": 78,
+        "right_ankle_roll_joint": 117,
+        "right_elbow_joint": 17
+      },
+      "root_z_offset_range": [
+        -0.11523811857520795,
+        -0.07896752122041262
+      ],
+      "source_ground_clearance_range": [
+        -0.016617386654742442,
+        0.021327686362700715
+      ],
+      "target_ground_clearance_range": [
+        0.0,
+        0.021327686362700715
+      ]
+    },
+    {
+      "path": "WalkandRun/jog_backward_loop_002__A022.npz",
+      "file": "jog_backward_loop_002__A022.npz",
+      "frames": 287,
+      "fps": 50.0,
+      "clipped_joint_samples": 2,
+      "clipped_joints": {
+        "right_ankle_roll_joint": 2
+      },
+      "root_z_offset_range": [
+        -0.11178326610645314,
+        -0.09331331208964894
+      ],
+      "source_ground_clearance_range": [
+        -0.014308840207705922,
+        0.032705252784263214
+      ],
+      "target_ground_clearance_range": [
+        0.0,
+        0.032705252784263214
+      ]
+    },
+    {
+      "path": "WalkandRun/jog_backward_loop_003__A023.npz",
+      "file": "jog_backward_loop_003__A023.npz",
+      "frames": 285,
+      "fps": 50.0,
+      "clipped_joint_samples": 148,
+      "clipped_joints": {
+        "left_ankle_roll_joint": 70,
+        "right_ankle_roll_joint": 78
+      },
+      "root_z_offset_range": [
+        -0.11215104581107159,
+        -0.07873046630636904
+      ],
+      "source_ground_clearance_range": [
+        -0.02803656971256418,
+        0.015765270177919788
+      ],
+      "target_ground_clearance_range": [
+        0.0,
+        0.015765270177919788
+      ]
+    },
+    {
+      "path": "WalkandRun/jog_forward_loop_003__A021.npz",
+      "file": "jog_forward_loop_003__A021.npz",
+      "frames": 401,
+      "fps": 50.0,
+      "clipped_joint_samples": 157,
+      "clipped_joints": {
+        "left_ankle_pitch_joint": 1,
+        "left_ankle_roll_joint": 13,
+        "right_ankle_pitch_joint": 10,
+        "right_ankle_roll_joint": 13,
+        "left_elbow_joint": 120
+      },
+      "root_z_offset_range": [
+        -0.11448673191810774,
+        -0.0815262526324283
+      ],
+      "source_ground_clearance_range": [
+        -0.023964735896264376,
+        0.03801236776058738
+      ],
+      "target_ground_clearance_range": [
+        0.0,
+        0.03801236776058738
+      ]
+    },
+    {
+      "path": "WalkandRun/jog_forward_loop_003__A022.npz",
+      "file": "jog_forward_loop_003__A022.npz",
+      "frames": 286,
+      "fps": 50.0,
+      "clipped_joint_samples": 22,
+      "clipped_joints": {
+        "left_ankle_roll_joint": 13,
+        "right_ankle_roll_joint": 9
+      },
+      "root_z_offset_range": [
+        -0.11090323019008828,
+        -0.09299751773887752
+      ],
+      "source_ground_clearance_range": [
+        -0.013517963872722865,
+        0.02357587361199026
+      ],
+      "target_ground_clearance_range": [
+        0.0,
+        0.02357587361199026
+      ]
+    },
+    {
+      "path": "WalkandRun/step_rotate_idle_000_002__A026.npz",
+      "file": "step_rotate_idle_000_002__A026.npz",
+      "frames": 260,
+      "fps": 50.0,
+      "clipped_joint_samples": 0,
+      "clipped_joints": {},
+      "root_z_offset_range": [
+        -0.09922075595923968,
+        -0.0967514322010395
+      ],
+      "source_ground_clearance_range": [
+        -0.013724417442686819,
+        -0.011685927186737263
+      ],
+      "target_ground_clearance_range": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "path": "WalkandRun/walk_arc_cw_loop_002__A046.npz",
+      "file": "walk_arc_cw_loop_002__A046.npz",
+      "frames": 291,
+      "fps": 50.0,
+      "clipped_joint_samples": 31,
+      "clipped_joints": {
+        "left_ankle_roll_joint": 25,
+        "right_ankle_roll_joint": 6
+      },
+      "root_z_offset_range": [
+        -0.11156140463777099,
+        -0.08920333612693376
+      ],
+      "source_ground_clearance_range": [
+        -0.016217625006077468,
+        0.0066938020716717
+      ],
+      "target_ground_clearance_range": [
+        0.0,
+        0.0066938020716717
+      ]
+    },
+    {
+      "path": "WalkandRun/walk_backward_loop_001__A022.npz",
+      "file": "walk_backward_loop_001__A022.npz",
+      "frames": 520,
+      "fps": 50.0,
+      "clipped_joint_samples": 6,
+      "clipped_joints": {
+        "left_ankle_roll_joint": 6
+      },
+      "root_z_offset_range": [
+        -0.11075105972419319,
+        -0.08576556903405994
+      ],
+      "source_ground_clearance_range": [
+        -0.018817872194690062,
+        0.004670908185674172
+      ],
+      "target_ground_clearance_range": [
+        0.0,
+        0.004670908185674172
+      ]
+    },
+    {
+      "path": "WalkandRun/walk_backward_loop_001__A024.npz",
+      "file": "walk_backward_loop_001__A024.npz",
+      "frames": 729,
+      "fps": 50.0,
+      "clipped_joint_samples": 24,
+      "clipped_joints": {
+        "left_ankle_roll_joint": 22,
+        "right_ankle_roll_joint": 2
+      },
+      "root_z_offset_range": [
+        -0.11039444680888336,
+        -0.08186188748751234
+      ],
+      "source_ground_clearance_range": [
+        -0.02456680370374288,
+        0.004728253874675542
+      ],
+      "target_ground_clearance_range": [
+        0.0,
+        0.004728253874675542
+      ]
+    },
+    {
+      "path": "WalkandRun/walk_forward_loop_002__A022.npz",
+      "file": "walk_forward_loop_002__A022.npz",
+      "frames": 455,
+      "fps": 50.0,
+      "clipped_joint_samples": 0,
+      "clipped_joints": {},
+      "root_z_offset_range": [
+        -0.10923433865907858,
+        -0.07739851752876317
+      ],
+      "source_ground_clearance_range": [
+        -0.02571946873771706,
+        0.0016952191925415395
+      ],
+      "target_ground_clearance_range": [
+        0.0,
+        0.0016952191925415395
+      ]
+    },
+    {
+      "path": "WalkandRun/walk_forward_loop_002__A024.npz",
+      "file": "walk_forward_loop_002__A024.npz",
+      "frames": 482,
+      "fps": 50.0,
+      "clipped_joint_samples": 2,
+      "clipped_joints": {
+        "left_ankle_roll_joint": 2
+      },
+      "root_z_offset_range": [
+        -0.1110235723534628,
+        -0.07419288765493953
+      ],
+      "source_ground_clearance_range": [
+        -0.03014235325425981,
+        0.0027524366384996408
+      ],
+      "target_ground_clearance_range": [
+        0.0,
+        0.0027524366384996408
+      ]
+    },
+    {
+      "path": "WalkandRun/walk_sideway_left_loop_002__A021.npz",
+      "file": "walk_sideway_left_loop_002__A021.npz",
+      "frames": 713,
+      "fps": 50.0,
+      "clipped_joint_samples": 281,
+      "clipped_joints": {
+        "left_ankle_roll_joint": 101,
+        "right_ankle_roll_joint": 180
+      },
+      "root_z_offset_range": [
+        -0.12068300415575992,
+        -0.07483350433560107
+      ],
+      "source_ground_clearance_range": [
+        -0.03156915960401987,
+        0.0026035175158785877
+      ],
+      "target_ground_clearance_range": [
+        0.0,
+        0.0026035175158785877
+      ]
+    },
+    {
+      "path": "WalkandRun/walk_sideway_right_loop_001__A022.npz",
+      "file": "walk_sideway_right_loop_001__A022.npz",
+      "frames": 630,
+      "fps": 50.0,
+      "clipped_joint_samples": 134,
+      "clipped_joints": {
+        "left_ankle_roll_joint": 82,
+        "right_ankle_roll_joint": 52
+      },
+      "root_z_offset_range": [
+        -0.11337072470816151,
+        -0.08498350458848447
+      ],
+      "source_ground_clearance_range": [
+        -0.020864868772839107,
+        0.0036955908833560935
+      ],
+      "target_ground_clearance_range": [
+        0.0,
+        0.0036955908833560935
+      ]
+    }
+  ]
+}
