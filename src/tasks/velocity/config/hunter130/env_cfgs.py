@@ -13,6 +13,7 @@ from mjlab.sensor import ContactMatch, ContactSensorCfg, RayCastSensorCfg
 from mjlab.tasks.velocity import mdp
 from mjlab.tasks.velocity.mdp import UniformVelocityCommandCfg
 from src.tasks.velocity.velocity_env_cfg import make_velocity_env_cfg
+from src.tasks.hunter130_robustness import configure_hunter130_robustness
 
 
 def hunter130_rough_env_cfg(play: bool = False) -> ManagerBasedRlEnvCfg:
@@ -138,6 +139,8 @@ def hunter130_rough_env_cfg(play: bool = False) -> ManagerBasedRlEnvCfg:
     weight=-1.0,
     params={"sensor_name": self_collision_cfg.name, "force_threshold": 10.0},
   )
+
+  configure_hunter130_robustness(cfg, play=play)
 
   # Apply play mode overrides.
   if play:

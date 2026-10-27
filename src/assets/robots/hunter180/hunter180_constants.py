@@ -1,7 +1,8 @@
 """Hunter180 articulation, nominal pose and collision configuration.
 
 Effort and velocity ratings come from the vendored URDF. For the heavier robot,
-PD gains use the requested 3x Hunter130 baseline; armatures remain estimates.
+PD gains use the requested 3x historical Hunter130 baseline; armatures remain
+estimates. Later Hunter130 tuning must not change Hunter180 control parameters.
 """
 
 from copy import deepcopy
@@ -14,8 +15,9 @@ import mujoco
 from mjlab.actuator import BuiltinPositionActuatorCfg
 from mjlab.entity import EntityArticulationInfoCfg, EntityCfg
 from mjlab.utils.spec_config import CollisionCfg
-from src.assets.robots.unitree_g1.g1_constants import G1_ARTICULATION
-from src.assets.robots.hunter130.hunter130_constants import HUNTER130_URDF
+from src.assets.robots.hunter130.hunter130_constants import (
+  HUNTER130_URDF,
+)
 
 
 ASSET_DIR = Path(__file__).resolve().parent
@@ -41,6 +43,15 @@ HUNTER180_AMP_BODY_NAMES = (
 )
 HUNTER180_AMP_ANCHOR_NAME = "torso_link"
 
+# Freeze the 2026-10-16 Hunter130 reference so Hunter130-only PD updates cannot
+# silently alter Hunter180 gains or the corresponding policy action scales.
+_REFERENCE_MOTOR_PARAMS = {
+  r".*_(hip_pitch|hip_roll|knee)_joint": (100.0, 6.3, 0.0251),
+  r"(.*_hip_yaw|waist_yaw)_joint": (40.0, 2.6, 0.0102),
+  r"(.*_ankle_(pitch|roll)|waist_(pitch|roll))_joint": (28.5, 1.8, 0.0072),
+  r".*_(shoulder_(pitch|roll|yaw)|elbow)_joint": (14.25, 0.9, 0.0036),
+}
+
 
 def get_spec() -> mujoco.MjSpec:
   spec = mujoco.MjSpec.from_file(str(HUNTER180_XML))
@@ -53,16 +64,16 @@ def get_spec() -> mujoco.MjSpec:
 
 def _gains(name: str) -> tuple[float, float, float]:
   matches = [
-    actuator for actuator in G1_ARTICULATION.actuators
-    if any(re.fullmatch(pattern, name) for pattern in actuator.target_names_expr)
+    params for pattern, params in _REFERENCE_MOTOR_PARAMS.items()
+    if re.fullmatch(pattern, name)
   ]
   if len(matches) != 1:
-    raise ValueError(f"Expected one G1 PD configuration for {name}; found {len(matches)}")
-  actuator = matches[0]
+    raise ValueError(f"Expected one historical Hunter130 PD configuration for {name}; found {len(matches)}")
+  stiffness, damping, armature = matches[0]
   return (
-    actuator.stiffness * HUNTER180_PD_SCALE,
-    actuator.damping * HUNTER180_PD_SCALE,
-    actuator.armature,
+    round(stiffness * HUNTER180_PD_SCALE, 2),
+    round(damping * HUNTER180_PD_SCALE, 2),
+    armature,
   )
 
 
@@ -92,7 +103,7 @@ HUNTER180_COLLISION = CollisionCfg(
   friction={".*_foot_collision": (0.6,)},
 )
 HUNTER180_ACTION_SCALE = {
-  name: 0.25 * HUNTER180_EFFORT_LIMITS[name] / _gains(name)[0]
+  name: round(0.25 * HUNTER180_EFFORT_LIMITS[name] / _gains(name)[0], 3)
   for name in HUNTER180_JOINT_NAMES
 }
 

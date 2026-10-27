@@ -89,12 +89,24 @@ class Hunter130Test(unittest.TestCase):
     self.assertEqual(second.init_state.joint_pos[".*_knee_joint"], 0.3)
     self.assertEqual(second.articulation.actuators[0].stiffness, original_stiffness)
 
-  def test_pd_matches_g1(self):
+  def test_requested_pd_and_unchanged_armatures(self):
     for actuator in get_hunter130_robot_cfg().articulation.actuators:
       name = actuator.target_names_expr[0]
+      if "hip" in name or "knee" in name:
+        expected_gains = (100.0, 8.0)
+      elif "ankle" in name:
+        expected_gains = (30.0, 5.0)
+      elif "waist" in name:
+        expected_gains = (60.0, 5.0)
+      else:
+        expected_gains = (25.0, 1.0)
+      self.assertEqual((actuator.stiffness, actuator.damping), expected_gains)
+      index = HUNTER130_JOINT_NAMES.index(name)
+      self.assertEqual(self.model.actuator_gainprm[index, 0], expected_gains[0])
+      self.assertEqual(self.model.actuator_biasprm[index, 2], -expected_gains[1])
       reference = next(a for a in G1_ARTICULATION.actuators if any(re.fullmatch(p, name) for p in a.target_names_expr))
-      self.assertEqual(actuator.stiffness, reference.stiffness)
-      self.assertEqual(actuator.damping, reference.damping)
+      self.assertAlmostEqual(actuator.armature, reference.armature,
+                             delta=0.02 * reference.armature)
 
   def test_task_configs(self):
     for task in ("Hunter130-Flat", "Hunter130-Rough", "Hunter130-AMP-Flat", "Hunter130-AMP-Rough"):

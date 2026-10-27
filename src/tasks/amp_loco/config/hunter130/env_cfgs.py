@@ -18,6 +18,7 @@ from mjlab.sensor import ContactMatch, ContactSensorCfg, RayCastSensorCfg
 from mjlab.tasks.velocity import mdp
 from mjlab.tasks.velocity.mdp import UniformVelocityCommandCfg
 from src.tasks.amp_loco.amp_env_cfg import make_amp_env_cfg
+from src.tasks.hunter130_robustness import configure_hunter130_robustness
 from .motion import init_hunter130_motion_loader
 
 def hunter130_amp_rough_env_cfg(play: bool = False) -> ManagerBasedRlEnvCfg:
@@ -134,6 +135,8 @@ def hunter130_amp_rough_env_cfg(play: bool = False) -> ManagerBasedRlEnvCfg:
   cfg.observations["amp"].terms["body_ang_vel_b"].params["body_cfg"].body_names = body_names
 
   
+
+  configure_hunter130_robustness(cfg, play=play, amp=True)
 
   # Apply play mode overrides.
   if play:

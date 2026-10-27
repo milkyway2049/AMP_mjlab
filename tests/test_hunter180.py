@@ -10,7 +10,6 @@ from scipy.spatial.transform import Rotation
 from mjlab.entity import Entity
 from mjlab.tasks.registry import load_env_cfg, load_rl_cfg
 from src import SRC_PATH
-from src.assets.robots.hunter130.hunter130_constants import HUNTER130_ARTICULATION
 from src.assets.robots.hunter180.hunter180_constants import (
   HUNTER180_AMP_BODY_NAMES, HUNTER180_ARTICULATION, HUNTER180_FOOT_SITE_NAMES,
   HUNTER180_JOINT_NAMES, HUNTER180_PD_SCALE, HUNTER180_MASS_RATIO, HUNTER180_TOTAL_MASS,
@@ -56,15 +55,20 @@ class Hunter180Test(unittest.TestCase):
       effort = float(joint.find("limit").get("effort"))
       np.testing.assert_allclose(m.actuator_forcerange[i], [-effort, effort])
 
-  def test_pd_three_times_hunter130(self):
+  def test_pd_three_times_historical_hunter130(self):
     self.assertAlmostEqual(HUNTER180_MASS_RATIO, HUNTER180_TOTAL_MASS / HUNTER130_REFERENCE_MASS)
     self.assertEqual(HUNTER180_PD_SCALE, 3.0)
-    reference = {a.target_names_expr[0]: a for a in HUNTER130_ARTICULATION.actuators}
     for actuator in HUNTER180_ARTICULATION.actuators:
-      base = reference[actuator.target_names_expr[0]]
-      self.assertAlmostEqual(actuator.stiffness, base.stiffness * 3.0)
-      self.assertAlmostEqual(actuator.damping, base.damping * 3.0)
-      self.assertEqual(actuator.armature, base.armature)
+      name = actuator.target_names_expr[0]
+      if "hip_pitch" in name or "hip_roll" in name or "knee" in name:
+        expected = (300.0, 18.9, 0.0251)
+      elif "hip_yaw" in name or "waist_yaw" in name:
+        expected = (120.0, 7.8, 0.0102)
+      elif "ankle" in name or "waist" in name:
+        expected = (85.5, 5.4, 0.0072)
+      else:
+        expected = (42.75, 2.7, 0.0036)
+      self.assertEqual((actuator.stiffness, actuator.damping, actuator.armature), expected)
 
   def test_nominal_pose_original_feet_and_config_isolation(self):
     m = self.model; data = mujoco.MjData(m)

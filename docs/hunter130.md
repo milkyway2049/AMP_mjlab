@@ -4,13 +4,15 @@
 
 ONNX 接口、观测历史、关节映射及实机控制对接见 [Hunter130 神经网络部署文档](hunter130_deployment.md)。
 
+2026-10-28 的观测噪声/随机化审计、健身垫接触训练和新 PD 使用说明见 [健身垫训练调整](hunter130_mat_training.md)。
+
 - 25 个关节：双腿 12、腰部 3、双臂 10；质量 30.87757522 kg。
 - [hunter130.urdf](../src/assets/robots/hunter130/hunter130.urdf) 与同目录的 `meshes/` 保存原始机器人描述，运行不依赖原目录。
 - [hunter130.xml](../src/assets/robots/hunter130/xmls/hunter130.xml) 保留 URDF 的连杆坐标、质量、完整惯量、关节轴、角度限位和力矩限位，增加浮动基座、IMU、足底 site。
 - 足部视觉和碰撞均直接使用原始 `ankle_roll_link.STL`。MuJoCo 默认对 mesh 碰撞使用凸包；没有另外替换成盒体或胶囊，也没有减面。
 - 其他部位使用从 STL 包围范围拟合的盒体/胶囊碰撞体，排除沿关节链相距一至两个关节的连杆碰撞，保留其他自碰撞。
 - 5 个 STL 超过 MuJoCo 的 200000 三角面读取上限，生成无损索引 OBJ 用于视觉。原 STL 保留，顶点和三角形不减面。
-- [机器人配置](../src/assets/robots/hunter130/hunter130_constants.py) 的 PD 直接读取项目 [G1 配置](../src/assets/robots/unitree_g1/g1_constants.py) 中对应关节的 stiffness/damping；armature 同样使用 G1 的仿真估计值。力矩限制仍来自 Hunter130 URDF，action scale 为 `0.25 * effort_limit / stiffness`。URDF 速度限制保留为配置元数据，不作为硬速度约束。
+- [机器人配置](../src/assets/robots/hunter130/hunter130_constants.py) 的 PD 按 2026-10-28 指定值设置：髋 pitch/roll/yaw 和膝 Kp/Kd 为 `100/8`，踝 pitch/roll 为 `30/5`，肩 pitch/roll/yaw、肘和腕 roll 为 `25/1`，腰 yaw/roll/pitch 为 `60/5`。armature 保留原 G1 仿真估计值取整结果 `0.0251/0.0102/0.0072/0.0036`。力矩限制仍来自 Hunter130 URDF，action scale 为 `round(0.25 * effort_limit / stiffness, 3)`，已随新 Kp 重算并同步部署 JSON。旧策略训练时的 PD 和 scale 不同，需要按新配置重新训练或微调、验证后再部署。URDF 速度限制保留为配置元数据，不作为硬速度约束。
 
 在仓库根目录执行：
 

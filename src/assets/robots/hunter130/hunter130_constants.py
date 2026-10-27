@@ -1,7 +1,7 @@
 """Hunter130 articulation, nominal pose and collision configuration.
 
-Effort and velocity ratings come from the vendored URDF. PD gains are shared
-with the matching G1 joints as requested; G1 armatures are simulation estimates.
+Effort and velocity ratings come from the vendored URDF. PD gains use the
+requested Hunter130 values; estimated armatures retain rounded G1 baselines.
 """
 
 from copy import deepcopy
@@ -14,7 +14,6 @@ import mujoco
 from mjlab.actuator import BuiltinPositionActuatorCfg
 from mjlab.entity import EntityArticulationInfoCfg, EntityCfg
 from mjlab.utils.spec_config import CollisionCfg
-from src.assets.robots.unitree_g1.g1_constants import G1_ARTICULATION
 
 
 ASSET_DIR = Path(__file__).resolve().parent
@@ -35,6 +34,17 @@ HUNTER130_AMP_BODY_NAMES = (
 )
 HUNTER130_AMP_ANCHOR_NAME = "torso_link"
 
+# (Kp [Nm/rad], Kd [Nm*s/rad], armature [kg*m^2]). Keep the requested
+# values explicit so training, exported metadata and deployment agree.
+_MOTOR_PARAMS = {
+  r".*_(hip_pitch|hip_roll|knee)_joint": (100.0, 8.0, 0.0251),
+  r".*_hip_yaw_joint": (100.0, 8.0, 0.0102),
+  r".*_ankle_(pitch|roll)_joint": (30.0, 5.0, 0.0072),
+  r"waist_yaw_joint": (60.0, 5.0, 0.0102),
+  r"waist_(pitch|roll)_joint": (60.0, 5.0, 0.0072),
+  r".*_(shoulder_(pitch|roll|yaw)|elbow|wrist_roll)_joint": (25.0, 1.0, 0.0036),
+}
+
 
 def get_spec() -> mujoco.MjSpec:
   spec = mujoco.MjSpec.from_file(str(HUNTER130_XML))
@@ -47,13 +57,11 @@ def get_spec() -> mujoco.MjSpec:
 
 def _gains(name: str) -> tuple[float, float, float]:
   matches = [
-    actuator for actuator in G1_ARTICULATION.actuators
-    if any(re.fullmatch(pattern, name) for pattern in actuator.target_names_expr)
+    params for pattern, params in _MOTOR_PARAMS.items() if re.fullmatch(pattern, name)
   ]
   if len(matches) != 1:
-    raise ValueError(f"Expected one G1 PD configuration for {name}; found {len(matches)}")
-  actuator = matches[0]
-  return (actuator.stiffness, actuator.damping, actuator.armature)
+    raise ValueError(f"Expected one Hunter130 motor configuration for {name}; found {len(matches)}")
+  return matches[0]
 
 
 HUNTER130_ARTICULATION = EntityArticulationInfoCfg(
@@ -82,7 +90,7 @@ HUNTER130_COLLISION = CollisionCfg(
   friction={".*_foot_collision": (0.6,)},
 )
 HUNTER130_ACTION_SCALE = {
-  name: 0.25 * HUNTER130_EFFORT_LIMITS[name] / _gains(name)[0]
+  name: round(0.25 * HUNTER130_EFFORT_LIMITS[name] / _gains(name)[0], 3)
   for name in HUNTER130_JOINT_NAMES
 }
 

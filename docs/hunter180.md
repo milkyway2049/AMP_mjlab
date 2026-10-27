@@ -12,7 +12,7 @@
 
 ## 按重量参考与指定倍数设置 PD
 
-以本项目 Hunter130 的对应关节 PD 为基准。两台机器人的质量比约为 2.0839，当前按用户指定的 **3 倍**设置 Hunter180 的 Kp 和 Kd：
+以本项目 Hunter130 在 2026-10-16 的对应关节 PD 为固定基准（Hunter130 后续调参不会改变 Hunter180）。两台机器人的质量比约为 2.0839，当前按用户指定的 **3 倍**设置 Hunter180 的 Kp 和 Kd：
 
 ```text
 mass_ratio = Hunter180_mass / Hunter130_mass
@@ -24,11 +24,11 @@ Kp_180 = Kp_130 * PD_scale
 Kd_180 = Kd_130 * PD_scale
 ```
 
-Hunter130 的基准 PD 来自项目 G1 对应关节。Hunter180 的各组完整数值在 [机器人配置](../src/assets/robots/hunter180/hunter180_constants.py) 和 [接口参数 JSON](hunter180_policy_io.json) 中；质量比由两个本地 URDF 自动计算，最终 PD 倍数由 `HUNTER180_PD_SCALE=3.0` 指定。
+这一历史 Hunter130 基准 PD 来自项目 G1 对应关节的小幅取整值。Hunter180 对应组的 Kp/Kd 为：腿部主关节 `300/18.9`，hip yaw 和 waist yaw `120/7.8`，ankles 和 waist pitch/roll `85.5/5.4`，手臂 `42.75/2.7`。训练与部署使用同一组实际数值，见 [机器人配置](../src/assets/robots/hunter180/hunter180_constants.py) 和 [接口参数 JSON](hunter180_policy_io.json)；质量比由两个本地 URDF 自动计算，最终 PD 倍数由 `HUNTER180_PD_SCALE=3.0` 指定。
 
-这里把重量作为提高增益的依据，并使用指定的 3 倍初值；并未求解各关节的精确等效惯量。连杆长度和关节有效惯量也影响控制响应，这些不是经过实机辨识的电机增益。电机 armature 仍使用原估计值，没有按整机质量或 PD 倍数缩放。
+这里把重量作为提高增益的依据，并使用指定的 3 倍初值；并未求解各关节的精确等效惯量。连杆长度和关节有效惯量也影响控制响应，这些不是经过实机辨识的电机增益。电机 armature 使用 Hunter130 取整后的估计值，没有按整机质量或 PD 倍数缩放。
 
-力矩上限保留 Hunter180 URDF 的值，例如腿部主关节 450 Nm、ankle pitch 622 Nm、ankle roll 206 Nm、waist yaw/roll/pitch 400/260/356 Nm、手臂 160 Nm。`action_scale = 0.25 * effort_limit / Kp_180`，随新的 PD 重新计算，不统一使用 0.25。
+力矩上限保留 Hunter180 URDF 的值，例如腿部主关节 450 Nm、ankle pitch 622 Nm、ankle roll 206 Nm、waist yaw/roll/pitch 400/260/356 Nm、手臂 160 Nm。`action_scale = round(0.25 * effort_limit / Kp_180, 3)`，随新的 PD 重新计算并保留三位小数，不统一使用 0.25。
 
 ## 任务与训练
 

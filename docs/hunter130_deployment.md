@@ -2,7 +2,7 @@
 
 本文说明如何把 AMP_mjlab 的 Hunter130 策略接入 ONNX 推理和机器人控制循环，重点是训练、推理和电机接口之间的数据一致性。适配与动作数据准备见 [Hunter130 说明](hunter130.md)。
 
-本文以 **`Hunter130-AMP-Flat`、25 关节、336 维输入**为主，参数根据本仓库代码及训练目录 `logs/rsl_rl/hunter130_amp_locomotion/2026-10-13_13-54-20/` 的实际 ONNX 和保存配置核对。其他任务的差异在末尾列出。代码片段均为离线推理参考；本文没有修改或完成外部实机控制器的适配。
+本文以 **`Hunter130-AMP-Flat`、25 关节、336 维输入**为主。接口布局曾与训练目录 `logs/rsl_rl/hunter130_amp_locomotion/2026-10-13_13-54-20/` 的实际 ONNX 和保存配置核对；控制参数现采用 2026-10-28 指定的 Hunter130 PD，并同步重算 action scale。旧 run 的 PD/scale 与当前参数不同，不能直接配用当前 JSON；应使用对应 run 的配置，或按新参数重新训练/微调并验证。其他任务的差异在末尾列出。代码片段均为离线推理参考；本文没有修改或完成外部实机控制器的适配。
 
 ## 1. 部署接口概览
 
@@ -47,7 +47,7 @@ hunter130_policy/
 └── agent.yaml
 ```
 
-[hunter130_policy_io.json](hunter130_policy_io.json) 提供本配置的观测布局、关节顺序、默认姿态、完整精度的 Kp/Kd/action scale、关节限位与力矩上限。它是本次配置快照，**不是对任意 checkpoint 都通用的配置**。训练时修改过默认姿态、增益、观测或 action scale 的模型，应使用对应 run 的参数重新核对。
+[hunter130_policy_io.json](hunter130_policy_io.json) 提供本配置的观测布局、关节顺序、默认姿态、当前指定的 Kp/Kd 及重算后的 action scale、关节限位与力矩上限。它是本次配置快照，**不是对任意 checkpoint 都通用的配置**。训练时修改过默认姿态、增益、观测或 action scale 的模型，应使用对应 run 的参数重新核对。
 
 ### 2.1 使用训练时导出的 ONNX
 
@@ -188,37 +188,37 @@ obs_t = [frame_(t-3), frame_(t-2), frame_(t-1), frame_t]
 
 顺序为：左腿 6 → 右腿 6 → 腰部 3 → 左臂 5 → 右臂 5。双腕各有一个 roll 关节，没有 wrist pitch/yaw。
 
-下面的索引同时用于关节位置、关节速度、上一动作、ONNX 输出和 action scale。Kp 单位为 Nm/rad，Kd 为 Nm·s/rad。表格数值仅为便于阅读的舍入值，程序读取接口 JSON 的完整精度数组。
+下面的索引同时用于关节位置、关节速度、上一动作、ONNX 输出和 action scale。Kp 单位为 Nm/rad，Kd 为 Nm·s/rad。表格与接口 JSON、训练配置使用相同的指定 PD 数值；action scale 按当前 Kp 重算并保留三位小数。
 
 | Index | Joint | q0 (rad) | Kp | Kd | Scale (rad) | Torque limit (Nm) |
 |---:|---|---:|---:|---:|---:|---:|
-| 0 | `left_hip_pitch_joint` | -0.10 | 99.098428 | 6.308802 | 0.378411654 | 150 |
-| 1 | `left_hip_roll_joint` | 0.00 | 99.098428 | 6.308802 | 0.378411654 | 150 |
-| 2 | `left_hip_yaw_joint` | 0.00 | 40.179239 | 2.557890 | 0.933317835 | 150 |
-| 3 | `left_knee_joint` | 0.30 | 99.098428 | 6.308802 | 0.378411654 | 150 |
-| 4 | `left_ankle_pitch_joint` | -0.20 | 28.501246 | 1.814446 | 0.701723702 | 80 |
-| 5 | `left_ankle_roll_joint` | 0.00 | 28.501246 | 1.814446 | 0.333318759 | 38 |
-| 6 | `right_hip_pitch_joint` | -0.10 | 99.098428 | 6.308802 | 0.378411654 | 150 |
-| 7 | `right_hip_roll_joint` | 0.00 | 99.098428 | 6.308802 | 0.378411654 | 150 |
-| 8 | `right_hip_yaw_joint` | 0.00 | 40.179239 | 2.557890 | 0.933317835 | 150 |
-| 9 | `right_knee_joint` | 0.30 | 99.098428 | 6.308802 | 0.378411654 | 150 |
-| 10 | `right_ankle_pitch_joint` | -0.20 | 28.501246 | 1.814446 | 0.701723702 | 80 |
-| 11 | `right_ankle_roll_joint` | 0.00 | 28.501246 | 1.814446 | 0.333318759 | 38 |
-| 12 | `waist_yaw_joint` | 0.00 | 40.179239 | 2.557890 | 0.933317835 | 150 |
-| 13 | `waist_roll_joint` | 0.00 | 28.501246 | 1.814446 | 1.228016479 | 140 |
-| 14 | `waist_pitch_joint` | 0.00 | 28.501246 | 1.814446 | 0.986798956 | 112.5 |
-| 15 | `left_shoulder_pitch_joint` | 0.20 | 14.250623 | 0.907223 | 0.526292777 | 30 |
-| 16 | `left_shoulder_roll_joint` | 0.18 | 14.250623 | 0.907223 | 0.526292777 | 30 |
-| 17 | `left_shoulder_yaw_joint` | 0.00 | 14.250623 | 0.907223 | 0.526292777 | 30 |
-| 18 | `left_elbow_joint` | 0.60 | 14.250623 | 0.907223 | 0.526292777 | 30 |
-| 19 | `left_wrist_roll_joint` | 0.00 | 14.250623 | 0.907223 | 0.526292777 | 30 |
-| 20 | `right_shoulder_pitch_joint` | 0.20 | 14.250623 | 0.907223 | 0.526292777 | 30 |
-| 21 | `right_shoulder_roll_joint` | -0.18 | 14.250623 | 0.907223 | 0.526292777 | 30 |
-| 22 | `right_shoulder_yaw_joint` | 0.00 | 14.250623 | 0.907223 | 0.526292777 | 30 |
-| 23 | `right_elbow_joint` | 0.60 | 14.250623 | 0.907223 | 0.526292777 | 30 |
-| 24 | `right_wrist_roll_joint` | 0.00 | 14.250623 | 0.907223 | 0.526292777 | 30 |
+| 0 | `left_hip_pitch_joint` | -0.1 | 100 | 8 | 0.375 | 150 |
+| 1 | `left_hip_roll_joint` | 0 | 100 | 8 | 0.375 | 150 |
+| 2 | `left_hip_yaw_joint` | 0 | 100 | 8 | 0.375 | 150 |
+| 3 | `left_knee_joint` | 0.3 | 100 | 8 | 0.375 | 150 |
+| 4 | `left_ankle_pitch_joint` | -0.2 | 30 | 5 | 0.667 | 80 |
+| 5 | `left_ankle_roll_joint` | 0 | 30 | 5 | 0.317 | 38 |
+| 6 | `right_hip_pitch_joint` | -0.1 | 100 | 8 | 0.375 | 150 |
+| 7 | `right_hip_roll_joint` | 0 | 100 | 8 | 0.375 | 150 |
+| 8 | `right_hip_yaw_joint` | 0 | 100 | 8 | 0.375 | 150 |
+| 9 | `right_knee_joint` | 0.3 | 100 | 8 | 0.375 | 150 |
+| 10 | `right_ankle_pitch_joint` | -0.2 | 30 | 5 | 0.667 | 80 |
+| 11 | `right_ankle_roll_joint` | 0 | 30 | 5 | 0.317 | 38 |
+| 12 | `waist_yaw_joint` | 0 | 60 | 5 | 0.625 | 150 |
+| 13 | `waist_roll_joint` | 0 | 60 | 5 | 0.583 | 140 |
+| 14 | `waist_pitch_joint` | 0 | 60 | 5 | 0.469 | 112.5 |
+| 15 | `left_shoulder_pitch_joint` | 0.2 | 25 | 1 | 0.300 | 30 |
+| 16 | `left_shoulder_roll_joint` | 0.18 | 25 | 1 | 0.300 | 30 |
+| 17 | `left_shoulder_yaw_joint` | 0 | 25 | 1 | 0.300 | 30 |
+| 18 | `left_elbow_joint` | 0.6 | 25 | 1 | 0.300 | 30 |
+| 19 | `left_wrist_roll_joint` | 0 | 25 | 1 | 0.300 | 30 |
+| 20 | `right_shoulder_pitch_joint` | 0.2 | 25 | 1 | 0.300 | 30 |
+| 21 | `right_shoulder_roll_joint` | -0.18 | 25 | 1 | 0.300 | 30 |
+| 22 | `right_shoulder_yaw_joint` | 0 | 25 | 1 | 0.300 | 30 |
+| 23 | `right_elbow_joint` | 0.6 | 25 | 1 | 0.300 | 30 |
+| 24 | `right_wrist_roll_joint` | 0 | 25 | 1 | 0.300 | 30 |
 
-这些 Kp/Kd 直接对应项目 G1 的同名关节，是当前训练配置。力矩上限取自 Hunter130 URDF，包含 ankles、腰部和手臂的不同上限；它们不等于实机持续力矩或 SDK 已验证的安全限制。
+这些 Kp/Kd 为 2026-10-28 指定的 Hunter130 配置：髋与膝 `100/8`、踝 `30/5`、手臂含腕 roll `25/1`、腰部三轴 `60/5`。仿真 armature 保留原分组取整值 `0.0251/0.0102/0.0072/0.0036` kg·m²，详见 [机器人配置](../src/assets/robots/hunter130/hunter130_constants.py)。默认姿态和控制周期保持原值。力矩上限取自 Hunter130 URDF，包含 ankles、腰部和手臂的不同上限；它们不等于实机持续力矩或 SDK 已验证的安全限制。
 
 注意右臂起始索引是 **20**，不能使用省略双腕时的右臂起始索引 19。即使底层 SDK 的电机顺序不同，策略输入/输出仍按本表排列，应构造双向、按名称确认的映射。
 
@@ -230,10 +230,10 @@ obs_t = [frame_(t-3), frame_(t-2), frame_(t-1), frame_t]
 
 ```text
 q_des_i = q0_i + action_scale_i * a_i
-action_scale_i = 0.25 * effort_limit_i / Kp_i
+action_scale_i = round(0.25 * effort_limit_i / Kp_i, 3)
 ```
 
-不要给所有关节统一使用 `action_scale=0.25`。例如腰 roll 的 scale 约为 `1.228016479`，ankle roll 约为 `0.333318759`，两者不同。
+不要给所有关节统一使用 `action_scale=0.25`。例如腰 roll 的 scale 为 `0.583`，ankle roll 为 `0.317`，两者不同。部署读取 JSON 中的 scale，训练端也使用这组保留三位小数的值。PD 与 scale 均属于策略训练的控制模型；旧权重需要在这组新参数下重新训练或微调、验证后使用。
 
 训练使用 `BuiltinPositionActuatorCfg`。理想等效关节力矩为：
 
