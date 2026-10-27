@@ -1,0 +1,609 @@
+{
+  "method": "contact_whole_body_ik_soft_limits_v1",
+  "clips": 18,
+  "frames": 9992,
+  "note": "All-frame saved-data kinematic audit. Near-floor (site z<35mm) speed is a slip proxy, not measured physical contact slip. No dynamics/policy validation.",
+  "summary": {
+    "legacy": {
+      "self_penetration_over_1mm_frame_fraction": 0.1404123298638911,
+      "reset_soft_limit_changed_frame_fraction": 0.5634507606084868,
+      "near_floor_site_speed_mean_m_s": 0.43872779282924573
+    },
+    "ik": {
+      "self_penetration_over_1mm_frame_fraction": 0.0,
+      "reset_soft_limit_changed_frame_fraction": 0.0,
+      "near_floor_site_speed_mean_m_s": 0.26956316483696724,
+      "max_joint_speed_rating_ratio": 0.90756637757915,
+      "min_ground_clearance_m": 0.0020000000949949026,
+      "contact_goal_error_mean_m": 0.0017390124129779997
+    }
+  },
+  "motions": [
+    {
+      "clip": "Recovery/fallAndGetUp1_subject1.npz",
+      "frames": 2575,
+      "sha256": "4317c801c0fed42f288dd892c145bd84b6848787482d421f6248ae05f7392261",
+      "legacy": {
+        "near_floor_site_speed_mean_m_s": 0.5652636229514184,
+        "near_floor_site_samples": 1160,
+        "self_penetration_over_1mm_frame_count": 839,
+        "self_penetration_over_1mm_frame_fraction": 0.3258252427184466,
+        "deepest_self_penetration_m": -0.08241470961173829,
+        "self_contact_pairs": {
+          "leftelbow_Link_collision / waist_Link_collision": 389,
+          "rightelbow_Link_collision / waist_Link_collision": 240,
+          "base_link_collision / rightelbow_Link_collision": 181,
+          "base_link_collision / leftelbow_Link_collision": 176,
+          "base_link_collision / right_hip_pitch_Link_collision": 160,
+          "base_link_collision / left_hip_pitch_Link_collision": 148,
+          "right_hip_pitch_Link_collision / rightelbow_Link_collision": 15,
+          "left_hip_pitch_Link_collision / leftelbow_Link_collision": 13
+        },
+        "root_vertical_accel_p99_m_s2": 36.609222412109375,
+        "reset_soft_limit_changed_frame_fraction": 0.974757281553398
+      },
+      "ik": {
+        "near_floor_site_speed_mean_m_s": 0.2042439941788426,
+        "near_floor_site_samples": 1960,
+        "self_penetration_over_1mm_frame_count": 0,
+        "self_penetration_over_1mm_frame_fraction": 0.0,
+        "deepest_self_penetration_m": 0.0,
+        "self_contact_pairs": {},
+        "root_vertical_accel_p99_m_s2": 26.592531204223633,
+        "reset_soft_limit_changed_frame_fraction": 0.0,
+        "max_joint_speed_rating_ratio": 0.90756637757915,
+        "min_ground_clearance_m": 0.0020000000949949026,
+        "contact_goal_error_mean_m": 0.002218603617990353,
+        "contact_goal_error_p95_m": 0.006510120409790951,
+        "contact_goal_samples": 1699
+      }
+    },
+    {
+      "clip": "WalkandRun/arc_jog_left_loop_002__A029.npz",
+      "frames": 345,
+      "sha256": "6e522bd483cffe0d5ffb0d99be3a35e1b894bdd3f73b144fe2002d6db83c3924",
+      "legacy": {
+        "near_floor_site_speed_mean_m_s": 0.8655310732701821,
+        "near_floor_site_samples": 229,
+        "self_penetration_over_1mm_frame_count": 0,
+        "self_penetration_over_1mm_frame_fraction": 0.0,
+        "deepest_self_penetration_m": 0.0,
+        "self_contact_pairs": {},
+        "root_vertical_accel_p99_m_s2": 33.16112518310547,
+        "reset_soft_limit_changed_frame_fraction": 0.9478260869565217
+      },
+      "ik": {
+        "near_floor_site_speed_mean_m_s": 0.3925298710442236,
+        "near_floor_site_samples": 269,
+        "self_penetration_over_1mm_frame_count": 0,
+        "self_penetration_over_1mm_frame_fraction": 0.0,
+        "deepest_self_penetration_m": 0.0,
+        "self_contact_pairs": {},
+        "root_vertical_accel_p99_m_s2": 17.47690773010254,
+        "reset_soft_limit_changed_frame_fraction": 0.0,
+        "max_joint_speed_rating_ratio": 0.8997919221804377,
+        "min_ground_clearance_m": 0.0020000000949949026,
+        "contact_goal_error_mean_m": 0.002627925564407004,
+        "contact_goal_error_p95_m": 0.007399626930943584,
+        "contact_goal_samples": 242
+      }
+    },
+    {
+      "clip": "WalkandRun/arc_walk_left_loop_001__A029.npz",
+      "frames": 621,
+      "sha256": "c60b737c597e9b39c0ef8d9e73d3a191edf9bc95d594c8405e3a73bdf982bdd4",
+      "legacy": {
+        "near_floor_site_speed_mean_m_s": 0.7719083082862673,
+        "near_floor_site_samples": 574,
+        "self_penetration_over_1mm_frame_count": 15,
+        "self_penetration_over_1mm_frame_fraction": 0.024154589371980676,
+        "deepest_self_penetration_m": -0.008714462447051735,
+        "self_contact_pairs": {
+          "right_hip_pitch_Link_collision / rightelbow_Link_collision": 15
+        },
+        "root_vertical_accel_p99_m_s2": 19.30716323852539,
+        "reset_soft_limit_changed_frame_fraction": 0.19001610305958133
+      },
+      "ik": {
+        "near_floor_site_speed_mean_m_s": 0.41236724551871556,
+        "near_floor_site_samples": 814,
+        "self_penetration_over_1mm_frame_count": 0,
+        "self_penetration_over_1mm_frame_fraction": 0.0,
+        "deepest_self_penetration_m": 0.0,
+        "self_contact_pairs": {},
+        "root_vertical_accel_p99_m_s2": 4.904723167419434,
+        "reset_soft_limit_changed_frame_fraction": 0.0,
+        "max_joint_speed_rating_ratio": 0.543310501134427,
+        "min_ground_clearance_m": 0.0020000000949949026,
+        "contact_goal_error_mean_m": 0.0015658781740483258,
+        "contact_goal_error_p95_m": 0.006129518658309704,
+        "contact_goal_samples": 800
+      }
+    },
+    {
+      "clip": "WalkandRun/idle_turn_270_001__A048.npz",
+      "frames": 298,
+      "sha256": "5c158b05d05692552b43e589675e95c496b5de65e0b66f88f7d172ee72f627b5",
+      "legacy": {
+        "near_floor_site_speed_mean_m_s": 0.1225094024798959,
+        "near_floor_site_samples": 565,
+        "self_penetration_over_1mm_frame_count": 0,
+        "self_penetration_over_1mm_frame_fraction": 0.0,
+        "deepest_self_penetration_m": 0.0,
+        "self_contact_pairs": {},
+        "root_vertical_accel_p99_m_s2": 6.119581699371338,
+        "reset_soft_limit_changed_frame_fraction": 0.10067114093959731
+      },
+      "ik": {
+        "near_floor_site_speed_mean_m_s": 0.052574386656616096,
+        "near_floor_site_samples": 596,
+        "self_penetration_over_1mm_frame_count": 0,
+        "self_penetration_over_1mm_frame_fraction": 0.0,
+        "deepest_self_penetration_m": 0.0,
+        "self_contact_pairs": {},
+        "root_vertical_accel_p99_m_s2": 0.5675206780433655,
+        "reset_soft_limit_changed_frame_fraction": 0.0,
+        "max_joint_speed_rating_ratio": 0.26613623949791715,
+        "min_ground_clearance_m": 0.00269884429872036,
+        "contact_goal_error_mean_m": 0.0007561351628602302,
+        "contact_goal_error_p95_m": 0.0017646175500424831,
+        "contact_goal_samples": 596
+      }
+    },
+    {
+      "clip": "WalkandRun/idle_turn_360_001__A047.npz",
+      "frames": 371,
+      "sha256": "9350454207536342c55550acc6e7b6e8ce1fd250e11cc27059d2a9a0cdfdc06f",
+      "legacy": {
+        "near_floor_site_speed_mean_m_s": 0.1602472849797338,
+        "near_floor_site_samples": 682,
+        "self_penetration_over_1mm_frame_count": 3,
+        "self_penetration_over_1mm_frame_fraction": 0.008086253369272238,
+        "deepest_self_penetration_m": -0.001756143853306677,
+        "self_contact_pairs": {
+          "rightelbow_Link_collision / waist_Link_collision": 3
+        },
+        "root_vertical_accel_p99_m_s2": 4.333037376403809,
+        "reset_soft_limit_changed_frame_fraction": 0.19946091644204852
+      },
+      "ik": {
+        "near_floor_site_speed_mean_m_s": 0.09596191802660865,
+        "near_floor_site_samples": 727,
+        "self_penetration_over_1mm_frame_count": 0,
+        "self_penetration_over_1mm_frame_fraction": 0.0,
+        "deepest_self_penetration_m": 0.0,
+        "self_contact_pairs": {},
+        "root_vertical_accel_p99_m_s2": 2.5609655380249023,
+        "reset_soft_limit_changed_frame_fraction": 0.0,
+        "max_joint_speed_rating_ratio": 0.43099450836400205,
+        "min_ground_clearance_m": 0.00413876585662365,
+        "contact_goal_error_mean_m": 0.0022755458036914037,
+        "contact_goal_error_p95_m": 0.004867719836503245,
+        "contact_goal_samples": 727
+      }
+    },
+    {
+      "clip": "WalkandRun/jog_arc_cw_loop_004__A045.npz",
+      "frames": 443,
+      "sha256": "2ca16be1721b47bc1cb3300909cb501962cd29669e74867fbf1420dc555f1ed0",
+      "legacy": {
+        "near_floor_site_speed_mean_m_s": 0.7016319227221086,
+        "near_floor_site_samples": 433,
+        "self_penetration_over_1mm_frame_count": 0,
+        "self_penetration_over_1mm_frame_fraction": 0.0,
+        "deepest_self_penetration_m": 0.0,
+        "self_contact_pairs": {},
+        "root_vertical_accel_p99_m_s2": 32.07216262817383,
+        "reset_soft_limit_changed_frame_fraction": 0.7471783295711061
+      },
+      "ik": {
+        "near_floor_site_speed_mean_m_s": 0.38517191610204365,
+        "near_floor_site_samples": 504,
+        "self_penetration_over_1mm_frame_count": 0,
+        "self_penetration_over_1mm_frame_fraction": 0.0,
+        "deepest_self_penetration_m": 0.0,
+        "self_contact_pairs": {},
+        "root_vertical_accel_p99_m_s2": 10.694755554199219,
+        "reset_soft_limit_changed_frame_fraction": 0.0,
+        "max_joint_speed_rating_ratio": 0.894539959952555,
+        "min_ground_clearance_m": 0.0020000000949949026,
+        "contact_goal_error_mean_m": 0.002038747496806862,
+        "contact_goal_error_p95_m": 0.00831958149220136,
+        "contact_goal_samples": 495
+      }
+    },
+    {
+      "clip": "WalkandRun/jog_backward_loop_002__A022.npz",
+      "frames": 287,
+      "sha256": "955ca308fdccb5738f853c78f6a9977adf2b057449ad35480a421f8d9ce525fd",
+      "legacy": {
+        "near_floor_site_speed_mean_m_s": 0.4394322389251343,
+        "near_floor_site_samples": 298,
+        "self_penetration_over_1mm_frame_count": 36,
+        "self_penetration_over_1mm_frame_fraction": 0.1254355400696864,
+        "deepest_self_penetration_m": -0.028096728350911385,
+        "self_contact_pairs": {
+          "rightelbow_Link_collision / waist_Link_collision": 19,
+          "leftelbow_Link_collision / waist_Link_collision": 17,
+          "base_link_collision / rightelbow_Link_collision": 4
+        },
+        "root_vertical_accel_p99_m_s2": 22.09038734436035,
+        "reset_soft_limit_changed_frame_fraction": 0.7456445993031359
+      },
+      "ik": {
+        "near_floor_site_speed_mean_m_s": 0.3107538433133533,
+        "near_floor_site_samples": 366,
+        "self_penetration_over_1mm_frame_count": 0,
+        "self_penetration_over_1mm_frame_fraction": 0.0,
+        "deepest_self_penetration_m": 0.0,
+        "self_contact_pairs": {},
+        "root_vertical_accel_p99_m_s2": 14.088735580444336,
+        "reset_soft_limit_changed_frame_fraction": 0.0,
+        "max_joint_speed_rating_ratio": 0.7607853063430141,
+        "min_ground_clearance_m": 0.0020000000949949026,
+        "contact_goal_error_mean_m": 0.001821069146722768,
+        "contact_goal_error_p95_m": 0.007975089765823548,
+        "contact_goal_samples": 359
+      }
+    },
+    {
+      "clip": "WalkandRun/jog_backward_loop_003__A023.npz",
+      "frames": 285,
+      "sha256": "d2425b94b6fd2487b491f9aafd2d6946ccc081258ebd11cc8ec49a05f662d2cc",
+      "legacy": {
+        "near_floor_site_speed_mean_m_s": 0.698425662173366,
+        "near_floor_site_samples": 344,
+        "self_penetration_over_1mm_frame_count": 0,
+        "self_penetration_over_1mm_frame_fraction": 0.0,
+        "deepest_self_penetration_m": 0.0,
+        "self_contact_pairs": {},
+        "root_vertical_accel_p99_m_s2": 23.77945899963379,
+        "reset_soft_limit_changed_frame_fraction": 0.7052631578947368
+      },
+      "ik": {
+        "near_floor_site_speed_mean_m_s": 0.3881266037263525,
+        "near_floor_site_samples": 365,
+        "self_penetration_over_1mm_frame_count": 0,
+        "self_penetration_over_1mm_frame_fraction": 0.0,
+        "deepest_self_penetration_m": 0.0,
+        "self_contact_pairs": {},
+        "root_vertical_accel_p99_m_s2": 14.612042427062988,
+        "reset_soft_limit_changed_frame_fraction": 0.0,
+        "max_joint_speed_rating_ratio": 0.8281663932074577,
+        "min_ground_clearance_m": 0.0020000000949949026,
+        "contact_goal_error_mean_m": 0.0016756181653402892,
+        "contact_goal_error_p95_m": 0.00723019311524301,
+        "contact_goal_samples": 343
+      }
+    },
+    {
+      "clip": "WalkandRun/jog_forward_loop_003__A021.npz",
+      "frames": 401,
+      "sha256": "0c7a221df47f3d0d9c4ea65ef4459d4f2a045caeb1c7b1df6803d09ab9afb656",
+      "legacy": {
+        "near_floor_site_speed_mean_m_s": 0.37761222349652973,
+        "near_floor_site_samples": 515,
+        "self_penetration_over_1mm_frame_count": 85,
+        "self_penetration_over_1mm_frame_fraction": 0.2119700748129676,
+        "deepest_self_penetration_m": -0.036561990403607955,
+        "self_contact_pairs": {
+          "rightelbow_Link_collision / waist_Link_collision": 38,
+          "base_link_collision / rightelbow_Link_collision": 37,
+          "base_link_collision / leftelbow_Link_collision": 29,
+          "left_hip_pitch_Link_collision / leftelbow_Link_collision": 9,
+          "leftelbow_Link_collision / waist_Link_collision": 4
+        },
+        "root_vertical_accel_p99_m_s2": 24.401657104492188,
+        "reset_soft_limit_changed_frame_fraction": 0.46384039900249374
+      },
+      "ik": {
+        "near_floor_site_speed_mean_m_s": 0.25846150945754487,
+        "near_floor_site_samples": 583,
+        "self_penetration_over_1mm_frame_count": 0,
+        "self_penetration_over_1mm_frame_fraction": 0.0,
+        "deepest_self_penetration_m": 0.0,
+        "self_contact_pairs": {},
+        "root_vertical_accel_p99_m_s2": 13.167359352111816,
+        "reset_soft_limit_changed_frame_fraction": 0.0,
+        "max_joint_speed_rating_ratio": 0.6905233992907834,
+        "min_ground_clearance_m": 0.0020000000949949026,
+        "contact_goal_error_mean_m": 0.0012045351248563796,
+        "contact_goal_error_p95_m": 0.00543535563849114,
+        "contact_goal_samples": 572
+      }
+    },
+    {
+      "clip": "WalkandRun/jog_forward_loop_003__A022.npz",
+      "frames": 286,
+      "sha256": "1a8bebd2584e57cc1f43924499babf09fdfade7d65e1ef24c722e9c0fbfd2ca0",
+      "legacy": {
+        "near_floor_site_speed_mean_m_s": 0.47132953984434156,
+        "near_floor_site_samples": 306,
+        "self_penetration_over_1mm_frame_count": 133,
+        "self_penetration_over_1mm_frame_fraction": 0.46503496503496505,
+        "deepest_self_penetration_m": -0.04175141883996046,
+        "self_contact_pairs": {
+          "leftelbow_Link_collision / waist_Link_collision": 66,
+          "rightelbow_Link_collision / waist_Link_collision": 59,
+          "base_link_collision / leftelbow_Link_collision": 33,
+          "base_link_collision / rightelbow_Link_collision": 6
+        },
+        "root_vertical_accel_p99_m_s2": 26.001588821411133,
+        "reset_soft_limit_changed_frame_fraction": 0.7832167832167832
+      },
+      "ik": {
+        "near_floor_site_speed_mean_m_s": 0.3340932487449694,
+        "near_floor_site_samples": 348,
+        "self_penetration_over_1mm_frame_count": 0,
+        "self_penetration_over_1mm_frame_fraction": 0.0,
+        "deepest_self_penetration_m": 0.0,
+        "self_contact_pairs": {},
+        "root_vertical_accel_p99_m_s2": 11.025888442993164,
+        "reset_soft_limit_changed_frame_fraction": 0.0,
+        "max_joint_speed_rating_ratio": 0.6653932465810277,
+        "min_ground_clearance_m": 0.0020000000949949026,
+        "contact_goal_error_mean_m": 0.001762244027802625,
+        "contact_goal_error_p95_m": 0.006551290495886552,
+        "contact_goal_samples": 345
+      }
+    },
+    {
+      "clip": "WalkandRun/step_rotate_idle_000_002__A026.npz",
+      "frames": 260,
+      "sha256": "d6f5ed99caa36d10264af04059c9e1ca1acef562908001417998376c5935c78e",
+      "legacy": {
+        "near_floor_site_speed_mean_m_s": 0.005134310435906664,
+        "near_floor_site_samples": 520,
+        "self_penetration_over_1mm_frame_count": 0,
+        "self_penetration_over_1mm_frame_fraction": 0.0,
+        "deepest_self_penetration_m": 0.0,
+        "self_contact_pairs": {},
+        "root_vertical_accel_p99_m_s2": 0.13006114959716797,
+        "reset_soft_limit_changed_frame_fraction": 0.0
+      },
+      "ik": {
+        "near_floor_site_speed_mean_m_s": 5.611704175815495e-06,
+        "near_floor_site_samples": 520,
+        "self_penetration_over_1mm_frame_count": 0,
+        "self_penetration_over_1mm_frame_fraction": 0.0,
+        "deepest_self_penetration_m": 0.0,
+        "self_contact_pairs": {},
+        "root_vertical_accel_p99_m_s2": 0.0272472333163023,
+        "reset_soft_limit_changed_frame_fraction": 0.0,
+        "max_joint_speed_rating_ratio": 0.01453437518664184,
+        "min_ground_clearance_m": 0.0035214857198297977,
+        "contact_goal_error_mean_m": 0.0003076440800120288,
+        "contact_goal_error_p95_m": 0.0003301589051607687,
+        "contact_goal_samples": 520
+      }
+    },
+    {
+      "clip": "WalkandRun/walk_arc_cw_loop_002__A046.npz",
+      "frames": 291,
+      "sha256": "c9ae58eb69324d290b62a0042562b7970fda4b93d2e313dd36c1e265f3516cd8",
+      "legacy": {
+        "near_floor_site_speed_mean_m_s": 0.6579989433946706,
+        "near_floor_site_samples": 284,
+        "self_penetration_over_1mm_frame_count": 0,
+        "self_penetration_over_1mm_frame_fraction": 0.0,
+        "deepest_self_penetration_m": 0.0,
+        "self_contact_pairs": {},
+        "root_vertical_accel_p99_m_s2": 10.86002254486084,
+        "reset_soft_limit_changed_frame_fraction": 0.21993127147766323
+      },
+      "ik": {
+        "near_floor_site_speed_mean_m_s": 0.40646991596224397,
+        "near_floor_site_samples": 403,
+        "self_penetration_over_1mm_frame_count": 0,
+        "self_penetration_over_1mm_frame_fraction": 0.0,
+        "deepest_self_penetration_m": 0.0,
+        "self_contact_pairs": {},
+        "root_vertical_accel_p99_m_s2": 3.8097612857818604,
+        "reset_soft_limit_changed_frame_fraction": 0.0,
+        "max_joint_speed_rating_ratio": 0.5122486846303607,
+        "min_ground_clearance_m": 0.0020000000949949026,
+        "contact_goal_error_mean_m": 0.0013167162152793509,
+        "contact_goal_error_p95_m": 0.005596563484212128,
+        "contact_goal_samples": 399
+      }
+    },
+    {
+      "clip": "WalkandRun/walk_backward_loop_001__A022.npz",
+      "frames": 520,
+      "sha256": "5e4d2d7bb51c495641ad672149f315bc84b0725d1bc139855b5c97803c6c1997",
+      "legacy": {
+        "near_floor_site_speed_mean_m_s": 0.49467164507534245,
+        "near_floor_site_samples": 648,
+        "self_penetration_over_1mm_frame_count": 109,
+        "self_penetration_over_1mm_frame_fraction": 0.20961538461538462,
+        "deepest_self_penetration_m": -0.015324788192124392,
+        "self_contact_pairs": {
+          "right_hip_pitch_Link_collision / rightelbow_Link_collision": 76,
+          "left_hip_pitch_Link_collision / leftelbow_Link_collision": 33
+        },
+        "root_vertical_accel_p99_m_s2": 5.700832843780518,
+        "reset_soft_limit_changed_frame_fraction": 0.39807692307692305
+      },
+      "ik": {
+        "near_floor_site_speed_mean_m_s": 0.34720347330849366,
+        "near_floor_site_samples": 800,
+        "self_penetration_over_1mm_frame_count": 0,
+        "self_penetration_over_1mm_frame_fraction": 0.0,
+        "deepest_self_penetration_m": 0.0,
+        "self_contact_pairs": {},
+        "root_vertical_accel_p99_m_s2": 3.4710590839385986,
+        "reset_soft_limit_changed_frame_fraction": 0.0,
+        "max_joint_speed_rating_ratio": 0.48441036690244377,
+        "min_ground_clearance_m": 0.0020000000949949026,
+        "contact_goal_error_mean_m": 0.0010722407162049087,
+        "contact_goal_error_p95_m": 0.004015239999272978,
+        "contact_goal_samples": 800
+      }
+    },
+    {
+      "clip": "WalkandRun/walk_backward_loop_001__A024.npz",
+      "frames": 729,
+      "sha256": "c7de1356fc30d8e174f04da1a75061ef6c0d0d90986b71539446162b738c6b0e",
+      "legacy": {
+        "near_floor_site_speed_mean_m_s": 0.37346574539056604,
+        "near_floor_site_samples": 1040,
+        "self_penetration_over_1mm_frame_count": 2,
+        "self_penetration_over_1mm_frame_fraction": 0.0027434842249657062,
+        "deepest_self_penetration_m": -0.0018077388121525845,
+        "self_contact_pairs": {
+          "left_hip_pitch_Link_collision / leftelbow_Link_collision": 2
+        },
+        "root_vertical_accel_p99_m_s2": 7.395060062408447,
+        "reset_soft_limit_changed_frame_fraction": 0.06721536351165981
+      },
+      "ik": {
+        "near_floor_site_speed_mean_m_s": 0.20534118305873644,
+        "near_floor_site_samples": 1167,
+        "self_penetration_over_1mm_frame_count": 0,
+        "self_penetration_over_1mm_frame_fraction": 0.0,
+        "deepest_self_penetration_m": 0.0,
+        "self_contact_pairs": {},
+        "root_vertical_accel_p99_m_s2": 3.7335033416748047,
+        "reset_soft_limit_changed_frame_fraction": 0.0,
+        "max_joint_speed_rating_ratio": 0.521111672955704,
+        "min_ground_clearance_m": 0.0020000000949949026,
+        "contact_goal_error_mean_m": 0.0015238432711441137,
+        "contact_goal_error_p95_m": 0.00447427880686801,
+        "contact_goal_samples": 1156
+      }
+    },
+    {
+      "clip": "WalkandRun/walk_forward_loop_002__A022.npz",
+      "frames": 455,
+      "sha256": "cd027258690cf29369064fe07907af005ae558bee36ef85a35c5ea0a37e0a87a",
+      "legacy": {
+        "near_floor_site_speed_mean_m_s": 0.3719488559693124,
+        "near_floor_site_samples": 556,
+        "self_penetration_over_1mm_frame_count": 37,
+        "self_penetration_over_1mm_frame_fraction": 0.08131868131868132,
+        "deepest_self_penetration_m": -0.012005777200103707,
+        "self_contact_pairs": {
+          "right_hip_pitch_Link_collision / rightelbow_Link_collision": 19,
+          "left_hip_pitch_Link_collision / leftelbow_Link_collision": 18
+        },
+        "root_vertical_accel_p99_m_s2": 11.03223991394043,
+        "reset_soft_limit_changed_frame_fraction": 0.4989010989010989
+      },
+      "ik": {
+        "near_floor_site_speed_mean_m_s": 0.34160392061595046,
+        "near_floor_site_samples": 716,
+        "self_penetration_over_1mm_frame_count": 0,
+        "self_penetration_over_1mm_frame_fraction": 0.0,
+        "deepest_self_penetration_m": 0.0,
+        "self_contact_pairs": {},
+        "root_vertical_accel_p99_m_s2": 3.1869823932647705,
+        "reset_soft_limit_changed_frame_fraction": 0.0,
+        "max_joint_speed_rating_ratio": 0.4391764366575577,
+        "min_ground_clearance_m": 0.0020000000949949026,
+        "contact_goal_error_mean_m": 0.001092744733816929,
+        "contact_goal_error_p95_m": 0.004254360474675746,
+        "contact_goal_samples": 703
+      }
+    },
+    {
+      "clip": "WalkandRun/walk_forward_loop_002__A024.npz",
+      "frames": 482,
+      "sha256": "d477049532e949057a38dbece22a62140cb3a5adcae488e445fa93abaa1942ef",
+      "legacy": {
+        "near_floor_site_speed_mean_m_s": 0.4612841066162832,
+        "near_floor_site_samples": 581,
+        "self_penetration_over_1mm_frame_count": 0,
+        "self_penetration_over_1mm_frame_fraction": 0.0,
+        "deepest_self_penetration_m": 0.0,
+        "self_contact_pairs": {},
+        "root_vertical_accel_p99_m_s2": 10.123623847961426,
+        "reset_soft_limit_changed_frame_fraction": 0.10580912863070539
+      },
+      "ik": {
+        "near_floor_site_speed_mean_m_s": 0.3469059084765289,
+        "near_floor_site_samples": 740,
+        "self_penetration_over_1mm_frame_count": 0,
+        "self_penetration_over_1mm_frame_fraction": 0.0,
+        "deepest_self_penetration_m": 0.0,
+        "self_contact_pairs": {},
+        "root_vertical_accel_p99_m_s2": 4.1841511726379395,
+        "reset_soft_limit_changed_frame_fraction": 0.0,
+        "max_joint_speed_rating_ratio": 0.48413601057442984,
+        "min_ground_clearance_m": 0.0020000000949949026,
+        "contact_goal_error_mean_m": 0.0014337713864251865,
+        "contact_goal_error_p95_m": 0.005630916976995798,
+        "contact_goal_samples": 731
+      }
+    },
+    {
+      "clip": "WalkandRun/walk_sideway_left_loop_002__A021.npz",
+      "frames": 713,
+      "sha256": "76462c7539bd6951c4b5797c04dcccd223af28af831c397ae537eb5fa043ab18",
+      "legacy": {
+        "near_floor_site_speed_mean_m_s": 0.35144197780960923,
+        "near_floor_site_samples": 830,
+        "self_penetration_over_1mm_frame_count": 20,
+        "self_penetration_over_1mm_frame_fraction": 0.028050490883590462,
+        "deepest_self_penetration_m": -0.011374652319409359,
+        "self_contact_pairs": {
+          "base_link_collision / left_hip_pitch_Link_collision": 15,
+          "base_link_collision / leftelbow_Link_collision": 10
+        },
+        "root_vertical_accel_p99_m_s2": 29.04134178161621,
+        "reset_soft_limit_changed_frame_fraction": 0.5259467040673211
+      },
+      "ik": {
+        "near_floor_site_speed_mean_m_s": 0.28561532778789217,
+        "near_floor_site_samples": 1150,
+        "self_penetration_over_1mm_frame_count": 0,
+        "self_penetration_over_1mm_frame_fraction": 0.0,
+        "deepest_self_penetration_m": 0.0,
+        "self_contact_pairs": {},
+        "root_vertical_accel_p99_m_s2": 5.161164283752441,
+        "reset_soft_limit_changed_frame_fraction": 0.0,
+        "max_joint_speed_rating_ratio": 0.47782442919211315,
+        "min_ground_clearance_m": 0.0020000000949949026,
+        "contact_goal_error_mean_m": 0.0024530610314212674,
+        "contact_goal_error_p95_m": 0.006632572561148016,
+        "contact_goal_samples": 1136
+      }
+    },
+    {
+      "clip": "WalkandRun/walk_sideway_right_loop_001__A022.npz",
+      "frames": 630,
+      "sha256": "682aa86d1c620638f2be00c75a5145db6b9ca41520c23e5eb351f675e05bcb3d",
+      "legacy": {
+        "near_floor_site_speed_mean_m_s": 0.49003336326151375,
+        "near_floor_site_samples": 823,
+        "self_penetration_over_1mm_frame_count": 124,
+        "self_penetration_over_1mm_frame_fraction": 0.19682539682539682,
+        "deepest_self_penetration_m": -0.05723551504274528,
+        "self_contact_pairs": {
+          "base_link_collision / rightelbow_Link_collision": 88,
+          "left_foot_collision / right_foot_collision": 60,
+          "right_hip_pitch_Link_collision / rightelbow_Link_collision": 19,
+          "left_foot_collision / right_knee_Link_collision": 17,
+          "base_link_collision / left_hip_pitch_Link_collision": 15,
+          "base_link_collision / right_hip_pitch_Link_collision": 6
+        },
+        "root_vertical_accel_p99_m_s2": 21.599628448486328,
+        "reset_soft_limit_changed_frame_fraction": 0.7015873015873015
+      },
+      "ik": {
+        "near_floor_site_speed_mean_m_s": 0.33616139625987707,
+        "near_floor_site_samples": 1084,
+        "self_penetration_over_1mm_frame_count": 0,
+        "self_penetration_over_1mm_frame_fraction": 0.0,
+        "deepest_self_penetration_m": 0.0,
+        "self_contact_pairs": {},
+        "root_vertical_accel_p99_m_s2": 5.449215412139893,
+        "reset_soft_limit_changed_frame_fraction": 0.0,
+        "max_joint_speed_rating_ratio": 0.466500786514854,
+        "min_ground_clearance_m": 0.0020000000949949026,
+        "contact_goal_error_mean_m": 0.0026741859056761655,
+        "contact_goal_error_p95_m": 0.006865270861945817,
+        "contact_goal_samples": 1077
+      }
+    }
+  ]
+}

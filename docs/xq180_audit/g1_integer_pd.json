@@ -1,0 +1,213 @@
+{
+  "pd_profile": "g1_inertia_integer_v3",
+  "method": "Derive integer XQ180 PD from G1 nominal single-support joint inertia ratios.\n\nScale Kp and Kd by the same inertia ratio to preserve the local second-order\nfrequency and damping ratio, then round to nearest integer (minimum one).\nThis is a nominal model estimate, not motor identification or balance tuning.\n",
+  "symmetry": "Arithmetic mean of left/right nominal single-support inertia ratios per joint group",
+  "groups": {
+    "hip_yaw": {
+      "inertia_ratio_mean": 2.3053054130587527,
+      "g1_kp": 40.17923863450712,
+      "g1_kd": 2.557889775413375,
+      "unrounded_kp": 92.62541631670864,
+      "unrounded_kd": 5.896717145268091,
+      "kp": 93,
+      "kd": 6
+    },
+    "hip_roll": {
+      "inertia_ratio_mean": 3.1722101361909147,
+      "g1_kp": 99.09842777666111,
+      "g1_kd": 6.308801853496639,
+      "unrounded_kp": 314.3610370737077,
+      "unrounded_kd": 20.012845186882068,
+      "kp": 314,
+      "kd": 20
+    },
+    "hip_pitch": {
+      "inertia_ratio_mean": 2.9614450147204447,
+      "g1_kp": 99.09842777666111,
+      "g1_kd": 6.308801853496639,
+      "unrounded_kp": 293.4745449058271,
+      "unrounded_kd": 18.68316979789672,
+      "kp": 293,
+      "kd": 19
+    },
+    "knee": {
+      "inertia_ratio_mean": 3.0987844027844096,
+      "g1_kp": 99.09842777666111,
+      "g1_kd": 6.308801853496639,
+      "unrounded_kp": 307.08466233477475,
+      "unrounded_kd": 19.549616783872757,
+      "kp": 307,
+      "kd": 20
+    },
+    "ankle": {
+      "inertia_ratio_mean": 3.549217673339202,
+      "g1_kp": 28.50124619574858,
+      "g1_kd": 1.814445686584846,
+      "unrounded_kp": 101.15712671014255,
+      "unrounded_kd": 6.439862698141018,
+      "kp": 101,
+      "kd": 6
+    },
+    "waist": {
+      "inertia_ratio_mean": 1.5322540082961,
+      "g1_kp": 40.17923863450712,
+      "g1_kd": 2.557889775413375,
+      "unrounded_kp": 61.56479944800906,
+      "unrounded_kd": 3.919336861156755,
+      "kp": 62,
+      "kd": 4
+    },
+    "shoulder_pitch": {
+      "inertia_ratio_mean": 0.6910357021666789,
+      "g1_kp": 14.25062309787429,
+      "g1_kd": 0.907222843292423,
+      "unrounded_kp": 9.847689338752252,
+      "unrounded_kd": 0.6269233745362304,
+      "kp": 10,
+      "kd": 1
+    },
+    "shoulder_roll": {
+      "inertia_ratio_mean": 0.8746722356511657,
+      "g1_kp": 14.25062309787429,
+      "g1_kd": 0.907222843292423,
+      "unrounded_kp": 12.464624364439846,
+      "unrounded_kd": 0.7935226325763908,
+      "kp": 12,
+      "kd": 1
+    },
+    "shoulder_yaw": {
+      "inertia_ratio_mean": 0.4499681590988761,
+      "g1_kp": 14.25062309787429,
+      "g1_kd": 0.907222843292423,
+      "unrounded_kp": 6.412326641362417,
+      "unrounded_kd": 0.40822139268873975,
+      "kp": 6,
+      "kd": 1
+    },
+    "elbow": {
+      "inertia_ratio_mean": 0.7276626600291284,
+      "g1_kp": 14.25062309787429,
+      "g1_kd": 0.907222843292423,
+      "unrounded_kp": 10.369646310471744,
+      "unrounded_kd": 0.6601521873893536,
+      "kp": 10,
+      "kd": 1
+    }
+  },
+  "joint_inertia_ratios": [
+    {
+      "joint": "left_hip_yaw_joint",
+      "g1_joint": "left_hip_yaw_joint",
+      "fixed_root_inertia_ratio": 3.0667270328820084,
+      "single_support_inertia_ratio": 2.329334818080446
+    },
+    {
+      "joint": "left_hip_roll_joint",
+      "g1_joint": "left_hip_roll_joint",
+      "fixed_root_inertia_ratio": 4.022651293599537,
+      "single_support_inertia_ratio": 3.1898764959078507
+    },
+    {
+      "joint": "left_hip_pitch_joint",
+      "g1_joint": "left_hip_pitch_joint",
+      "fixed_root_inertia_ratio": 2.879720335731354,
+      "single_support_inertia_ratio": 2.972275981620057
+    },
+    {
+      "joint": "left_knee_joint",
+      "g1_joint": "left_knee_joint",
+      "fixed_root_inertia_ratio": 2.90593899375115,
+      "single_support_inertia_ratio": 3.0988112794935816
+    },
+    {
+      "joint": "left_ankle_joint",
+      "g1_joint": "left_ankle_pitch_joint",
+      "fixed_root_inertia_ratio": 1.9268004523769662,
+      "single_support_inertia_ratio": 3.549217685938027
+    },
+    {
+      "joint": "right_hip_yaw_joint",
+      "g1_joint": "right_hip_yaw_joint",
+      "fixed_root_inertia_ratio": 3.164228278283065,
+      "single_support_inertia_ratio": 2.2812760080370595
+    },
+    {
+      "joint": "right_hip_roll_joint",
+      "g1_joint": "right_hip_roll_joint",
+      "fixed_root_inertia_ratio": 4.10410403980117,
+      "single_support_inertia_ratio": 3.1545437764739788
+    },
+    {
+      "joint": "right_hip_pitch_joint",
+      "g1_joint": "right_hip_pitch_joint",
+      "fixed_root_inertia_ratio": 2.9381328468240304,
+      "single_support_inertia_ratio": 2.950614047820833
+    },
+    {
+      "joint": "right_knee_joint",
+      "g1_joint": "right_knee_joint",
+      "fixed_root_inertia_ratio": 2.90869552458539,
+      "single_support_inertia_ratio": 3.098757526075237
+    },
+    {
+      "joint": "right_ankle_joint",
+      "g1_joint": "right_ankle_pitch_joint",
+      "fixed_root_inertia_ratio": 1.9268404651288997,
+      "single_support_inertia_ratio": 3.5492176607403763
+    },
+    {
+      "joint": "waist_point",
+      "g1_joint": "waist_yaw_joint",
+      "fixed_root_inertia_ratio": 1.5322540082961,
+      "single_support_inertia_ratio": 1.5322540082961
+    },
+    {
+      "joint": "left_shoulder_pitch_joint",
+      "g1_joint": "left_shoulder_pitch_joint",
+      "fixed_root_inertia_ratio": 0.6897641243364133,
+      "single_support_inertia_ratio": 0.6897641243364133
+    },
+    {
+      "joint": "left_shoulder_roll_joint",
+      "g1_joint": "left_shoulder_roll_joint",
+      "fixed_root_inertia_ratio": 0.8744205244636182,
+      "single_support_inertia_ratio": 0.8744205244636182
+    },
+    {
+      "joint": "left_shoulder_yaw_joint",
+      "g1_joint": "left_shoulder_yaw_joint",
+      "fixed_root_inertia_ratio": 0.44993502149288683,
+      "single_support_inertia_ratio": 0.44993502149288683
+    },
+    {
+      "joint": "leftelbow_joint",
+      "g1_joint": "left_elbow_joint",
+      "fixed_root_inertia_ratio": 0.7276524719329156,
+      "single_support_inertia_ratio": 0.7276524719329156
+    },
+    {
+      "joint": "right_shoulder_pitch_joint",
+      "g1_joint": "right_shoulder_pitch_joint",
+      "fixed_root_inertia_ratio": 0.6923072799969444,
+      "single_support_inertia_ratio": 0.6923072799969444
+    },
+    {
+      "joint": "right_shoulder_roll_joint",
+      "g1_joint": "right_shoulder_roll_joint",
+      "fixed_root_inertia_ratio": 0.8749239468387132,
+      "single_support_inertia_ratio": 0.8749239468387132
+    },
+    {
+      "joint": "right_shoulder_yaw_joint",
+      "g1_joint": "right_shoulder_yaw_joint",
+      "fixed_root_inertia_ratio": 0.4500012967048654,
+      "single_support_inertia_ratio": 0.4500012967048654
+    },
+    {
+      "joint": "rightelbow_joint",
+      "g1_joint": "right_elbow_joint",
+      "fixed_root_inertia_ratio": 0.7276728481253412,
+      "single_support_inertia_ratio": 0.7276728481253412
+    }
+  ]
+}

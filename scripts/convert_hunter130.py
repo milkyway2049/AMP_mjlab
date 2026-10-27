@@ -59,6 +59,9 @@ def convert(
   source_dir: Path, output_dir: Path = ASSET_DIR, *, robot_name: str = "hunter130",
   urdf_relative_path: str = "EC-H130-V2_URDF.urdf", root_height: float = 0.68,
   expected_joint_count: int = 25,
+  root_name: str = "pelvis", foot_link_suffix: str = "ankle_roll_link",
+  torso_name: str = "torso_link",
+  repair_inertia: bool = False,
 ) -> Path:
   urdf_path = source_dir / urdf_relative_path
   urdf = ET.parse(urdf_path)
@@ -95,8 +98,8 @@ def convert(
     children.setdefault(parent, []).append(joint)
     parents[child] = parent
   roots = links.keys() - parents.keys()
-  if roots != {"pelvis"} or len(joints) != expected_joint_count:
-    raise ValueError(f"Expected {robot_name} with {expected_joint_count} joints and pelvis root")
+  if roots != {root_name} or len(joints) != expected_joint_count:
+    raise ValueError(f"Expected {robot_name} with {expected_joint_count} joints and {root_name} root")
   world = ET.SubElement(model, "worldbody")
 
   def add_link(name: str, parent_body: ET.Element, joint: ET.Element | None = None):
@@ -110,6 +113,18 @@ def convert(
     io = inertial.find("origin")
     rotation = Rotation.from_euler("xyz", np.fromstring(io.get("rpy", "0 0 0"), sep=" ")).as_matrix()
     tensor = rotation @ tensor @ rotation.T
+    if repair_inertia:
+      values, axes = np.linalg.eigh(tensor)
+      if values[0] <= 0:
+        raise ValueError(f"Non-positive inertia: {name}")
+      if values[2] > values[0] + values[1]:
+        # Some supplied CAD tensors violate the rigid-body triangle inequality.
+        # Keep mass, COM, principal axes and two moments; cap the largest moment.
+        original = values[2]
+        # A 0.1% margin avoids roundoff in MuJoCo's inertia eigensolver.
+        values[2] = (values[0] + values[1]) * 0.999
+        tensor = axes @ np.diag(values) @ axes.T
+        body.append(ET.Comment(f"URDF inertia triangle repair: largest moment {original:.12g} -> {values[2]:.12g}"))
     ET.SubElement(body, "inertial", pos=io.get("xyz", "0 0 0"), mass=inertial.find("mass").attrib["value"],
                   fullinertia=numbers([tensor[0, 0], tensor[1, 1], tensor[2, 2], tensor[0, 1], tensor[0, 2], tensor[1, 2]]))
     if joint is None:
@@ -137,13 +152,13 @@ def convert(
     rotation = Rotation.from_quat(xyzw)
     offset = np.fromstring(frame["pos"], sep=" ")
     attrs = {"name": f"{name}_collision", "class": "collision"}
-    if name.endswith("ankle_roll_link"):
+    if name.endswith(foot_link_suffix):
       side = name.split("_")[0]
       if Path(collision_file).name != filename:
         raise ValueError(f"Foot visual/collision mesh mismatch: {name}")
       attrs.update(name=f"{side}_foot_collision", type="mesh", mesh=name, **frame, condim="3", priority="1")
       ET.SubElement(body, "site", name=f"{side}_foot", pos=numbers(rotation.apply([center[0], center[1], lower[2]]) + offset), size="0.01", group="5")
-    elif name in ("pelvis", "torso_link"):
+    elif name in (root_name, torso_name):
       attrs.update(type="box", pos=numbers(rotation.apply(center) + offset), quat=frame["quat"], size=numbers(half))
     else:
       axis = int(np.argmax(half))
@@ -157,7 +172,7 @@ def convert(
     for child_joint in children.get(name, []):
       add_link(child_joint.find("child").attrib["link"], body, child_joint)
 
-  add_link("pelvis", world)
+  add_link(root_name, world)
   # CAD joint housings overlap along the chain; exclude pairs within two joints.
   contact = ET.SubElement(model, "contact")
   for child, parent in parents.items():
@@ -167,7 +182,7 @@ def convert(
   sensors = ET.SubElement(model, "sensor")
   for tag, name in (("gyro", "imu_ang_vel"), ("velocimeter", "imu_lin_vel"), ("accelerometer", "imu_lin_acc")):
     ET.SubElement(sensors, tag, name=name, site="imu_in_pelvis")
-  ET.SubElement(sensors, "subtreeangmom", name="root_angmom", body="pelvis")
+  ET.SubElement(sensors, "subtreeangmom", name="root_angmom", body=root_name)
   ET.indent(model, space="  ")
   path = output_dir / f"xmls/{robot_name}.xml"
   ET.ElementTree(model).write(path, encoding="utf-8", xml_declaration=True)

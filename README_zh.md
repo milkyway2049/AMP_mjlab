@@ -145,3 +145,7 @@ python scripts/csv_to_npz.py --help
 
 - 感谢 [unitreerobotics/unitree_rl_mjlab](https://github.com/unitreerobotics/unitree_rl_mjlab) 项目的开源工作与启发。
 - 感谢 [Open-X-Humanoid/TienKung-Lab](https://github.com/Open-X-Humanoid/TienKung-Lab)，本项目在 rsl_rl 的 AMP 部分参考了该实现。
+
+## XQ180 机器人适配
+
+已接入 XQ180 的速度和 AMP 平地/复杂地形任务，模型、动作转换和启动命令见 [适配说明](docs/xq180.md)。

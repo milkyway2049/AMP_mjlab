@@ -76,11 +76,16 @@ class GroundClearance:
 
 
 class G1ToHunter130:
-  def __init__(self, target_cfg=None, target_robot: str = "hunter130", joint_offsets: dict[str, float] | None = None):
+  def __init__(self, target_cfg=None, target_robot: str = "hunter130", joint_offsets: dict[str, float] | None = None,
+               joint_mapping: dict[str, str] | None = None):
     self.source = Entity(get_g1_robot_cfg())
     self.target = Entity(get_hunter130_robot_cfg() if target_cfg is None else target_cfg)
     self.target_robot = target_robot
     self.joint_offsets = joint_offsets or {}
+    # Target-to-source names; identity preserves the Hunter130/180 behavior.
+    self.joint_mapping = {n: (joint_mapping or {}).get(n, n) for n in self.target.joint_names}
+    if set(self.joint_mapping.values()) - set(self.source.joint_names):
+      raise ValueError("Mapped source joint names must belong to G1")
     if set(self.joint_offsets) - set(self.target.joint_names):
       raise ValueError("Joint offset names must belong to the target robot")
     self.source_model = self.source.spec.compile()
@@ -114,7 +119,7 @@ class G1ToHunter130:
         if source[key].shape != shape or not np.isfinite(source[key]).all():
           raise ValueError(f"Invalid {key} in {source_path}; expected {shape}")
       g1_indices = [joint_names.index(n) for n in self.source.joint_names]
-      target_indices = [joint_names.index(n) for n in self.target.joint_names]
+      target_indices = [joint_names.index(self.joint_mapping[n]) for n in self.target.joint_names]
       g1_joint_pos = source["joint_pos"][:, g1_indices].astype(np.float64)
       raw_joint_pos = source["joint_pos"][:, target_indices].astype(np.float64)
       raw_joint_pos += np.array([self.joint_offsets.get(n, 0.0) for n in self.target.joint_names])
@@ -184,6 +189,7 @@ class G1ToHunter130:
       retarget_method="joint_mapping_limit_clip_ground_clearance_fk",
       root_z_offset=root_z_offset.astype(np.float32), ground_clearance=ground_clearance.astype(np.float32),
       joint_position_offsets=np.array([self.joint_offsets.get(n, 0.0) for n in self.target.joint_names], dtype=np.float32),
+      source_joint_names=np.asarray([self.joint_mapping[n] for n in self.target.joint_names]),
     )
     changed = np.abs(joint_pos - raw_joint_pos) > 1e-7
     return {
@@ -211,8 +217,9 @@ def convert_directory(source_dir: Path, output_dir: Path, retargeter: G1ToHunter
   summary = {
     "source_dir": str(source_dir), "output_dir": str(output_dir), "target_robot": retargeter.target_robot,
     "joint_position_offsets": retargeter.joint_offsets,
+    "joint_mapping": retargeter.joint_mapping,
     "clips": len(report), "frames": sum(r["frames"] for r in report),
-    "dropped_joints": [n for n in retargeter.source.joint_names if n not in retargeter.target.joint_names],
+    "dropped_joints": [n for n in retargeter.source.joint_names if n not in retargeter.joint_mapping.values()],
     "method": "Shared joint mapping, target limit clipping, per-frame ground clearance matching, target FK and link-origin velocities; no IK/dynamics solve.",
     "motions": report,
   }

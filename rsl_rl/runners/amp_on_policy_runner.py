@@ -211,6 +211,8 @@ class AmpOnPolicyRunner:
             amp_normalizer,
             device=self.device,
             min_std=min_std,
+            action_clip=train_cfg.get("clip_actions"),
+            kl_stop_multiplier=train_cfg.get("amp_kl_stop_multiplier"),
             **self.alg_cfg,
             multi_gpu_cfg=self.multi_gpu_cfg,
         )
@@ -250,6 +252,10 @@ class AmpOnPolicyRunner:
         self.git_status_repos = [rsl_rl.__file__]
 
     def learn(self, num_learning_iterations: int, init_at_random_ep_len: bool = False):  # noqa: C901
+        if self.alg.amp_normalizer_version != self.alg.AMP_NORMALIZER_VERSION:
+            raise RuntimeError("This checkpoint uses legacy AMP normalization. For policy warm start, "
+                               "set --agent.amp-reset-on-load True; this resets AMP and optimizer "
+                               "state while retaining policy and observation-normalizer weights.")
         # initialize writer
         if self.log_dir is not None and self.writer is None and not self.disable_logs:
             # Launch either Tensorboard or Neptune & Tensorboard summary writer(s), default: Tensorboard.
@@ -289,6 +295,8 @@ class AmpOnPolicyRunner:
         amp_obs = extras["observations"]["amp"]
         obs, privileged_obs, amp_obs = obs.to(self.device), privileged_obs.to(self.device), amp_obs.to(self.device)
         self.train_mode()  # switch to train mode (for dropout for example)
+        obs = self.obs_normalizer(obs)
+        privileged_obs = self.privileged_obs_normalizer(privileged_obs)
 
         # Book keeping
         ep_infos = []
@@ -315,6 +323,7 @@ class AmpOnPolicyRunner:
         start_iter = self.current_learning_iteration
         tot_iter = start_iter + num_learning_iterations
         for it in range(start_iter, tot_iter):
+            self._apply_learning_rate_schedule(it)
             start = time.time()
             # Rollout
             with torch.inference_mode():
@@ -412,7 +421,7 @@ class AmpOnPolicyRunner:
             # Clear episode infos
             ep_infos.clear()
             # Save code state
-            if it == start_iter and not self.disable_logs:
+            if it == start_iter and self.log_dir is not None and not self.disable_logs:
                 # obtain all the diff files
                 git_file_paths = store_code_state(self.log_dir, self.git_status_repos)
                 # if possible store them to wandb
@@ -538,6 +547,7 @@ class AmpOnPolicyRunner:
             "optimizer_state_dict": self.alg.optimizer.state_dict(),
             "discriminator_state_dict": self.alg.discriminator.state_dict(),
             "amp_normalizer": self.alg.amp_normalizer,
+            "amp_normalizer_version": self.alg.amp_normalizer_version,
             "iter": self.current_learning_iteration,
             "infos": infos,
         }
@@ -557,8 +567,10 @@ class AmpOnPolicyRunner:
         if self.logger_type in ["neptune", "wandb"] and not self.disable_logs:
             self.writer.save_model(path, self.current_learning_iteration)
 
-    def load(self, path: str, load_optimizer: bool = True):
-        loaded_dict = torch.load(path, weights_only=False)
+    def load(self, path: str, load_optimizer: bool = True, *, reset_amp: bool | None = None):
+        loaded_dict = torch.load(path, map_location=self.device, weights_only=False)
+        if reset_amp is None:
+            reset_amp = self.cfg.get("amp_reset_on_load", False)
 
         # -- Load model (support both native and mjlab v5 checkpoint formats)
         if "model_state_dict" in loaded_dict:
@@ -587,6 +599,7 @@ class AmpOnPolicyRunner:
             self.alg.discriminator.load_state_dict(loaded_dict["discriminator_state_dict"])
         if "amp_normalizer" in loaded_dict:
             self.alg.amp_normalizer = loaded_dict["amp_normalizer"]
+        self.alg.amp_normalizer_version = loaded_dict.get("amp_normalizer_version", 1)
         # -- Load RND model if used
         if self.alg.rnd:
             self.alg.rnd.load_state_dict(loaded_dict["rnd_state_dict"])
@@ -603,7 +616,7 @@ class AmpOnPolicyRunner:
                 # is not loaded, as the observation space could differ from the previous rl training.
                 self.privileged_obs_normalizer.load_state_dict(loaded_dict["obs_norm_state_dict"])
         # -- load optimizer if used
-        if load_optimizer and resumed_training:
+        if load_optimizer and resumed_training and not reset_amp:
             # -- algorithm optimizer
             self.alg.optimizer.load_state_dict(loaded_dict["optimizer_state_dict"])
             # -- RND optimizer if used
@@ -612,7 +625,34 @@ class AmpOnPolicyRunner:
         # -- load current learning iteration
         if resumed_training:
             self.current_learning_iteration = loaded_dict["iter"]
+        if reset_amp:
+            self.alg.reset_amp_training()
+            print("[AMP] Policy warm start: reset discriminator, AMP statistics, replay and optimizer state.")
+        # A fixed schedule must honor the selected config after optimizer.load().
+        if self.alg.schedule == "fixed":
+            self._apply_learning_rate_schedule(self.current_learning_iteration)
+        elif load_optimizer and not reset_amp:
+            self.alg.learning_rate = self.alg.optimizer.param_groups[0]["lr"]
         return loaded_dict["infos"]
+
+    def _apply_learning_rate_schedule(self, iteration: int):
+        stages = self.cfg.get("amp_learning_rate_decay_stages", [])
+        if stages and self.alg.schedule != "fixed":
+            raise ValueError("AMP learning-rate stages require algorithm.schedule='fixed'")
+        if self.alg.schedule != "fixed":
+            return
+        factor = 1.0
+        previous = -1
+        for step, multiplier in stages:
+            if step < 0 or step <= previous or not 0 < multiplier <= 1:
+                raise ValueError("AMP learning-rate stages need increasing nonnegative steps and factors in (0,1]")
+            previous = step
+            if iteration >= step:
+                factor = multiplier
+        rate = self.alg_cfg["learning_rate"] * factor
+        self.alg.learning_rate = rate
+        for group in self.alg.optimizer.param_groups:
+            group["lr"] = rate
 
     def get_inference_policy(self, device=None):
         self.eval_mode()  # switch to evaluation mode (dropout for example)

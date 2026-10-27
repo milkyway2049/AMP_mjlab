@@ -1,0 +1,886 @@
+{
+  "motion_dir": "/home/milkyway/mjlab/AMP_mjlab/src/assets/motions/xq180/amp",
+  "frames": 9992,
+  "clips": 18,
+  "method": "All-frame MuJoCo FK/self-contact check; penetration threshold 1mm. Near-floor sole-site horizontal speed uses z<35mm and is only a slip proxy. No policy rollout or physical contact simulation.",
+  "summary": {
+    "hard_clipped_joint_samples": 10870,
+    "hard_clipped_frame_fraction": 0.42574059247397916,
+    "reset_soft_limit_changed_frame_fraction": 0.5634507606084868,
+    "self_penetration_over_1mm_frame_fraction": 0.1404123298638911
+  },
+  "g1_total_mass_kg": 33.341142000000005,
+  "xq180_total_mass_kg": 66.609902,
+  "nominal_inertia_ratios": [
+    {
+      "joint": "left_hip_yaw_joint",
+      "g1_joint": "left_hip_yaw_joint",
+      "fixed_root_inertia_ratio": 3.0667270328820084,
+      "single_support_inertia_ratio": 2.329334818080446
+    },
+    {
+      "joint": "left_hip_roll_joint",
+      "g1_joint": "left_hip_roll_joint",
+      "fixed_root_inertia_ratio": 4.022651293599537,
+      "single_support_inertia_ratio": 3.1898764959078507
+    },
+    {
+      "joint": "left_hip_pitch_joint",
+      "g1_joint": "left_hip_pitch_joint",
+      "fixed_root_inertia_ratio": 2.879720335731354,
+      "single_support_inertia_ratio": 2.972275981620057
+    },
+    {
+      "joint": "left_knee_joint",
+      "g1_joint": "left_knee_joint",
+      "fixed_root_inertia_ratio": 2.90593899375115,
+      "single_support_inertia_ratio": 3.0988112794935816
+    },
+    {
+      "joint": "left_ankle_joint",
+      "g1_joint": "left_ankle_pitch_joint",
+      "fixed_root_inertia_ratio": 1.9268004523769662,
+      "single_support_inertia_ratio": 3.549217685938027
+    },
+    {
+      "joint": "right_hip_yaw_joint",
+      "g1_joint": "right_hip_yaw_joint",
+      "fixed_root_inertia_ratio": 3.164228278283065,
+      "single_support_inertia_ratio": 2.2812760080370595
+    },
+    {
+      "joint": "right_hip_roll_joint",
+      "g1_joint": "right_hip_roll_joint",
+      "fixed_root_inertia_ratio": 4.10410403980117,
+      "single_support_inertia_ratio": 3.1545437764739788
+    },
+    {
+      "joint": "right_hip_pitch_joint",
+      "g1_joint": "right_hip_pitch_joint",
+      "fixed_root_inertia_ratio": 2.9381328468240304,
+      "single_support_inertia_ratio": 2.950614047820833
+    },
+    {
+      "joint": "right_knee_joint",
+      "g1_joint": "right_knee_joint",
+      "fixed_root_inertia_ratio": 2.90869552458539,
+      "single_support_inertia_ratio": 3.098757526075237
+    },
+    {
+      "joint": "right_ankle_joint",
+      "g1_joint": "right_ankle_pitch_joint",
+      "fixed_root_inertia_ratio": 1.9268404651288997,
+      "single_support_inertia_ratio": 3.5492176607403763
+    },
+    {
+      "joint": "waist_point",
+      "g1_joint": "waist_yaw_joint",
+      "fixed_root_inertia_ratio": 1.5322540082961,
+      "single_support_inertia_ratio": 1.5322540082961
+    },
+    {
+      "joint": "left_shoulder_pitch_joint",
+      "g1_joint": "left_shoulder_pitch_joint",
+      "fixed_root_inertia_ratio": 0.6897641243364133,
+      "single_support_inertia_ratio": 0.6897641243364133
+    },
+    {
+      "joint": "left_shoulder_roll_joint",
+      "g1_joint": "left_shoulder_roll_joint",
+      "fixed_root_inertia_ratio": 0.8744205244636182,
+      "single_support_inertia_ratio": 0.8744205244636182
+    },
+    {
+      "joint": "left_shoulder_yaw_joint",
+      "g1_joint": "left_shoulder_yaw_joint",
+      "fixed_root_inertia_ratio": 0.44993502149288683,
+      "single_support_inertia_ratio": 0.44993502149288683
+    },
+    {
+      "joint": "leftelbow_joint",
+      "g1_joint": "left_elbow_joint",
+      "fixed_root_inertia_ratio": 0.7276524719329156,
+      "single_support_inertia_ratio": 0.7276524719329156
+    },
+    {
+      "joint": "right_shoulder_pitch_joint",
+      "g1_joint": "right_shoulder_pitch_joint",
+      "fixed_root_inertia_ratio": 0.6923072799969444,
+      "single_support_inertia_ratio": 0.6923072799969444
+    },
+    {
+      "joint": "right_shoulder_roll_joint",
+      "g1_joint": "right_shoulder_roll_joint",
+      "fixed_root_inertia_ratio": 0.8749239468387132,
+      "single_support_inertia_ratio": 0.8749239468387132
+    },
+    {
+      "joint": "right_shoulder_yaw_joint",
+      "g1_joint": "right_shoulder_yaw_joint",
+      "fixed_root_inertia_ratio": 0.4500012967048654,
+      "single_support_inertia_ratio": 0.4500012967048654
+    },
+    {
+      "joint": "rightelbow_joint",
+      "g1_joint": "right_elbow_joint",
+      "fixed_root_inertia_ratio": 0.7276728481253412,
+      "single_support_inertia_ratio": 0.7276728481253412
+    }
+  ],
+  "motions": [
+    {
+      "clip": "Recovery/fallAndGetUp1_subject1.npz",
+      "frames": 2575,
+      "fps": 50.0,
+      "sha256": "4c4b45219260af5bdf47ade24bb91066cf1ba08d52a0e11cd6c47c92a6ac96d9",
+      "hard_clipped_joint_samples": 7186,
+      "hard_clipped_frame_fraction": 0.8695145631067961,
+      "hard_clipped_fraction_by_joint": {
+        "left_hip_yaw_joint": 0.01825242718446602,
+        "left_hip_roll_joint": 0.3145631067961165,
+        "left_hip_pitch_joint": 0.10718446601941747,
+        "left_knee_joint": 0.29902912621359223,
+        "right_hip_yaw_joint": 0.036893203883495145,
+        "right_hip_roll_joint": 0.4225242718446602,
+        "right_hip_pitch_joint": 0.055145631067961165,
+        "right_knee_joint": 0.24310679611650485,
+        "left_shoulder_roll_joint": 0.16194174757281554,
+        "leftelbow_joint": 0.5029126213592233,
+        "right_shoulder_roll_joint": 0.1871844660194175,
+        "rightelbow_joint": 0.4419417475728155
+      },
+      "reset_soft_limit_changed_frame_fraction": 0.974757281553398,
+      "joint_speed_max_rad_s": 9.867475509643555,
+      "g1": {
+        "near_floor_site_speed_mean_m_s": 0.17949294363496313,
+        "near_floor_site_samples": 1946,
+        "self_penetration_over_1mm_frame_count": 574,
+        "self_penetration_over_1mm_frame_fraction": 0.2229126213592233,
+        "deepest_self_penetration_m": -0.0740891173704961,
+        "self_contact_pairs": {
+          "right_elbow_yaw_collision / torso_collision": 157,
+          "left_elbow_yaw_collision / torso_collision": 114,
+          "right_wrist_collision / torso_collision": 105,
+          "left_wrist_collision / torso_collision": 79,
+          "right_hand_collision / right_hip_collision": 67,
+          "left_shoulder_yaw_collision / torso_collision": 65,
+          "right_shoulder_yaw_collision / torso_collision": 53,
+          "right_hip_collision / right_wrist_collision": 52
+        },
+        "root_vertical_accel_p99_m_s2": 8.859867095947266
+      },
+      "xq180": {
+        "near_floor_site_speed_mean_m_s": 0.5652636229514184,
+        "near_floor_site_samples": 1160,
+        "self_penetration_over_1mm_frame_count": 839,
+        "self_penetration_over_1mm_frame_fraction": 0.3258252427184466,
+        "deepest_self_penetration_m": -0.08241470961173829,
+        "self_contact_pairs": {
+          "leftelbow_Link_collision / waist_Link_collision": 389,
+          "rightelbow_Link_collision / waist_Link_collision": 240,
+          "base_link_collision / rightelbow_Link_collision": 181,
+          "base_link_collision / leftelbow_Link_collision": 176,
+          "base_link_collision / right_hip_pitch_Link_collision": 160,
+          "base_link_collision / left_hip_pitch_Link_collision": 148,
+          "right_hip_pitch_Link_collision / rightelbow_Link_collision": 15,
+          "left_hip_pitch_Link_collision / leftelbow_Link_collision": 13
+        },
+        "root_vertical_accel_p99_m_s2": 36.609222412109375
+      }
+    },
+    {
+      "clip": "WalkandRun/arc_jog_left_loop_002__A029.npz",
+      "frames": 345,
+      "fps": 50.0,
+      "sha256": "83c98de2c6067acacc44c09b76276736760ad6ba68ae9e743c34981703a0769f",
+      "hard_clipped_joint_samples": 857,
+      "hard_clipped_frame_fraction": 0.9449275362318841,
+      "hard_clipped_fraction_by_joint": {
+        "left_hip_roll_joint": 0.04057971014492753,
+        "left_knee_joint": 0.2,
+        "right_hip_roll_joint": 0.2144927536231884,
+        "right_knee_joint": 0.20579710144927535,
+        "leftelbow_joint": 0.9449275362318841,
+        "rightelbow_joint": 0.8782608695652174
+      },
+      "reset_soft_limit_changed_frame_fraction": 0.9478260869565217,
+      "joint_speed_max_rad_s": 17.381887435913086,
+      "g1": {
+        "near_floor_site_speed_mean_m_s": 0.3875288802477661,
+        "near_floor_site_samples": 285,
+        "self_penetration_over_1mm_frame_count": 15,
+        "self_penetration_over_1mm_frame_fraction": 0.043478260869565216,
+        "deepest_self_penetration_m": -0.011901421978805782,
+        "self_contact_pairs": {
+          "left_hip_collision / left_wrist_collision": 11,
+          "right_hand_collision / right_hip_collision": 4,
+          "right_hand_collision / right_thigh_collision": 1
+        },
+        "root_vertical_accel_p99_m_s2": 13.347296714782715
+      },
+      "xq180": {
+        "near_floor_site_speed_mean_m_s": 0.8655310732701821,
+        "near_floor_site_samples": 229,
+        "self_penetration_over_1mm_frame_count": 0,
+        "self_penetration_over_1mm_frame_fraction": 0.0,
+        "deepest_self_penetration_m": 0.0,
+        "self_contact_pairs": {},
+        "root_vertical_accel_p99_m_s2": 33.16112518310547
+      }
+    },
+    {
+      "clip": "WalkandRun/arc_walk_left_loop_001__A029.npz",
+      "frames": 621,
+      "fps": 50.0,
+      "sha256": "9e34fa85c0fd31280484bc1baf5daac11f7860d6c40dc864bc228d5d26203e40",
+      "hard_clipped_joint_samples": 26,
+      "hard_clipped_frame_fraction": 0.04186795491143317,
+      "hard_clipped_fraction_by_joint": {
+        "right_hip_roll_joint": 0.04186795491143317
+      },
+      "reset_soft_limit_changed_frame_fraction": 0.19001610305958133,
+      "joint_speed_max_rad_s": 11.98127269744873,
+      "g1": {
+        "near_floor_site_speed_mean_m_s": 0.3888088410176971,
+        "near_floor_site_samples": 809,
+        "self_penetration_over_1mm_frame_count": 182,
+        "self_penetration_over_1mm_frame_fraction": 0.29307568438003223,
+        "deepest_self_penetration_m": -0.03538750231126343,
+        "self_contact_pairs": {
+          "left_hand_collision / left_hip_collision": 80,
+          "left_hip_collision / left_wrist_collision": 79,
+          "right_hip_collision / right_wrist_collision": 65,
+          "right_hand_collision / right_hip_collision": 38,
+          "right_hand_collision / right_thigh_collision": 24,
+          "left_hand_collision / left_thigh_collision": 1
+        },
+        "root_vertical_accel_p99_m_s2": 4.693180561065674
+      },
+      "xq180": {
+        "near_floor_site_speed_mean_m_s": 0.7719083082862673,
+        "near_floor_site_samples": 574,
+        "self_penetration_over_1mm_frame_count": 15,
+        "self_penetration_over_1mm_frame_fraction": 0.024154589371980676,
+        "deepest_self_penetration_m": -0.008714462447051735,
+        "self_contact_pairs": {
+          "right_hip_pitch_Link_collision / rightelbow_Link_collision": 15
+        },
+        "root_vertical_accel_p99_m_s2": 19.30716323852539
+      }
+    },
+    {
+      "clip": "WalkandRun/idle_turn_270_001__A048.npz",
+      "frames": 298,
+      "fps": 50.0,
+      "sha256": "f0be8bbe107deca4427b436d4c08d06554567440e6f140cdd6a0190b8e4d343d",
+      "hard_clipped_joint_samples": 34,
+      "hard_clipped_frame_fraction": 0.09060402684563758,
+      "hard_clipped_fraction_by_joint": {
+        "left_hip_yaw_joint": 0.08053691275167785,
+        "left_hip_roll_joint": 0.02348993288590604,
+        "right_hip_roll_joint": 0.010067114093959731
+      },
+      "reset_soft_limit_changed_frame_fraction": 0.10067114093959731,
+      "joint_speed_max_rad_s": 5.2450103759765625,
+      "g1": {
+        "near_floor_site_speed_mean_m_s": 0.03420236378949744,
+        "near_floor_site_samples": 596,
+        "self_penetration_over_1mm_frame_count": 298,
+        "self_penetration_over_1mm_frame_fraction": 1.0,
+        "deepest_self_penetration_m": -0.05810776386407621,
+        "self_contact_pairs": {
+          "right_hand_collision / right_hip_collision": 283,
+          "right_hand_collision / right_thigh_collision": 274,
+          "right_hip_collision / right_wrist_collision": 272,
+          "left_hand_collision / left_hip_collision": 247,
+          "left_hip_collision / left_wrist_collision": 220,
+          "left_hand_collision / left_thigh_collision": 37
+        },
+        "root_vertical_accel_p99_m_s2": 0.6358996629714966
+      },
+      "xq180": {
+        "near_floor_site_speed_mean_m_s": 0.1225094024798959,
+        "near_floor_site_samples": 565,
+        "self_penetration_over_1mm_frame_count": 0,
+        "self_penetration_over_1mm_frame_fraction": 0.0,
+        "deepest_self_penetration_m": 0.0,
+        "self_contact_pairs": {},
+        "root_vertical_accel_p99_m_s2": 6.119581699371338
+      }
+    },
+    {
+      "clip": "WalkandRun/idle_turn_360_001__A047.npz",
+      "frames": 371,
+      "fps": 50.0,
+      "sha256": "ed080cb1bf831d83201742adbed27a04eea8ff34dfdb3cdaf4dc21b5a929ef4f",
+      "hard_clipped_joint_samples": 57,
+      "hard_clipped_frame_fraction": 0.10242587601078167,
+      "hard_clipped_fraction_by_joint": {
+        "left_hip_yaw_joint": 0.04582210242587601,
+        "left_hip_roll_joint": 0.0215633423180593,
+        "right_hip_yaw_joint": 0.0215633423180593,
+        "right_hip_roll_joint": 0.0646900269541779
+      },
+      "reset_soft_limit_changed_frame_fraction": 0.19946091644204852,
+      "joint_speed_max_rad_s": 7.511427879333496,
+      "g1": {
+        "near_floor_site_speed_mean_m_s": 0.0644451516928367,
+        "near_floor_site_samples": 726,
+        "self_penetration_over_1mm_frame_count": 331,
+        "self_penetration_over_1mm_frame_fraction": 0.8921832884097035,
+        "deepest_self_penetration_m": -0.06737094890860972,
+        "self_contact_pairs": {
+          "left_hand_collision / left_hip_collision": 331,
+          "left_hand_collision / left_thigh_collision": 102,
+          "left_hip_collision / left_wrist_collision": 28
+        },
+        "root_vertical_accel_p99_m_s2": 0.752266526222229
+      },
+      "xq180": {
+        "near_floor_site_speed_mean_m_s": 0.1602472849797338,
+        "near_floor_site_samples": 682,
+        "self_penetration_over_1mm_frame_count": 3,
+        "self_penetration_over_1mm_frame_fraction": 0.008086253369272238,
+        "deepest_self_penetration_m": -0.001756143853306677,
+        "self_contact_pairs": {
+          "rightelbow_Link_collision / waist_Link_collision": 3
+        },
+        "root_vertical_accel_p99_m_s2": 4.333037376403809
+      }
+    },
+    {
+      "clip": "WalkandRun/jog_arc_cw_loop_004__A045.npz",
+      "frames": 443,
+      "fps": 50.0,
+      "sha256": "53f7681e208a6ed6d8e7ddcdec9bc261499c1c4c52ad195a2b56a42dfffef213",
+      "hard_clipped_joint_samples": 748,
+      "hard_clipped_frame_fraction": 0.7381489841986456,
+      "hard_clipped_fraction_by_joint": {
+        "left_hip_roll_joint": 0.06997742663656885,
+        "left_knee_joint": 0.08577878103837472,
+        "right_knee_joint": 0.12866817155756208,
+        "leftelbow_joint": 0.7381489841986456,
+        "rightelbow_joint": 0.6659142212189616
+      },
+      "reset_soft_limit_changed_frame_fraction": 0.7471783295711061,
+      "joint_speed_max_rad_s": 11.017269134521484,
+      "g1": {
+        "near_floor_site_speed_mean_m_s": 0.3341148001565542,
+        "near_floor_site_samples": 497,
+        "self_penetration_over_1mm_frame_count": 90,
+        "self_penetration_over_1mm_frame_fraction": 0.20316027088036118,
+        "deepest_self_penetration_m": -0.054553837847193774,
+        "self_contact_pairs": {
+          "right_hand_collision / right_hip_collision": 90,
+          "right_hand_collision / right_thigh_collision": 86,
+          "left_hand_collision / left_thigh_collision": 82,
+          "left_hand_collision / left_hip_collision": 63,
+          "right_hip_collision / right_wrist_collision": 9
+        },
+        "root_vertical_accel_p99_m_s2": 8.085958480834961
+      },
+      "xq180": {
+        "near_floor_site_speed_mean_m_s": 0.7016319227221086,
+        "near_floor_site_samples": 433,
+        "self_penetration_over_1mm_frame_count": 0,
+        "self_penetration_over_1mm_frame_fraction": 0.0,
+        "deepest_self_penetration_m": 0.0,
+        "self_contact_pairs": {},
+        "root_vertical_accel_p99_m_s2": 32.07216262817383
+      }
+    },
+    {
+      "clip": "WalkandRun/jog_backward_loop_002__A022.npz",
+      "frames": 287,
+      "fps": 50.0,
+      "sha256": "bde516ae3f1c291d381778bf9503e5c0ec52ceb9207ae5ae9c75e5b6019872cb",
+      "hard_clipped_joint_samples": 369,
+      "hard_clipped_frame_fraction": 0.6655052264808362,
+      "hard_clipped_fraction_by_joint": {
+        "leftelbow_joint": 0.6655052264808362,
+        "rightelbow_joint": 0.6202090592334495
+      },
+      "reset_soft_limit_changed_frame_fraction": 0.7456445993031359,
+      "joint_speed_max_rad_s": 11.28580379486084,
+      "g1": {
+        "near_floor_site_speed_mean_m_s": 0.23718650235015887,
+        "near_floor_site_samples": 361,
+        "self_penetration_over_1mm_frame_count": 103,
+        "self_penetration_over_1mm_frame_fraction": 0.3588850174216028,
+        "deepest_self_penetration_m": -0.054067022650673535,
+        "self_contact_pairs": {
+          "left_hand_collision / left_hip_collision": 102,
+          "left_hip_collision / left_wrist_collision": 78,
+          "right_hand_collision / right_hip_collision": 65,
+          "right_hip_collision / right_wrist_collision": 63,
+          "right_hand_collision / right_thigh_collision": 43,
+          "left_hand_collision / left_thigh_collision": 40
+        },
+        "root_vertical_accel_p99_m_s2": 10.41391658782959
+      },
+      "xq180": {
+        "near_floor_site_speed_mean_m_s": 0.4394322389251343,
+        "near_floor_site_samples": 298,
+        "self_penetration_over_1mm_frame_count": 36,
+        "self_penetration_over_1mm_frame_fraction": 0.1254355400696864,
+        "deepest_self_penetration_m": -0.028096728350911385,
+        "self_contact_pairs": {
+          "rightelbow_Link_collision / waist_Link_collision": 19,
+          "leftelbow_Link_collision / waist_Link_collision": 17,
+          "base_link_collision / rightelbow_Link_collision": 4
+        },
+        "root_vertical_accel_p99_m_s2": 22.09038734436035
+      }
+    },
+    {
+      "clip": "WalkandRun/jog_backward_loop_003__A023.npz",
+      "frames": 285,
+      "fps": 50.0,
+      "sha256": "3d11c1291c97273122dc0a9123565ad0c5f8121bf133575b46ecc8ff0a06d019",
+      "hard_clipped_joint_samples": 228,
+      "hard_clipped_frame_fraction": 0.6350877192982456,
+      "hard_clipped_fraction_by_joint": {
+        "left_knee_joint": 0.028070175438596492,
+        "right_knee_joint": 0.11578947368421053,
+        "leftelbow_joint": 0.6175438596491228,
+        "rightelbow_joint": 0.03859649122807018
+      },
+      "reset_soft_limit_changed_frame_fraction": 0.7052631578947368,
+      "joint_speed_max_rad_s": 15.069459915161133,
+      "g1": {
+        "near_floor_site_speed_mean_m_s": 0.41644796165211206,
+        "near_floor_site_samples": 378,
+        "self_penetration_over_1mm_frame_count": 42,
+        "self_penetration_over_1mm_frame_fraction": 0.14736842105263157,
+        "deepest_self_penetration_m": -0.02425492807746686,
+        "self_contact_pairs": {
+          "left_hand_collision / left_hip_collision": 25,
+          "right_hip_collision / right_wrist_collision": 20,
+          "right_hand_collision / right_hip_collision": 15,
+          "right_hand_collision / right_thigh_collision": 9
+        },
+        "root_vertical_accel_p99_m_s2": 11.904346466064453
+      },
+      "xq180": {
+        "near_floor_site_speed_mean_m_s": 0.698425662173366,
+        "near_floor_site_samples": 344,
+        "self_penetration_over_1mm_frame_count": 0,
+        "self_penetration_over_1mm_frame_fraction": 0.0,
+        "deepest_self_penetration_m": 0.0,
+        "self_contact_pairs": {},
+        "root_vertical_accel_p99_m_s2": 23.77945899963379
+      }
+    },
+    {
+      "clip": "WalkandRun/jog_forward_loop_003__A021.npz",
+      "frames": 401,
+      "fps": 50.0,
+      "sha256": "b73548c3d24d1784dfccee6c636930fee50aa341337d371f9dc5e8537a2e3ae5",
+      "hard_clipped_joint_samples": 392,
+      "hard_clipped_frame_fraction": 0.4389027431421446,
+      "hard_clipped_fraction_by_joint": {
+        "left_hip_roll_joint": 0.0399002493765586,
+        "left_knee_joint": 0.014962593516209476,
+        "right_hip_roll_joint": 0.06982543640897755,
+        "leftelbow_joint": 0.4389027431421446,
+        "rightelbow_joint": 0.4139650872817955
+      },
+      "reset_soft_limit_changed_frame_fraction": 0.46384039900249374,
+      "joint_speed_max_rad_s": 14.299528121948242,
+      "g1": {
+        "near_floor_site_speed_mean_m_s": 0.24748198637609814,
+        "near_floor_site_samples": 584,
+        "self_penetration_over_1mm_frame_count": 212,
+        "self_penetration_over_1mm_frame_fraction": 0.5286783042394015,
+        "deepest_self_penetration_m": -0.025944532985054655,
+        "self_contact_pairs": {
+          "right_hip_collision / right_wrist_collision": 196,
+          "left_hip_collision / left_wrist_collision": 189,
+          "right_hand_collision / right_hip_collision": 183,
+          "left_hand_collision / left_hip_collision": 146,
+          "right_hand_collision / right_thigh_collision": 64,
+          "left_hand_collision / left_thigh_collision": 8
+        },
+        "root_vertical_accel_p99_m_s2": 11.756346702575684
+      },
+      "xq180": {
+        "near_floor_site_speed_mean_m_s": 0.37761222349652973,
+        "near_floor_site_samples": 515,
+        "self_penetration_over_1mm_frame_count": 85,
+        "self_penetration_over_1mm_frame_fraction": 0.2119700748129676,
+        "deepest_self_penetration_m": -0.036561990403607955,
+        "self_contact_pairs": {
+          "rightelbow_Link_collision / waist_Link_collision": 38,
+          "base_link_collision / rightelbow_Link_collision": 37,
+          "base_link_collision / leftelbow_Link_collision": 29,
+          "left_hip_pitch_Link_collision / leftelbow_Link_collision": 9,
+          "leftelbow_Link_collision / waist_Link_collision": 4
+        },
+        "root_vertical_accel_p99_m_s2": 24.401657104492188
+      }
+    },
+    {
+      "clip": "WalkandRun/jog_forward_loop_003__A022.npz",
+      "frames": 286,
+      "fps": 50.0,
+      "sha256": "9dd28d58e5274295af7cbc8cb3f834c84ebaff78d8c632035df46503402116bc",
+      "hard_clipped_joint_samples": 403,
+      "hard_clipped_frame_fraction": 0.6958041958041958,
+      "hard_clipped_fraction_by_joint": {
+        "left_knee_joint": 0.017482517482517484,
+        "right_knee_joint": 0.05944055944055944,
+        "leftelbow_joint": 0.6958041958041958,
+        "rightelbow_joint": 0.6363636363636364
+      },
+      "reset_soft_limit_changed_frame_fraction": 0.7832167832167832,
+      "joint_speed_max_rad_s": 14.23128890991211,
+      "g1": {
+        "near_floor_site_speed_mean_m_s": 0.3410540834479751,
+        "near_floor_site_samples": 352,
+        "self_penetration_over_1mm_frame_count": 87,
+        "self_penetration_over_1mm_frame_fraction": 0.3041958041958042,
+        "deepest_self_penetration_m": -0.04510136118225939,
+        "self_contact_pairs": {
+          "right_hand_collision / right_hip_collision": 76,
+          "right_hip_collision / right_wrist_collision": 68,
+          "right_hand_collision / right_thigh_collision": 60,
+          "left_hip_collision / left_wrist_collision": 55,
+          "left_hand_collision / left_hip_collision": 53,
+          "left_hand_collision / left_thigh_collision": 29,
+          "left_hand_collision / right_hand_collision": 2
+        },
+        "root_vertical_accel_p99_m_s2": 9.288375854492188
+      },
+      "xq180": {
+        "near_floor_site_speed_mean_m_s": 0.47132953984434156,
+        "near_floor_site_samples": 306,
+        "self_penetration_over_1mm_frame_count": 133,
+        "self_penetration_over_1mm_frame_fraction": 0.46503496503496505,
+        "deepest_self_penetration_m": -0.04175141883996046,
+        "self_contact_pairs": {
+          "leftelbow_Link_collision / waist_Link_collision": 66,
+          "rightelbow_Link_collision / waist_Link_collision": 59,
+          "base_link_collision / leftelbow_Link_collision": 33,
+          "base_link_collision / rightelbow_Link_collision": 6
+        },
+        "root_vertical_accel_p99_m_s2": 26.001588821411133
+      }
+    },
+    {
+      "clip": "WalkandRun/step_rotate_idle_000_002__A026.npz",
+      "frames": 260,
+      "fps": 50.0,
+      "sha256": "cf8acfaf4a6a3478dc55ff7b1aaac3a257ce97e2c52f203c9bdae435197fa316",
+      "hard_clipped_joint_samples": 0,
+      "hard_clipped_frame_fraction": 0.0,
+      "hard_clipped_fraction_by_joint": {},
+      "reset_soft_limit_changed_frame_fraction": 0.0,
+      "joint_speed_max_rad_s": 0.13651996850967407,
+      "g1": {
+        "near_floor_site_speed_mean_m_s": 0.001914280467043266,
+        "near_floor_site_samples": 520,
+        "self_penetration_over_1mm_frame_count": 186,
+        "self_penetration_over_1mm_frame_fraction": 0.7153846153846154,
+        "deepest_self_penetration_m": -0.004609770683911149,
+        "self_contact_pairs": {
+          "left_hand_collision / left_hip_collision": 186
+        },
+        "root_vertical_accel_p99_m_s2": 0.09786225855350494
+      },
+      "xq180": {
+        "near_floor_site_speed_mean_m_s": 0.005134310435906664,
+        "near_floor_site_samples": 520,
+        "self_penetration_over_1mm_frame_count": 0,
+        "self_penetration_over_1mm_frame_fraction": 0.0,
+        "deepest_self_penetration_m": 0.0,
+        "self_contact_pairs": {},
+        "root_vertical_accel_p99_m_s2": 0.13006114959716797
+      }
+    },
+    {
+      "clip": "WalkandRun/walk_arc_cw_loop_002__A046.npz",
+      "frames": 291,
+      "fps": 50.0,
+      "sha256": "05343adfab5a583df48252226090be81a0648316f5d2110a3db19a1aa2d84a73",
+      "hard_clipped_joint_samples": 26,
+      "hard_clipped_frame_fraction": 0.08934707903780069,
+      "hard_clipped_fraction_by_joint": {
+        "left_hip_roll_joint": 0.08934707903780069
+      },
+      "reset_soft_limit_changed_frame_fraction": 0.21993127147766323,
+      "joint_speed_max_rad_s": 9.208155632019043,
+      "g1": {
+        "near_floor_site_speed_mean_m_s": 0.45239045502849556,
+        "near_floor_site_samples": 403,
+        "self_penetration_over_1mm_frame_count": 162,
+        "self_penetration_over_1mm_frame_fraction": 0.5567010309278351,
+        "deepest_self_penetration_m": -0.06097096122590549,
+        "self_contact_pairs": {
+          "right_hand_collision / right_hip_collision": 152,
+          "right_hip_collision / right_wrist_collision": 148,
+          "right_hand_collision / right_thigh_collision": 61,
+          "left_hand_collision / left_hip_collision": 10,
+          "left_hip_collision / left_wrist_collision": 5,
+          "left_hand_collision / left_thigh_collision": 3
+        },
+        "root_vertical_accel_p99_m_s2": 2.60361647605896
+      },
+      "xq180": {
+        "near_floor_site_speed_mean_m_s": 0.6579989433946706,
+        "near_floor_site_samples": 284,
+        "self_penetration_over_1mm_frame_count": 0,
+        "self_penetration_over_1mm_frame_fraction": 0.0,
+        "deepest_self_penetration_m": 0.0,
+        "self_contact_pairs": {},
+        "root_vertical_accel_p99_m_s2": 10.86002254486084
+      }
+    },
+    {
+      "clip": "WalkandRun/walk_backward_loop_001__A022.npz",
+      "frames": 520,
+      "fps": 50.0,
+      "sha256": "ba49546862ca5cdc50373df0720ea235a600b0dcb2fd67ee9e1a59bc6631424d",
+      "hard_clipped_joint_samples": 0,
+      "hard_clipped_frame_fraction": 0.0,
+      "hard_clipped_fraction_by_joint": {},
+      "reset_soft_limit_changed_frame_fraction": 0.39807692307692305,
+      "joint_speed_max_rad_s": 5.930520534515381,
+      "g1": {
+        "near_floor_site_speed_mean_m_s": 0.3474829095395172,
+        "near_floor_site_samples": 788,
+        "self_penetration_over_1mm_frame_count": 406,
+        "self_penetration_over_1mm_frame_fraction": 0.7807692307692308,
+        "deepest_self_penetration_m": -0.05671975332435331,
+        "self_contact_pairs": {
+          "left_hip_collision / left_wrist_collision": 312,
+          "right_hand_collision / right_hip_collision": 261,
+          "left_hand_collision / left_hip_collision": 255,
+          "right_hip_collision / right_wrist_collision": 184,
+          "right_hand_collision / right_thigh_collision": 165,
+          "left_hand_collision / left_thigh_collision": 154
+        },
+        "root_vertical_accel_p99_m_s2": 2.579144239425659
+      },
+      "xq180": {
+        "near_floor_site_speed_mean_m_s": 0.49467164507534245,
+        "near_floor_site_samples": 648,
+        "self_penetration_over_1mm_frame_count": 109,
+        "self_penetration_over_1mm_frame_fraction": 0.20961538461538462,
+        "deepest_self_penetration_m": -0.015324788192124392,
+        "self_contact_pairs": {
+          "right_hip_pitch_Link_collision / rightelbow_Link_collision": 76,
+          "left_hip_pitch_Link_collision / leftelbow_Link_collision": 33
+        },
+        "root_vertical_accel_p99_m_s2": 5.700832843780518
+      }
+    },
+    {
+      "clip": "WalkandRun/walk_backward_loop_001__A024.npz",
+      "frames": 729,
+      "fps": 50.0,
+      "sha256": "f78c0a5e2f8b7093074e892987ca8233d5118de699a32e7583fbdec2dbf2e398",
+      "hard_clipped_joint_samples": 4,
+      "hard_clipped_frame_fraction": 0.0054869684499314125,
+      "hard_clipped_fraction_by_joint": {
+        "right_hip_roll_joint": 0.0054869684499314125
+      },
+      "reset_soft_limit_changed_frame_fraction": 0.06721536351165981,
+      "joint_speed_max_rad_s": 9.254399299621582,
+      "g1": {
+        "near_floor_site_speed_mean_m_s": 0.2283809919534649,
+        "near_floor_site_samples": 1177,
+        "self_penetration_over_1mm_frame_count": 497,
+        "self_penetration_over_1mm_frame_fraction": 0.6817558299039781,
+        "deepest_self_penetration_m": -0.05714648350127478,
+        "self_contact_pairs": {
+          "right_hand_collision / right_hip_collision": 446,
+          "right_hip_collision / right_wrist_collision": 256,
+          "left_hand_collision / left_hip_collision": 214,
+          "left_hip_collision / left_wrist_collision": 191,
+          "right_hand_collision / right_thigh_collision": 185,
+          "left_hand_collision / left_thigh_collision": 123
+        },
+        "root_vertical_accel_p99_m_s2": 3.152397394180298
+      },
+      "xq180": {
+        "near_floor_site_speed_mean_m_s": 0.37346574539056604,
+        "near_floor_site_samples": 1040,
+        "self_penetration_over_1mm_frame_count": 2,
+        "self_penetration_over_1mm_frame_fraction": 0.0027434842249657062,
+        "deepest_self_penetration_m": -0.0018077388121525845,
+        "self_contact_pairs": {
+          "left_hip_pitch_Link_collision / leftelbow_Link_collision": 2
+        },
+        "root_vertical_accel_p99_m_s2": 7.395060062408447
+      }
+    },
+    {
+      "clip": "WalkandRun/walk_forward_loop_002__A022.npz",
+      "frames": 455,
+      "fps": 50.0,
+      "sha256": "d6b80a41a39d3596db04f4bdc7c0fbba1f756c9d9aaac30bdeb1a7e586f74632",
+      "hard_clipped_joint_samples": 0,
+      "hard_clipped_frame_fraction": 0.0,
+      "hard_clipped_fraction_by_joint": {},
+      "reset_soft_limit_changed_frame_fraction": 0.4989010989010989,
+      "joint_speed_max_rad_s": 8.726162910461426,
+      "g1": {
+        "near_floor_site_speed_mean_m_s": 0.3586852207354878,
+        "near_floor_site_samples": 718,
+        "self_penetration_over_1mm_frame_count": 323,
+        "self_penetration_over_1mm_frame_fraction": 0.7098901098901099,
+        "deepest_self_penetration_m": -0.05195474413053691,
+        "self_contact_pairs": {
+          "right_hand_collision / right_hip_collision": 262,
+          "left_hip_collision / left_wrist_collision": 237,
+          "right_hip_collision / right_wrist_collision": 212,
+          "left_hand_collision / left_hip_collision": 209,
+          "right_hand_collision / right_thigh_collision": 169,
+          "left_hand_collision / left_thigh_collision": 96
+        },
+        "root_vertical_accel_p99_m_s2": 3.1167051792144775
+      },
+      "xq180": {
+        "near_floor_site_speed_mean_m_s": 0.3719488559693124,
+        "near_floor_site_samples": 556,
+        "self_penetration_over_1mm_frame_count": 37,
+        "self_penetration_over_1mm_frame_fraction": 0.08131868131868132,
+        "deepest_self_penetration_m": -0.012005777200103707,
+        "self_contact_pairs": {
+          "right_hip_pitch_Link_collision / rightelbow_Link_collision": 19,
+          "left_hip_pitch_Link_collision / leftelbow_Link_collision": 18
+        },
+        "root_vertical_accel_p99_m_s2": 11.03223991394043
+      }
+    },
+    {
+      "clip": "WalkandRun/walk_forward_loop_002__A024.npz",
+      "frames": 482,
+      "fps": 50.0,
+      "sha256": "b91708b19a43618d8c20f3551a942eb997a242a5f10f1a701e47a381ac893ab8",
+      "hard_clipped_joint_samples": 12,
+      "hard_clipped_frame_fraction": 0.024896265560165973,
+      "hard_clipped_fraction_by_joint": {
+        "right_hip_roll_joint": 0.024896265560165973
+      },
+      "reset_soft_limit_changed_frame_fraction": 0.10580912863070539,
+      "joint_speed_max_rad_s": 11.903984069824219,
+      "g1": {
+        "near_floor_site_speed_mean_m_s": 0.37550577785907596,
+        "near_floor_site_samples": 742,
+        "self_penetration_over_1mm_frame_count": 441,
+        "self_penetration_over_1mm_frame_fraction": 0.9149377593360996,
+        "deepest_self_penetration_m": -0.05888923585302175,
+        "self_contact_pairs": {
+          "right_hand_collision / right_hip_collision": 347,
+          "right_hip_collision / right_wrist_collision": 264,
+          "left_hand_collision / left_hip_collision": 203,
+          "right_hand_collision / right_thigh_collision": 185,
+          "left_hip_collision / left_wrist_collision": 133,
+          "left_hand_collision / left_thigh_collision": 68
+        },
+        "root_vertical_accel_p99_m_s2": 3.749342203140259
+      },
+      "xq180": {
+        "near_floor_site_speed_mean_m_s": 0.4612841066162832,
+        "near_floor_site_samples": 581,
+        "self_penetration_over_1mm_frame_count": 0,
+        "self_penetration_over_1mm_frame_fraction": 0.0,
+        "deepest_self_penetration_m": 0.0,
+        "self_contact_pairs": {},
+        "root_vertical_accel_p99_m_s2": 10.123623847961426
+      }
+    },
+    {
+      "clip": "WalkandRun/walk_sideway_left_loop_002__A021.npz",
+      "frames": 713,
+      "fps": 50.0,
+      "sha256": "18df0ff4b3f308e880d68755f43792d8b1c01edfd6b0ccb9969850a41ddd9f9b",
+      "hard_clipped_joint_samples": 295,
+      "hard_clipped_frame_fraction": 0.36605890603085556,
+      "hard_clipped_fraction_by_joint": {
+        "left_hip_roll_joint": 0.23983169705469845,
+        "right_hip_roll_joint": 0.17391304347826086
+      },
+      "reset_soft_limit_changed_frame_fraction": 0.5259467040673211,
+      "joint_speed_max_rad_s": 7.133546829223633,
+      "g1": {
+        "near_floor_site_speed_mean_m_s": 0.19151771803976297,
+        "near_floor_site_samples": 1123,
+        "self_penetration_over_1mm_frame_count": 469,
+        "self_penetration_over_1mm_frame_fraction": 0.6577840112201964,
+        "deepest_self_penetration_m": -0.04282051644272789,
+        "self_contact_pairs": {
+          "left_hip_collision / left_wrist_collision": 334,
+          "right_hip_collision / right_wrist_collision": 181,
+          "left_hand_collision / left_thigh_collision": 146,
+          "left_hand_collision / left_hip_collision": 144,
+          "right_hand_collision / right_hip_collision": 64,
+          "right_hand_collision / right_thigh_collision": 49
+        },
+        "root_vertical_accel_p99_m_s2": 3.623162269592285
+      },
+      "xq180": {
+        "near_floor_site_speed_mean_m_s": 0.35144197780960923,
+        "near_floor_site_samples": 830,
+        "self_penetration_over_1mm_frame_count": 20,
+        "self_penetration_over_1mm_frame_fraction": 0.028050490883590462,
+        "deepest_self_penetration_m": -0.011374652319409359,
+        "self_contact_pairs": {
+          "base_link_collision / left_hip_pitch_Link_collision": 15,
+          "base_link_collision / leftelbow_Link_collision": 10
+        },
+        "root_vertical_accel_p99_m_s2": 29.04134178161621
+      }
+    },
+    {
+      "clip": "WalkandRun/walk_sideway_right_loop_001__A022.npz",
+      "frames": 630,
+      "fps": 50.0,
+      "sha256": "42b19bf5c47f3797d24eb4662985361d912f4e30e04778ecc868e1f67afb2732",
+      "hard_clipped_joint_samples": 233,
+      "hard_clipped_frame_fraction": 0.35079365079365077,
+      "hard_clipped_fraction_by_joint": {
+        "left_hip_roll_joint": 0.15555555555555556,
+        "right_hip_roll_joint": 0.19206349206349208,
+        "right_shoulder_roll_joint": 0.022222222222222223
+      },
+      "reset_soft_limit_changed_frame_fraction": 0.7015873015873015,
+      "joint_speed_max_rad_s": 6.5503458976745605,
+      "g1": {
+        "near_floor_site_speed_mean_m_s": 0.2646590775720531,
+        "near_floor_site_samples": 1035,
+        "self_penetration_over_1mm_frame_count": 428,
+        "self_penetration_over_1mm_frame_fraction": 0.6793650793650794,
+        "deepest_self_penetration_m": -0.05483750659157042,
+        "self_contact_pairs": {
+          "left_hand_collision / left_hip_collision": 336,
+          "left_hip_collision / left_wrist_collision": 312,
+          "left_hand_collision / left_thigh_collision": 305,
+          "right_hand_collision / right_thigh_collision": 212,
+          "right_hand_collision / right_hip_collision": 168,
+          "right_hip_collision / right_wrist_collision": 113,
+          "left_thigh_collision / right_thigh_collision": 9,
+          "left_thigh_collision / right_shin_collision": 8
+        },
+        "root_vertical_accel_p99_m_s2": 2.9953675270080566
+      },
+      "xq180": {
+        "near_floor_site_speed_mean_m_s": 0.49003336326151375,
+        "near_floor_site_samples": 823,
+        "self_penetration_over_1mm_frame_count": 124,
+        "self_penetration_over_1mm_frame_fraction": 0.19682539682539682,
+        "deepest_self_penetration_m": -0.05723551504274528,
+        "self_contact_pairs": {
+          "base_link_collision / rightelbow_Link_collision": 88,
+          "left_foot_collision / right_foot_collision": 60,
+          "right_hip_pitch_Link_collision / rightelbow_Link_collision": 19,
+          "left_foot_collision / right_knee_Link_collision": 17,
+          "base_link_collision / left_hip_pitch_Link_collision": 15,
+          "base_link_collision / right_hip_pitch_Link_collision": 6
+        },
+        "root_vertical_accel_p99_m_s2": 21.599628448486328
+      }
+    }
+  ]
+}

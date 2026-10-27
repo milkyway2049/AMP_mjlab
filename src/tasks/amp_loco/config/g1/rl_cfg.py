@@ -29,6 +29,9 @@ class RslRlAmpRunnerCfg(RslRlOnPolicyRunnerCfg):
   min_normalized_std: List[float] = field(default_factory=lambda: [0.05] * 29)
   amp_body_names: tuple = ()
   amp_anchor_name: str = ""
+  amp_reset_on_load: bool = False
+  amp_kl_stop_multiplier: float | None = None
+  amp_learning_rate_decay_stages: list[tuple[int, float]] = field(default_factory=list)
 
 
 def g1_amp_ppo_runner_cfg() -> RslRlAmpRunnerCfg:

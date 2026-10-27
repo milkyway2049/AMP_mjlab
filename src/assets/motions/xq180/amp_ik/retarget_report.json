@@ -1,0 +1,213 @@
+{
+  "source_dir": "/home/milkyway/mjlab/AMP_mjlab/src/assets/motions/g1/amp",
+  "output_dir": "/home/milkyway/mjlab/AMP_mjlab/src/assets/motions/xq180/amp_ik",
+  "source_robot": "g1",
+  "target_robot": "xq180",
+  "method": "contact_whole_body_ik_soft_limits_v1",
+  "clips": 18,
+  "frames": 9992,
+  "iterations": 18,
+  "height_scale": 1.380422734360142,
+  "soft_joint_pos_limit_factor": 0.9,
+  "limitations": "Kinematic IK with collision penalties; not an inverse dynamics, stability or trained-policy validation.",
+  "motions": [
+    {
+      "path": "Recovery/fallAndGetUp1_subject1.npz",
+      "frames": 2575,
+      "fps": 50.0,
+      "self_penetration_over_1mm_frame_fraction": 0.0,
+      "deepest_self_penetration_m": 0.0,
+      "ground_min_m": 0.0019999999999997797,
+      "near_floor_site_speed_mean_m_s": 0.20424391681626533,
+      "contact_foot_error_mean_m": 0.0022186020348044003,
+      "root_vertical_accel_p99_m_s2": 26.592534294624937
+    },
+    {
+      "path": "WalkandRun/arc_jog_left_loop_002__A029.npz",
+      "frames": 345,
+      "fps": 50.0,
+      "self_penetration_over_1mm_frame_fraction": 0.0,
+      "deepest_self_penetration_m": -0.00017875113303791185,
+      "ground_min_m": 0.0019999999999999497,
+      "near_floor_site_speed_mean_m_s": 0.3925299095201068,
+      "contact_foot_error_mean_m": 0.002627925647358604,
+      "root_vertical_accel_p99_m_s2": 17.476906523439574
+    },
+    {
+      "path": "WalkandRun/arc_walk_left_loop_001__A029.npz",
+      "frames": 621,
+      "fps": 50.0,
+      "self_penetration_over_1mm_frame_fraction": 0.0,
+      "deepest_self_penetration_m": 0.0,
+      "ground_min_m": 0.0019999999999998977,
+      "near_floor_site_speed_mean_m_s": 0.412367287780275,
+      "contact_foot_error_mean_m": 0.001565876216175594,
+      "root_vertical_accel_p99_m_s2": 4.9047231032279255
+    },
+    {
+      "path": "WalkandRun/idle_turn_270_001__A048.npz",
+      "frames": 298,
+      "fps": 50.0,
+      "self_penetration_over_1mm_frame_fraction": 0.0,
+      "deepest_self_penetration_m": 0.0,
+      "ground_min_m": 0.002698844285949884,
+      "near_floor_site_speed_mean_m_s": 0.05257438717947299,
+      "contact_foot_error_mean_m": 0.0007561352119616577,
+      "root_vertical_accel_p99_m_s2": 0.5675206483772035
+    },
+    {
+      "path": "WalkandRun/idle_turn_360_001__A047.npz",
+      "frames": 371,
+      "fps": 50.0,
+      "self_penetration_over_1mm_frame_fraction": 0.0,
+      "deepest_self_penetration_m": 0.0,
+      "ground_min_m": 0.004138765862524929,
+      "near_floor_site_speed_mean_m_s": 0.09596191631065987,
+      "contact_foot_error_mean_m": 0.002275545657687511,
+      "root_vertical_accel_p99_m_s2": 2.5609655864834235
+    },
+    {
+      "path": "WalkandRun/jog_arc_cw_loop_004__A045.npz",
+      "frames": 443,
+      "fps": 50.0,
+      "self_penetration_over_1mm_frame_fraction": 0.0,
+      "deepest_self_penetration_m": 0.0,
+      "ground_min_m": 0.0019999999999999497,
+      "near_floor_site_speed_mean_m_s": 0.3851719180160553,
+      "contact_foot_error_mean_m": 0.0020387469759681177,
+      "root_vertical_accel_p99_m_s2": 10.694756078157535
+    },
+    {
+      "path": "WalkandRun/jog_backward_loop_002__A022.npz",
+      "frames": 287,
+      "fps": 50.0,
+      "self_penetration_over_1mm_frame_fraction": 0.0,
+      "deepest_self_penetration_m": 0.0,
+      "ground_min_m": 0.0020000000000000157,
+      "near_floor_site_speed_mean_m_s": 0.31075375041115916,
+      "contact_foot_error_mean_m": 0.0018210693317062482,
+      "root_vertical_accel_p99_m_s2": 14.088736011143435
+    },
+    {
+      "path": "WalkandRun/jog_backward_loop_003__A023.npz",
+      "frames": 285,
+      "fps": 50.0,
+      "self_penetration_over_1mm_frame_fraction": 0.0,
+      "deepest_self_penetration_m": 0.0,
+      "ground_min_m": 0.0020000000000000087,
+      "near_floor_site_speed_mean_m_s": 0.3881264634287051,
+      "contact_foot_error_mean_m": 0.0016756194494218595,
+      "root_vertical_accel_p99_m_s2": 14.612041954598642
+    },
+    {
+      "path": "WalkandRun/jog_forward_loop_003__A021.npz",
+      "frames": 401,
+      "fps": 50.0,
+      "self_penetration_over_1mm_frame_fraction": 0.0,
+      "deepest_self_penetration_m": 0.0,
+      "ground_min_m": 0.0019999999999998908,
+      "near_floor_site_speed_mean_m_s": 0.2584611329654175,
+      "contact_foot_error_mean_m": 0.0012045146295475968,
+      "root_vertical_accel_p99_m_s2": 13.16735839054825
+    },
+    {
+      "path": "WalkandRun/jog_forward_loop_003__A022.npz",
+      "frames": 286,
+      "fps": 50.0,
+      "self_penetration_over_1mm_frame_fraction": 0.0,
+      "deepest_self_penetration_m": 0.0,
+      "ground_min_m": 0.001999999999999856,
+      "near_floor_site_speed_mean_m_s": 0.334093121706163,
+      "contact_foot_error_mean_m": 0.0017622422411760793,
+      "root_vertical_accel_p99_m_s2": 11.02588763161549
+    },
+    {
+      "path": "WalkandRun/step_rotate_idle_000_002__A026.npz",
+      "frames": 260,
+      "fps": 50.0,
+      "self_penetration_over_1mm_frame_fraction": 0.0,
+      "deepest_self_penetration_m": 0.0,
+      "ground_min_m": 0.0035214857605164566,
+      "near_floor_site_speed_mean_m_s": 5.592409057118345e-06,
+      "contact_foot_error_mean_m": 0.00030764144798288483,
+      "root_vertical_accel_p99_m_s2": 0.027247234381568057
+    },
+    {
+      "path": "WalkandRun/walk_arc_cw_loop_002__A046.npz",
+      "frames": 291,
+      "fps": 50.0,
+      "self_penetration_over_1mm_frame_fraction": 0.0,
+      "deepest_self_penetration_m": 0.0,
+      "ground_min_m": 0.0019999999999998908,
+      "near_floor_site_speed_mean_m_s": 0.4064699044294462,
+      "contact_foot_error_mean_m": 0.001316719882552711,
+      "root_vertical_accel_p99_m_s2": 3.8097611645948066
+    },
+    {
+      "path": "WalkandRun/walk_backward_loop_001__A022.npz",
+      "frames": 520,
+      "fps": 50.0,
+      "self_penetration_over_1mm_frame_fraction": 0.0,
+      "deepest_self_penetration_m": 0.0,
+      "ground_min_m": 0.0019999999999999046,
+      "near_floor_site_speed_mean_m_s": 0.34720340937623234,
+      "contact_foot_error_mean_m": 0.0010722400256287028,
+      "root_vertical_accel_p99_m_s2": 3.4710590678565145
+    },
+    {
+      "path": "WalkandRun/walk_backward_loop_001__A024.npz",
+      "frames": 729,
+      "fps": 50.0,
+      "self_penetration_over_1mm_frame_fraction": 0.0,
+      "deepest_self_penetration_m": 0.0,
+      "ground_min_m": 0.0019999999999999046,
+      "near_floor_site_speed_mean_m_s": 0.20534118872809268,
+      "contact_foot_error_mean_m": 0.0015238428594309386,
+      "root_vertical_accel_p99_m_s2": 3.7335032734842044
+    },
+    {
+      "path": "WalkandRun/walk_forward_loop_002__A022.npz",
+      "frames": 455,
+      "fps": 50.0,
+      "self_penetration_over_1mm_frame_fraction": 0.0,
+      "deepest_self_penetration_m": 0.0,
+      "ground_min_m": 0.00199999999999996,
+      "near_floor_site_speed_mean_m_s": 0.34160385526600173,
+      "contact_foot_error_mean_m": 0.0010927515137594788,
+      "root_vertical_accel_p99_m_s2": 3.1869823322567923
+    },
+    {
+      "path": "WalkandRun/walk_forward_loop_002__A024.npz",
+      "frames": 482,
+      "fps": 50.0,
+      "self_penetration_over_1mm_frame_fraction": 0.0,
+      "deepest_self_penetration_m": 0.0,
+      "ground_min_m": 0.0019999999999998908,
+      "near_floor_site_speed_mean_m_s": 0.34690580867129145,
+      "contact_foot_error_mean_m": 0.0014337708655766867,
+      "root_vertical_accel_p99_m_s2": 4.184151138141954
+    },
+    {
+      "path": "WalkandRun/walk_sideway_left_loop_002__A021.npz",
+      "frames": 713,
+      "fps": 50.0,
+      "self_penetration_over_1mm_frame_fraction": 0.0,
+      "deepest_self_penetration_m": 0.0,
+      "ground_min_m": 0.001999999999999901,
+      "near_floor_site_speed_mean_m_s": 0.28561520729390655,
+      "contact_foot_error_mean_m": 0.002453059478924085,
+      "root_vertical_accel_p99_m_s2": 5.161164223024937
+    },
+    {
+      "path": "WalkandRun/walk_sideway_right_loop_001__A022.npz",
+      "frames": 630,
+      "fps": 50.0,
+      "self_penetration_over_1mm_frame_fraction": 0.0,
+      "deepest_self_penetration_m": 0.0,
+      "ground_min_m": 0.001999999999999811,
+      "near_floor_site_speed_mean_m_s": 0.33616138900721865,
+      "contact_foot_error_mean_m": 0.0026741888349543965,
+      "root_vertical_accel_p99_m_s2": 5.449215429370893
+    }
+  ]
+}

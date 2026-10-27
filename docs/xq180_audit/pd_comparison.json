@@ -1,0 +1,220 @@
+{
+  "profile": "g1_inertia_v1",
+  "g1_multipliers": {
+    "hip_yaw": 2.5,
+    "hip_roll": 3.25,
+    "hip_pitch": 3.0,
+    "knee": 3.1,
+    "ankle": 3.6,
+    "waist": 1.6,
+    "arms": 2.0
+  },
+  "fixed_root_test": {
+    "step_rad": 0.08,
+    "step_at_s": 0.2,
+    "duration_s": 4.0,
+    "gravity": false,
+    "contacts": false,
+    "note": "Builtin PD only; G1 custom torque-speed/friction compute is not exercised."
+  },
+  "responses": {
+    "left_hip_yaw_joint": {
+      "g1": {
+        "rise_to_90pct_s": 0.165,
+        "overshoot_pct": 10.868274761763042,
+        "final_error_rad": 2.414776115178263e-09,
+        "peak_speed_rad_s": 0.726474307776888,
+        "peak_torque_nm": 3.21433909076057
+      },
+      "legacy": {
+        "rise_to_90pct_s": 0.145,
+        "overshoot_pct": 2.784809736327065,
+        "final_error_rad": 3.067823772795464e-13,
+        "peak_speed_rad_s": 0.8427834521967166,
+        "peak_torque_nm": 24.0
+      },
+      "new": {
+        "rise_to_90pct_s": 0.15,
+        "overshoot_pct": 10.023844456648101,
+        "final_error_rad": 2.8393952755667584e-07,
+        "peak_speed_rad_s": 0.678105410993676,
+        "peak_torque_nm": 8.035847726901425
+      }
+    },
+    "left_hip_roll_joint": {
+      "g1": {
+        "rise_to_90pct_s": 0.17500000000000002,
+        "overshoot_pct": 23.249493845921098,
+        "final_error_rad": 2.45834766848807e-08,
+        "peak_speed_rad_s": 0.47636981147361274,
+        "peak_torque_nm": 7.927874222132889
+      },
+      "legacy": {
+        "rise_to_90pct_s": 0.17,
+        "overshoot_pct": 20.12032110203734,
+        "final_error_rad": 1.857422687878696e-10,
+        "peak_speed_rad_s": 0.5277335041367476,
+        "peak_torque_nm": 32.0
+      },
+      "new": {
+        "rise_to_90pct_s": 0.17500000000000002,
+        "overshoot_pct": 28.66727100880022,
+        "final_error_rad": 6.881498942762354e-07,
+        "peak_speed_rad_s": 0.5077846274144941,
+        "peak_torque_nm": 25.765591221931892
+      }
+    },
+    "left_hip_pitch_joint": {
+      "g1": {
+        "rise_to_90pct_s": 0.18,
+        "overshoot_pct": 31.564477501272293,
+        "final_error_rad": 4.7716037648859455e-09,
+        "peak_speed_rad_s": 0.5028057223113078,
+        "peak_torque_nm": 7.927874222132889
+      },
+      "legacy": {
+        "rise_to_90pct_s": 0.15,
+        "overshoot_pct": 22.579031362855417,
+        "final_error_rad": 5.104642680775484e-10,
+        "peak_speed_rad_s": 0.5749187275425421,
+        "peak_torque_nm": 40.000000000000014
+      },
+      "new": {
+        "rise_to_90pct_s": 0.185,
+        "overshoot_pct": 28.195519763602107,
+        "final_error_rad": 9.006369525582647e-07,
+        "peak_speed_rad_s": 0.4582110743016048,
+        "peak_torque_nm": 23.78362266639867
+      }
+    },
+    "left_knee_joint": {
+      "g1": {
+        "rise_to_90pct_s": 0.14,
+        "overshoot_pct": 2.543793904468772,
+        "final_error_rad": 6.34976031477219e-09,
+        "peak_speed_rad_s": 0.8966532001502487,
+        "peak_torque_nm": 7.9278742221328855
+      },
+      "legacy": {
+        "rise_to_90pct_s": 0.135,
+        "overshoot_pct": 2.0903720842666784,
+        "final_error_rad": 3.892046407383276e-11,
+        "peak_speed_rad_s": 1.0265384337358776,
+        "peak_torque_nm": 40.0
+      },
+      "new": {
+        "rise_to_90pct_s": 0.145,
+        "overshoot_pct": 2.8961170460555907,
+        "final_error_rad": 8.759541898772927e-08,
+        "peak_speed_rad_s": 0.9344645359227792,
+        "peak_torque_nm": 24.576410088611937
+      }
+    },
+    "left_ankle_joint": {
+      "g1": {
+        "rise_to_90pct_s": 0.135,
+        "overshoot_pct": 0.0045641403983553985,
+        "final_error_rad": 1.0602477229504359e-11,
+        "peak_speed_rad_s": 1.0340718117960546,
+        "peak_torque_nm": 2.280099695659887
+      },
+      "legacy": {
+        "rise_to_90pct_s": 0.11,
+        "overshoot_pct": 0.001579739456381013,
+        "final_error_rad": 4.034689249365897e-13,
+        "peak_speed_rad_s": 1.396500583686262,
+        "peak_torque_nm": 16.0
+      },
+      "new": {
+        "rise_to_90pct_s": 0.14,
+        "overshoot_pct": 0.002934593772718763,
+        "final_error_rad": 3.969729683861445e-10,
+        "peak_speed_rad_s": 1.0875796743823338,
+        "peak_torque_nm": 8.208358904375594
+      }
+    },
+    "waist_point": {
+      "g1": {
+        "rise_to_90pct_s": 0.17500000000000002,
+        "overshoot_pct": 14.1062715534366,
+        "final_error_rad": 2.1476809625248228e-05,
+        "peak_speed_rad_s": 0.5931320170134414,
+        "peak_torque_nm": 3.21433909076057
+      },
+      "legacy": {
+        "rise_to_90pct_s": 0.13,
+        "overshoot_pct": 1.6541456272553434,
+        "final_error_rad": 9.71445146547012e-17,
+        "peak_speed_rad_s": 0.7857304095126963,
+        "peak_torque_nm": 24.0
+      },
+      "new": {
+        "rise_to_90pct_s": 0.165,
+        "overshoot_pct": 22.716671379580667,
+        "final_error_rad": 7.016589892439029e-08,
+        "peak_speed_rad_s": 0.5444447305539312,
+        "peak_torque_nm": 5.142942545216912
+      }
+    },
+    "left_shoulder_pitch_joint": {
+      "g1": {
+        "rise_to_90pct_s": 0.215,
+        "overshoot_pct": 32.24343213631153,
+        "final_error_rad": 2.6852336597535387e-05,
+        "peak_speed_rad_s": 0.3806598238879615,
+        "peak_torque_nm": 1.140049847829943
+      },
+      "legacy": {
+        "rise_to_90pct_s": 0.21,
+        "overshoot_pct": 0.0,
+        "final_error_rad": 2.7755575615628914e-17,
+        "peak_speed_rad_s": 0.6164973123671984,
+        "peak_torque_nm": 8.0
+      },
+      "new": {
+        "rise_to_90pct_s": 0.145,
+        "overshoot_pct": 14.373242025360566,
+        "final_error_rad": 1.756975227806823e-08,
+        "peak_speed_rad_s": 0.6228901886538424,
+        "peak_torque_nm": 2.2800996956598865
+      }
+    },
+    "leftelbow_joint": {
+      "g1": {
+        "rise_to_90pct_s": 0.145,
+        "overshoot_pct": 4.2607165780544465,
+        "final_error_rad": 3.1935480857975262e-06,
+        "peak_speed_rad_s": 0.7899396320122868,
+        "peak_torque_nm": 1.1400498478299426
+      },
+      "legacy": {
+        "rise_to_90pct_s": 0.225,
+        "overshoot_pct": 0.0,
+        "final_error_rad": 4.85722573273506e-16,
+        "peak_speed_rad_s": 0.7090838830825257,
+        "peak_torque_nm": 8.0
+      },
+      "new": {
+        "rise_to_90pct_s": 0.13,
+        "overshoot_pct": 1.0263091168243976,
+        "final_error_rad": 1.158849669002926e-09,
+        "peak_speed_rad_s": 0.9171660989544318,
+        "peak_torque_nm": 2.280099695659887
+      }
+    }
+  },
+  "home_target_no_policy": {
+    "legacy": {
+      "duration_s": 3.0,
+      "fall_time_s": 1.8199999999999832,
+      "finite": true,
+      "note": "Constant home targets, no balance feedback; not a policy performance test."
+    },
+    "new": {
+      "duration_s": 3.0,
+      "fall_time_s": 1.6499999999999868,
+      "finite": true,
+      "note": "Constant home targets, no balance feedback; not a policy performance test."
+    }
+  }
+}

@@ -141,3 +141,7 @@ If valid NPZ files exist in these folders, training config loads them automatica
 
 - Thanks to [unitreerobotics/unitree_rl_mjlab](https://github.com/unitreerobotics/unitree_rl_mjlab) for open-sourcing their work and inspiration.
 - Thanks to [Open-X-Humanoid/TienKung-Lab](https://github.com/Open-X-Humanoid/TienKung-Lab); the rsl_rl AMP part in this project references their implementation.
+
+## XQ180 robot support
+
+XQ180 velocity and AMP tasks support flat and rough terrain. See [model, motion conversion and training instructions](docs/xq180.md).

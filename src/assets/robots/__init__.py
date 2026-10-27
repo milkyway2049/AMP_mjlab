@@ -21,3 +21,8 @@ from .hunter180.hunter180_constants import (
   HUNTER180_ACTION_SCALE as HUNTER180_ACTION_SCALE,
   get_hunter180_robot_cfg as get_hunter180_robot_cfg,
 )
+
+from .xq180.xq180_constants import (
+  XQ180_ACTION_SCALE as XQ180_ACTION_SCALE,
+  get_xq180_robot_cfg as get_xq180_robot_cfg,
+)

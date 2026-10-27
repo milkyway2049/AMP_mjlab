@@ -1,0 +1,1011 @@
+{
+  "pd_profile": "g1_chain_integer_v4",
+  "method": "Derive integer XQ180 PD using actual kinematic chains and locomotion poses.\n\nScale Kp and Kd by the same inertia ratio to preserve the local second-order\nfrequency and damping ratio, then round to nearest integer (minimum one).\nUse fixed-root inertia for swing/upper-body joints and own-foot-constrained\ninertia for stance-leg joints. Select P90 of paired inertia ratios over evenly\nsampled frames in every walking/running clip. This is a model estimate, not\nmotor identification, contact dynamics, or a demonstrated balance controller.\n",
+  "symmetry": "Mean left/right ratio at each pose, then P90 across poses, then round; minimum gain 1",
+  "clips": 17,
+  "sampled_poses": 544,
+  "samples_per_clip": 32,
+  "limitations": "Other joint speeds held zero, ideal own-foot constraint, no double-support/contact-force solve. XQ180 armature=0.01 is an assumption. P90 is a conservative tuning choice, not an optimum.",
+  "groups": {
+    "hip_yaw": {
+      "inertia_ratio_p10_p50_p90": [
+        2.024467431856438,
+        2.65613254322128,
+        4.046243871729109
+      ],
+      "selected_inertia_ratio": 4.046243871729109,
+      "samples_by_mode": {
+        "stance": 808,
+        "swing_or_upper_body": 280
+      },
+      "g1_kp": 40.17923863450712,
+      "g1_kd": 2.557889775413375,
+      "unrounded_kp": 162.57499809561588,
+      "unrounded_kd": 10.349845828324916,
+      "kp": 163,
+      "kd": 10
+    },
+    "hip_roll": {
+      "inertia_ratio_p10_p50_p90": [
+        2.922187036752295,
+        3.407801073621352,
+        3.9029518999142163
+      ],
+      "selected_inertia_ratio": 3.9029518999142163,
+      "samples_by_mode": {
+        "stance": 808,
+        "swing_or_upper_body": 280
+      },
+      "g1_kp": 99.09842777666111,
+      "g1_kd": 6.308801853496639,
+      "unrounded_kp": 386.77639696943123,
+      "unrounded_kd": 24.622950180287035,
+      "kp": 387,
+      "kd": 25
+    },
+    "hip_pitch": {
+      "inertia_ratio_p10_p50_p90": [
+        2.73016199073747,
+        2.972651888648885,
+        3.1196709914280403
+      ],
+      "selected_inertia_ratio": 3.1196709914280403,
+      "samples_by_mode": {
+        "stance": 808,
+        "swing_or_upper_body": 280
+      },
+      "g1_kp": 99.09842777666111,
+      "g1_kd": 6.308801853496639,
+      "unrounded_kp": 309.1544904309764,
+      "unrounded_kd": 19.681386133020915,
+      "kp": 309,
+      "kd": 20
+    },
+    "knee": {
+      "inertia_ratio_p10_p50_p90": [
+        2.9271117127468504,
+        3.050767959560787,
+        3.120225112820274
+      ],
+      "selected_inertia_ratio": 3.120225112820274,
+      "samples_by_mode": {
+        "stance": 808,
+        "swing_or_upper_body": 280
+      },
+      "g1_kp": 99.09842777666111,
+      "g1_kd": 6.308801853496639,
+      "unrounded_kp": 309.2094029897442,
+      "unrounded_kd": 19.684881975087304,
+      "kp": 309,
+      "kd": 20
+    },
+    "ankle": {
+      "inertia_ratio_p10_p50_p90": [
+        2.633845598857443,
+        3.4260516091212323,
+        3.5227447708101276
+      ],
+      "selected_inertia_ratio": 3.5227447708101276,
+      "samples_by_mode": {
+        "stance": 808,
+        "swing_or_upper_body": 280
+      },
+      "g1_kp": 28.50124619574858,
+      "g1_kd": 1.814445686584846,
+      "unrounded_kp": 100.40261599764534,
+      "unrounded_kd": 6.391829054335758,
+      "kp": 100,
+      "kd": 6
+    },
+    "waist": {
+      "inertia_ratio_p10_p50_p90": [
+        1.4035737528270114,
+        1.597179041897856,
+        1.7310463826766265
+      ],
+      "selected_inertia_ratio": 1.7310463826766265,
+      "samples_by_mode": {
+        "stance": 0,
+        "swing_or_upper_body": 544
+      },
+      "g1_kp": 40.17923863450712,
+      "g1_kd": 2.557889775413375,
+      "unrounded_kp": 69.55212569696451,
+      "unrounded_kd": 4.427825843014851,
+      "kp": 70,
+      "kd": 4
+    },
+    "shoulder_pitch": {
+      "inertia_ratio_p10_p50_p90": [
+        0.6081135270561012,
+        0.6382310838522856,
+        1.0213073389636849
+      ],
+      "selected_inertia_ratio": 1.0213073389636849,
+      "samples_by_mode": {
+        "stance": 0,
+        "swing_or_upper_body": 1088
+      },
+      "g1_kp": 14.25062309787429,
+      "g1_kd": 0.907222843292423,
+      "unrounded_kp": 14.554265954664414,
+      "unrounded_kd": 0.9265533479300526,
+      "kp": 15,
+      "kd": 1
+    },
+    "shoulder_roll": {
+      "inertia_ratio_p10_p50_p90": [
+        0.6839882880299738,
+        0.6932751291515066,
+        1.4596963058524102
+      ],
+      "selected_inertia_ratio": 1.4596963058524102,
+      "samples_by_mode": {
+        "stance": 0,
+        "swing_or_upper_body": 1088
+      },
+      "g1_kp": 14.25062309787429,
+      "g1_kd": 0.907222843292423,
+      "unrounded_kp": 20.801581892062128,
+      "unrounded_kd": 1.3242698329388698,
+      "kp": 21,
+      "kd": 1
+    },
+    "shoulder_yaw": {
+      "inertia_ratio_p10_p50_p90": [
+        0.5809282877278114,
+        0.992853761249405,
+        1.3039861011015612
+      ],
+      "selected_inertia_ratio": 1.3039861011015612,
+      "samples_by_mode": {
+        "stance": 0,
+        "swing_or_upper_body": 1088
+      },
+      "g1_kp": 14.25062309787429,
+      "g1_kd": 0.907222843292423,
+      "unrounded_kp": 18.582614451664945,
+      "unrounded_kd": 1.1830059782551592,
+      "kp": 19,
+      "kd": 1
+    },
+    "elbow": {
+      "inertia_ratio_p10_p50_p90": [
+        0.7280930993998588,
+        0.7298843626806228,
+        0.7360233624539824
+      ],
+      "selected_inertia_ratio": 0.7360233624539824,
+      "samples_by_mode": {
+        "stance": 0,
+        "swing_or_upper_body": 1088
+      },
+      "g1_kp": 14.25062309787429,
+      "g1_kd": 0.907222843292423,
+      "unrounded_kp": 10.488791529561821,
+      "unrounded_kd": 0.6677372076151514,
+      "kp": 10,
+      "kd": 1
+    }
+  },
+  "joint_inertia_ratios": [
+    {
+      "joint": "left_hip_yaw_joint",
+      "g1_joint": "left_hip_yaw_joint",
+      "fixed_root_inertia_ratio": 3.0667270328820084,
+      "single_support_inertia_ratio": 2.329334818080446,
+      "g1_chain": {
+        "root_to_joint": [
+          "left_hip_pitch_joint",
+          "left_hip_roll_joint",
+          "left_hip_yaw_joint"
+        ],
+        "axis_in_joint_frame": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "nominal_axis_world": [
+          -0.46788838545399436,
+          0.0,
+          0.8837875642694089
+        ],
+        "downstream_mass_kg": 4.316
+      },
+      "xq180_chain": {
+        "root_to_joint": [
+          "left_hip_yaw_joint"
+        ],
+        "axis_in_joint_frame": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "nominal_axis_world": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "downstream_mass_kg": 19.929481000000003
+      }
+    },
+    {
+      "joint": "left_hip_roll_joint",
+      "g1_joint": "left_hip_roll_joint",
+      "fixed_root_inertia_ratio": 4.022651293599537,
+      "single_support_inertia_ratio": 3.1898764959078507,
+      "g1_chain": {
+        "root_to_joint": [
+          "left_hip_pitch_joint",
+          "left_hip_roll_joint"
+        ],
+        "axis_in_joint_frame": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "nominal_axis_world": [
+          0.8837875642694089,
+          0.0,
+          0.46788838545399436
+        ],
+        "downstream_mass_kg": 5.836
+      },
+      "xq180_chain": {
+        "root_to_joint": [
+          "left_hip_yaw_joint",
+          "left_hip_roll_joint"
+        ],
+        "axis_in_joint_frame": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "nominal_axis_world": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "downstream_mass_kg": 15.966074
+      }
+    },
+    {
+      "joint": "left_hip_pitch_joint",
+      "g1_joint": "left_hip_pitch_joint",
+      "fixed_root_inertia_ratio": 2.879720335731354,
+      "single_support_inertia_ratio": 2.972275981620057,
+      "g1_chain": {
+        "root_to_joint": [
+          "left_hip_pitch_joint"
+        ],
+        "axis_in_joint_frame": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "nominal_axis_world": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "downstream_mass_kg": 7.186
+      },
+      "xq180_chain": {
+        "root_to_joint": [
+          "left_hip_yaw_joint",
+          "left_hip_roll_joint",
+          "left_hip_pitch_joint"
+        ],
+        "axis_in_joint_frame": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "nominal_axis_world": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "downstream_mass_kg": 12.507554
+      }
+    },
+    {
+      "joint": "left_knee_joint",
+      "g1_joint": "left_knee_joint",
+      "fixed_root_inertia_ratio": 2.90593899375115,
+      "single_support_inertia_ratio": 3.0988112794935816,
+      "g1_chain": {
+        "root_to_joint": [
+          "left_hip_pitch_joint",
+          "left_hip_roll_joint",
+          "left_hip_yaw_joint",
+          "left_knee_joint"
+        ],
+        "axis_in_joint_frame": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "nominal_axis_world": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "downstream_mass_kg": 2.614
+      },
+      "xq180_chain": {
+        "root_to_joint": [
+          "left_hip_yaw_joint",
+          "left_hip_roll_joint",
+          "left_hip_pitch_joint",
+          "left_knee_joint"
+        ],
+        "axis_in_joint_frame": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "nominal_axis_world": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "downstream_mass_kg": 6.3019050000000005
+      }
+    },
+    {
+      "joint": "left_ankle_joint",
+      "g1_joint": "left_ankle_pitch_joint",
+      "fixed_root_inertia_ratio": 1.9268004523769662,
+      "single_support_inertia_ratio": 3.549217685938027,
+      "g1_chain": {
+        "root_to_joint": [
+          "left_hip_pitch_joint",
+          "left_hip_roll_joint",
+          "left_hip_yaw_joint",
+          "left_knee_joint",
+          "left_ankle_pitch_joint"
+        ],
+        "axis_in_joint_frame": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "nominal_axis_world": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "downstream_mass_kg": 0.6819999999999999
+      },
+      "xq180_chain": {
+        "root_to_joint": [
+          "left_hip_yaw_joint",
+          "left_hip_roll_joint",
+          "left_hip_pitch_joint",
+          "left_knee_joint",
+          "left_ankle_joint"
+        ],
+        "axis_in_joint_frame": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "nominal_axis_world": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "downstream_mass_kg": 1.000814
+      }
+    },
+    {
+      "joint": "right_hip_yaw_joint",
+      "g1_joint": "right_hip_yaw_joint",
+      "fixed_root_inertia_ratio": 3.164228278283065,
+      "single_support_inertia_ratio": 2.2812760080370595,
+      "g1_chain": {
+        "root_to_joint": [
+          "right_hip_pitch_joint",
+          "right_hip_roll_joint",
+          "right_hip_yaw_joint"
+        ],
+        "axis_in_joint_frame": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "nominal_axis_world": [
+          -0.46788838545399436,
+          0.0,
+          0.8837875642694089
+        ],
+        "downstream_mass_kg": 4.316
+      },
+      "xq180_chain": {
+        "root_to_joint": [
+          "right_hip_yaw_joint"
+        ],
+        "axis_in_joint_frame": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "nominal_axis_world": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "downstream_mass_kg": 20.45279
+      }
+    },
+    {
+      "joint": "right_hip_roll_joint",
+      "g1_joint": "right_hip_roll_joint",
+      "fixed_root_inertia_ratio": 4.10410403980117,
+      "single_support_inertia_ratio": 3.1545437764739788,
+      "g1_chain": {
+        "root_to_joint": [
+          "right_hip_pitch_joint",
+          "right_hip_roll_joint"
+        ],
+        "axis_in_joint_frame": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "nominal_axis_world": [
+          0.8837875642694089,
+          0.0,
+          0.46788838545399436
+        ],
+        "downstream_mass_kg": 5.836
+      },
+      "xq180_chain": {
+        "root_to_joint": [
+          "right_hip_yaw_joint",
+          "right_hip_roll_joint"
+        ],
+        "axis_in_joint_frame": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "nominal_axis_world": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "downstream_mass_kg": 16.489383
+      }
+    },
+    {
+      "joint": "right_hip_pitch_joint",
+      "g1_joint": "right_hip_pitch_joint",
+      "fixed_root_inertia_ratio": 2.9381328468240304,
+      "single_support_inertia_ratio": 2.950614047820833,
+      "g1_chain": {
+        "root_to_joint": [
+          "right_hip_pitch_joint"
+        ],
+        "axis_in_joint_frame": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "nominal_axis_world": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "downstream_mass_kg": 7.186
+      },
+      "xq180_chain": {
+        "root_to_joint": [
+          "right_hip_yaw_joint",
+          "right_hip_roll_joint",
+          "right_hip_pitch_joint"
+        ],
+        "axis_in_joint_frame": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "nominal_axis_world": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "downstream_mass_kg": 13.030863
+      }
+    },
+    {
+      "joint": "right_knee_joint",
+      "g1_joint": "right_knee_joint",
+      "fixed_root_inertia_ratio": 2.90869552458539,
+      "single_support_inertia_ratio": 3.098757526075237,
+      "g1_chain": {
+        "root_to_joint": [
+          "right_hip_pitch_joint",
+          "right_hip_roll_joint",
+          "right_hip_yaw_joint",
+          "right_knee_joint"
+        ],
+        "axis_in_joint_frame": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "nominal_axis_world": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "downstream_mass_kg": 2.614
+      },
+      "xq180_chain": {
+        "root_to_joint": [
+          "right_hip_yaw_joint",
+          "right_hip_roll_joint",
+          "right_hip_pitch_joint",
+          "right_knee_joint"
+        ],
+        "axis_in_joint_frame": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "nominal_axis_world": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "downstream_mass_kg": 6.471877
+      }
+    },
+    {
+      "joint": "right_ankle_joint",
+      "g1_joint": "right_ankle_pitch_joint",
+      "fixed_root_inertia_ratio": 1.9268404651288997,
+      "single_support_inertia_ratio": 3.5492176607403763,
+      "g1_chain": {
+        "root_to_joint": [
+          "right_hip_pitch_joint",
+          "right_hip_roll_joint",
+          "right_hip_yaw_joint",
+          "right_knee_joint",
+          "right_ankle_pitch_joint"
+        ],
+        "axis_in_joint_frame": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "nominal_axis_world": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "downstream_mass_kg": 0.6819999999999999
+      },
+      "xq180_chain": {
+        "root_to_joint": [
+          "right_hip_yaw_joint",
+          "right_hip_roll_joint",
+          "right_hip_pitch_joint",
+          "right_knee_joint",
+          "right_ankle_joint"
+        ],
+        "axis_in_joint_frame": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "nominal_axis_world": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "downstream_mass_kg": 1.000814
+      }
+    },
+    {
+      "joint": "waist_point",
+      "g1_joint": "waist_yaw_joint",
+      "fixed_root_inertia_ratio": 1.5322540082961,
+      "single_support_inertia_ratio": 1.5322540082961,
+      "g1_chain": {
+        "root_to_joint": [
+          "waist_yaw_joint"
+        ],
+        "axis_in_joint_frame": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "nominal_axis_world": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "downstream_mass_kg": 15.156142000000001
+      },
+      "xq180_chain": {
+        "root_to_joint": [
+          "waist_point"
+        ],
+        "axis_in_joint_frame": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "nominal_axis_world": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "downstream_mass_kg": 20.564366
+      }
+    },
+    {
+      "joint": "left_shoulder_pitch_joint",
+      "g1_joint": "left_shoulder_pitch_joint",
+      "fixed_root_inertia_ratio": 0.6897641243364133,
+      "single_support_inertia_ratio": 0.6897641243364133,
+      "g1_chain": {
+        "root_to_joint": [
+          "waist_yaw_joint",
+          "waist_roll_joint",
+          "waist_pitch_joint",
+          "left_shoulder_pitch_joint"
+        ],
+        "axis_in_joint_frame": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "nominal_axis_world": [
+          0.00019931407505568427,
+          0.9612461327923458,
+          0.27569155312714855
+        ],
+        "downstream_mass_kg": 3.5190710000000003
+      },
+      "xq180_chain": {
+        "root_to_joint": [
+          "waist_point",
+          "left_shoulder_pitch_joint"
+        ],
+        "axis_in_joint_frame": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "nominal_axis_world": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "downstream_mass_kg": 2.363654
+      }
+    },
+    {
+      "joint": "left_shoulder_roll_joint",
+      "g1_joint": "left_shoulder_roll_joint",
+      "fixed_root_inertia_ratio": 0.8744205244636182,
+      "single_support_inertia_ratio": 0.8744205244636182,
+      "g1_chain": {
+        "root_to_joint": [
+          "waist_yaw_joint",
+          "waist_roll_joint",
+          "waist_pitch_joint",
+          "left_shoulder_pitch_joint",
+          "left_shoulder_roll_joint"
+        ],
+        "axis_in_joint_frame": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "nominal_axis_world": [
+          0.9800665584380958,
+          0.05458368652099028,
+          -0.19102398330336687
+        ],
+        "downstream_mass_kg": 2.8010710000000003
+      },
+      "xq180_chain": {
+        "root_to_joint": [
+          "waist_point",
+          "left_shoulder_pitch_joint",
+          "left_shoulder_roll_joint"
+        ],
+        "axis_in_joint_frame": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "nominal_axis_world": [
+          0.9950041652780258,
+          0.0,
+          0.09983341664682815
+        ],
+        "downstream_mass_kg": 1.749802
+      }
+    },
+    {
+      "joint": "left_shoulder_yaw_joint",
+      "g1_joint": "left_shoulder_yaw_joint",
+      "fixed_root_inertia_ratio": 0.44993502149288683,
+      "single_support_inertia_ratio": 0.44993502149288683,
+      "g1_chain": {
+        "root_to_joint": [
+          "waist_yaw_joint",
+          "waist_roll_joint",
+          "waist_pitch_joint",
+          "left_shoulder_pitch_joint",
+          "left_shoulder_roll_joint",
+          "left_shoulder_yaw_joint"
+        ],
+        "axis_in_joint_frame": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "nominal_axis_world": [
+          0.1980615464812957,
+          -0.19328642972471022,
+          0.9609432761041165
+        ],
+        "downstream_mass_kg": 2.158071
+      },
+      "xq180_chain": {
+        "root_to_joint": [
+          "waist_point",
+          "left_shoulder_pitch_joint",
+          "left_shoulder_roll_joint",
+          "left_shoulder_yaw_joint"
+        ],
+        "axis_in_joint_frame": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "nominal_axis_world": [
+          -0.09871239499192232,
+          -0.14943813247359924,
+          0.9838313410528056
+        ],
+        "downstream_mass_kg": 1.147788
+      }
+    },
+    {
+      "joint": "leftelbow_joint",
+      "g1_joint": "left_elbow_joint",
+      "fixed_root_inertia_ratio": 0.7276524719329156,
+      "single_support_inertia_ratio": 0.7276524719329156,
+      "g1_chain": {
+        "root_to_joint": [
+          "waist_yaw_joint",
+          "waist_roll_joint",
+          "waist_pitch_joint",
+          "left_shoulder_pitch_joint",
+          "left_shoulder_roll_joint",
+          "left_shoulder_yaw_joint",
+          "left_elbow_joint"
+        ],
+        "axis_in_joint_frame": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "nominal_axis_world": [
+          -0.015529482822820084,
+          0.9796228750136723,
+          0.2002444953380812
+        ],
+        "downstream_mass_kg": 1.424071
+      },
+      "xq180_chain": {
+        "root_to_joint": [
+          "waist_point",
+          "left_shoulder_pitch_joint",
+          "left_shoulder_roll_joint",
+          "left_shoulder_yaw_joint",
+          "leftelbow_joint"
+        ],
+        "axis_in_joint_frame": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "nominal_axis_world": [
+          -0.014918919342160733,
+          0.9887710779360422,
+          0.14869156426260072
+        ],
+        "downstream_mass_kg": 0.479479
+      }
+    },
+    {
+      "joint": "right_shoulder_pitch_joint",
+      "g1_joint": "right_shoulder_pitch_joint",
+      "fixed_root_inertia_ratio": 0.6923072799969444,
+      "single_support_inertia_ratio": 0.6923072799969444,
+      "g1_chain": {
+        "root_to_joint": [
+          "waist_yaw_joint",
+          "waist_roll_joint",
+          "waist_pitch_joint",
+          "right_shoulder_pitch_joint"
+        ],
+        "axis_in_joint_frame": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "nominal_axis_world": [
+          -0.00019931407505568427,
+          0.9612461327923458,
+          -0.27569155312714855
+        ],
+        "downstream_mass_kg": 3.5190710000000003
+      },
+      "xq180_chain": {
+        "root_to_joint": [
+          "waist_point",
+          "right_shoulder_pitch_joint"
+        ],
+        "axis_in_joint_frame": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "nominal_axis_world": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "downstream_mass_kg": 2.363965
+      }
+    },
+    {
+      "joint": "right_shoulder_roll_joint",
+      "g1_joint": "right_shoulder_roll_joint",
+      "fixed_root_inertia_ratio": 0.8749239468387132,
+      "single_support_inertia_ratio": 0.8749239468387132,
+      "g1_chain": {
+        "root_to_joint": [
+          "waist_yaw_joint",
+          "waist_roll_joint",
+          "waist_pitch_joint",
+          "right_shoulder_pitch_joint",
+          "right_shoulder_roll_joint"
+        ],
+        "axis_in_joint_frame": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "nominal_axis_world": [
+          0.9800665584380958,
+          -0.05458368652099028,
+          -0.19102398330336687
+        ],
+        "downstream_mass_kg": 2.8010710000000003
+      },
+      "xq180_chain": {
+        "root_to_joint": [
+          "waist_point",
+          "right_shoulder_pitch_joint",
+          "right_shoulder_roll_joint"
+        ],
+        "axis_in_joint_frame": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "nominal_axis_world": [
+          0.9950041652780258,
+          0.0,
+          0.09983341664682815
+        ],
+        "downstream_mass_kg": 1.750113
+      }
+    },
+    {
+      "joint": "right_shoulder_yaw_joint",
+      "g1_joint": "right_shoulder_yaw_joint",
+      "fixed_root_inertia_ratio": 0.4500012967048654,
+      "single_support_inertia_ratio": 0.4500012967048654,
+      "g1_chain": {
+        "root_to_joint": [
+          "waist_yaw_joint",
+          "waist_roll_joint",
+          "waist_pitch_joint",
+          "right_shoulder_pitch_joint",
+          "right_shoulder_roll_joint",
+          "right_shoulder_yaw_joint"
+        ],
+        "axis_in_joint_frame": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "nominal_axis_world": [
+          0.1980615464812957,
+          0.19328642972471022,
+          0.9609432761041165
+        ],
+        "downstream_mass_kg": 2.158071
+      },
+      "xq180_chain": {
+        "root_to_joint": [
+          "waist_point",
+          "right_shoulder_pitch_joint",
+          "right_shoulder_roll_joint",
+          "right_shoulder_yaw_joint"
+        ],
+        "axis_in_joint_frame": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "nominal_axis_world": [
+          -0.09871239499192232,
+          0.14943813247359924,
+          0.9838313410528056
+        ],
+        "downstream_mass_kg": 1.148099
+      }
+    },
+    {
+      "joint": "rightelbow_joint",
+      "g1_joint": "right_elbow_joint",
+      "fixed_root_inertia_ratio": 0.7276728481253412,
+      "single_support_inertia_ratio": 0.7276728481253412,
+      "g1_chain": {
+        "root_to_joint": [
+          "waist_yaw_joint",
+          "waist_roll_joint",
+          "waist_pitch_joint",
+          "right_shoulder_pitch_joint",
+          "right_shoulder_roll_joint",
+          "right_shoulder_yaw_joint",
+          "right_elbow_joint"
+        ],
+        "axis_in_joint_frame": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "nominal_axis_world": [
+          0.015529482822820084,
+          0.9796228750136723,
+          -0.2002444953380812
+        ],
+        "downstream_mass_kg": 1.424071
+      },
+      "xq180_chain": {
+        "root_to_joint": [
+          "waist_point",
+          "right_shoulder_pitch_joint",
+          "right_shoulder_roll_joint",
+          "right_shoulder_yaw_joint",
+          "rightelbow_joint"
+        ],
+        "axis_in_joint_frame": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "nominal_axis_world": [
+          0.014918919342160733,
+          0.9887710779360422,
+          -0.14869156426260072
+        ],
+        "downstream_mass_kg": 0.479939
+      }
+    }
+  ]
+}

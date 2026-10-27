@@ -27,13 +27,14 @@ import torch.optim as optim
 from rsl_rl.modules import ActorCritic
 from rsl_rl.modules.rnd import RandomNetworkDistillation
 from rsl_rl.storage import ReplayBuffer, RolloutStorage
-from rsl_rl.utils import string_to_callable
+from rsl_rl.utils import Normalizer, string_to_callable
 
 
 class AMPPPO:
     """Proximal Policy Optimization algorithm (https://arxiv.org/abs/1707.06347)."""
 
     policy: ActorCritic
+    AMP_NORMALIZER_VERSION = 2
     """The actor critic module."""
 
     def __init__(
@@ -66,6 +67,8 @@ class AMPPPO:
         # Distributed training parameters
         multi_gpu_cfg: dict | None = None,
         share_cnn_encoders=False,
+        action_clip=None,
+        kl_stop_multiplier=None,
     ):
         # device-related parameters
         self.device = device
@@ -119,6 +122,11 @@ class AMPPPO:
         self.amp_storage = ReplayBuffer(discriminator.input_dim // 2, amp_replay_buffer_size, device)
         self.amp_data = amp_data
         self.amp_normalizer = amp_normalizer
+        self.amp_normalizer_version = self.AMP_NORMALIZER_VERSION
+        self.action_clip = action_clip
+        self.kl_stop_multiplier = kl_stop_multiplier
+        if kl_stop_multiplier is not None and (kl_stop_multiplier <= 0 or desired_kl is None or desired_kl <= 0):
+            raise ValueError("KL stopping requires a positive multiplier and desired_kl")
 
         # PPO components
         self.policy = policy
@@ -223,6 +231,10 @@ class AMPPPO:
         )
 
     def update(self):  # noqa: C901
+        if self.amp_normalizer_version != self.AMP_NORMALIZER_VERSION:
+            raise RuntimeError("Legacy AMP normalization cannot resume training directly. "
+                               "Reload with amp_reset_on_load=True to reset AMP statistics, "
+                               "discriminator and optimizer while retaining policy weights.")
         mean_value_loss = 0
         mean_surrogate_loss = 0
         mean_entropy = 0
@@ -242,6 +254,10 @@ class AMPPPO:
             mean_symmetry_loss = None
         skipped_non_finite_batches = 0
         effective_updates = 0
+        mean_kl = mean_clip_fraction = mean_action_saturation = 0.0
+        mean_policy_grad_norm = mean_amp_grad_norm = 0.0
+        policy_stopped = False
+        policy_updates = 0
 
         # generator for mini batches
         if self.policy.is_recurrent:
@@ -274,6 +290,11 @@ class AMPPPO:
                 masks_batch,
                 rnd_state_batch,
             ) = sample
+            if not self._all_finite(obs_batch, critic_obs_batch, actions_batch,
+                                    returns_batch, old_mu_batch, old_sigma_batch,
+                                    old_actions_log_prob_batch, advantages_batch):
+                skipped_non_finite_batches += 1
+                continue
 
             # number of augmentations per sample
             # we start with 1 and increase it if we use symmetry augmentation
@@ -314,7 +335,7 @@ class AMPPPO:
             actions_log_prob_batch = self.policy.get_actions_log_prob(actions_batch)
             # -- critic
             value_batch = self.policy.evaluate(critic_obs_batch, masks=masks_batch, hidden_states=hid_states_batch[1])
-            if not torch.isfinite(returns_batch).all() or not torch.isfinite(value_batch).all():
+            if not self._all_finite(value_batch):
                 skipped_non_finite_batches += 1
                 continue
             # -- entropy
@@ -324,7 +345,7 @@ class AMPPPO:
             entropy_batch = self.policy.entropy[:original_batch_size]
 
             # KL
-            if self.desired_kl is not None and self.schedule == "adaptive":
+            if self.desired_kl is not None:
                 with torch.inference_mode():
                     kl = torch.sum(
                         torch.log(sigma_batch / old_sigma_batch + 1.0e-5)
@@ -344,7 +365,7 @@ class AMPPPO:
                     # Perform this adaptation only on the main process
                     # TODO: Is this needed? If KL-divergence is the "same" across all GPUs,
                     #       then the learning rate should be the same across all GPUs.
-                    if self.gpu_global_rank == 0:
+                    if self.schedule == "adaptive" and self.gpu_global_rank == 0:
                         if kl_mean > self.desired_kl * 2.0:
                             self.learning_rate = max(1e-5, self.learning_rate / 1.5)
                         elif kl_mean < self.desired_kl / 2.0 and kl_mean > 0.0:
@@ -359,6 +380,8 @@ class AMPPPO:
                     # Update the learning rate for all parameter groups
                     for param_group in self.optimizer.param_groups:
                         param_group["lr"] = self.learning_rate
+                    if self.kl_stop_multiplier is not None and kl_mean > self.kl_stop_multiplier * self.desired_kl:
+                        policy_stopped = True
 
             # Surrogate loss
             ratio = torch.exp(actions_log_prob_batch - torch.squeeze(old_actions_log_prob_batch))
@@ -379,12 +402,12 @@ class AMPPPO:
             else:
                 value_loss = (returns_batch - value_batch).pow(2).mean()
 
-            if not torch.isfinite(value_loss):
+            if not self._all_finite(value_loss):
                 skipped_non_finite_batches += 1
                 continue
 
             loss = surrogate_loss + self.value_loss_coef * value_loss - self.entropy_coef * entropy_batch.mean()
-            if not torch.isfinite(loss):
+            if not self._all_finite(loss, *([kl_mean] if self.desired_kl is not None else [])):
                 skipped_non_finite_batches += 1
                 continue
 
@@ -433,8 +456,18 @@ class AMPPPO:
                 rnd_loss = mseloss(predicted_embedding, target_embedding)
 
             # Discriminator loss.
+            # Freeze PPO for the rest of this rollout after excessive KL, while
+            # still training AMP on every expert minibatch (no clip starvation).
+            if policy_stopped:
+                loss = loss.detach() * 0
             policy_state, policy_next_state = sample_amp_policy
             expert_state, expert_next_state = sample_amp_expert
+            if not self._all_finite(policy_state, policy_next_state, expert_state, expert_next_state):
+                skipped_non_finite_batches += 1
+                continue
+            # Preserve raw samples: running statistics describe the raw feature
+            # distribution, never the output of the normalizer itself.
+            raw_policy_state, raw_expert_state = policy_state, expert_state
             if self.amp_normalizer is not None:
                 with torch.no_grad():
                     policy_state = self.amp_normalizer.normalize_torch(policy_state, self.device)
@@ -446,12 +479,15 @@ class AMPPPO:
             expert_loss = torch.nn.MSELoss()(expert_d, torch.ones(expert_d.size(), device=self.device))
             policy_loss = torch.nn.MSELoss()(policy_d, -1 * torch.ones(policy_d.size(), device=self.device))
             amp_loss = 0.5 * (expert_loss + policy_loss)
-            grad_pen_loss = self.discriminator.compute_grad_pen(*sample_amp_expert, lambda_=10)
+            grad_pen_loss = self.discriminator.compute_grad_pen(expert_state, expert_next_state, lambda_=10)
             loss += self.amploss_coef * amp_loss + self.amploss_coef * grad_pen_loss
+            if not self._all_finite(loss, *([rnd_loss] if self.rnd else [])):
+                skipped_non_finite_batches += 1
+                continue
 
             # Compute the gradients
             # -- For PPO
-            self.optimizer.zero_grad()
+            self.optimizer.zero_grad(set_to_none=True)
             loss.backward()
             # -- For RND
             if self.rnd:
@@ -464,7 +500,12 @@ class AMPPPO:
 
             # Apply the gradients
             # -- For PPO
-            nn.utils.clip_grad_norm_(self.policy.parameters(), self.max_grad_norm)
+            policy_grad_norm = nn.utils.clip_grad_norm_(self.policy.parameters(), self.max_grad_norm)
+            amp_grad_norm = nn.utils.clip_grad_norm_(self.discriminator.parameters(), self.max_grad_norm)
+            if not self._all_finite(policy_grad_norm, amp_grad_norm):
+                self.optimizer.zero_grad(set_to_none=True)
+                skipped_non_finite_batches += 1
+                continue
             self.optimizer.step()
 
             # Keep policy noise above configured floor to avoid invalid Normal std.
@@ -495,11 +536,19 @@ class AMPPPO:
                 self.rnd_optimizer.step()
 
             if self.amp_normalizer is not None:
-                self.amp_normalizer.update(policy_state.cpu().numpy())
-                self.amp_normalizer.update(expert_state.cpu().numpy())
+                self.amp_normalizer.update(raw_policy_state.detach().cpu().numpy())
+                self.amp_normalizer.update(raw_expert_state.detach().cpu().numpy())
 
             # Store the losses
             effective_updates += 1
+            policy_updates += int(not policy_stopped)
+            with torch.no_grad():
+                mean_kl += kl_mean.item() if self.desired_kl is not None else 0.0
+                mean_clip_fraction += ((ratio - 1).abs() > self.clip_param).float().mean().item()
+                if self.action_clip is not None:
+                    mean_action_saturation += (actions_batch.abs() >= self.action_clip).float().mean().item()
+            mean_policy_grad_norm += policy_grad_norm.item()
+            mean_amp_grad_norm += amp_grad_norm.item()
             mean_value_loss += value_loss.item()
             mean_surrogate_loss += surrogate_loss.item()
             mean_entropy += entropy_batch.mean().item()
@@ -515,7 +564,10 @@ class AMPPPO:
                 mean_symmetry_loss += symmetry_loss.item()
 
         # -- For PPO
-        num_updates = max(effective_updates, 1)
+        if effective_updates == 0:
+            raise RuntimeError("AMPPPO skipped every minibatch due to non-finite data, loss or gradients; "
+                               "training stopped instead of continuing without updates.")
+        num_updates = effective_updates
         mean_value_loss /= num_updates
         mean_surrogate_loss /= num_updates
         mean_entropy /= num_updates
@@ -542,6 +594,14 @@ class AMPPPO:
             "amp_policy_pred": mean_policy_pred,
             "amp_expert_pred": mean_expert_pred,
             "skipped_non_finite_batches": float(skipped_non_finite_batches),
+            "effective_updates": float(effective_updates),
+            "policy_updates": float(policy_updates),
+            "policy_kl_stopped": float(policy_stopped),
+            "kl": mean_kl / num_updates,
+            "clip_fraction": mean_clip_fraction / num_updates,
+            "action_saturation_fraction": mean_action_saturation / num_updates,
+            "policy_grad_norm": mean_policy_grad_norm / num_updates,
+            "amp_grad_norm": mean_amp_grad_norm / num_updates,
         }
         if self.rnd:
             loss_dict["rnd"] = mean_rnd_loss
@@ -550,6 +610,24 @@ class AMPPPO:
 
         return loss_dict
 
+    def _all_finite(self, *values):
+        # Every rank must take the same skip path before gradient collectives.
+        finite = torch.stack([torch.isfinite(value).all().to(self.device) for value in values]).all().to(torch.int32)
+        if self.is_multi_gpu:
+            torch.distributed.all_reduce(finite, op=torch.distributed.ReduceOp.MIN)
+        return bool(finite.item())
+
+    def reset_amp_training(self):
+        """Explicit warm start from a policy trained with legacy AMP statistics."""
+        for module in self.discriminator.modules():
+            if isinstance(module, nn.Linear):
+                module.reset_parameters()
+        if self.amp_normalizer is not None:
+            self.amp_normalizer = Normalizer(self.discriminator.input_dim // 2)
+        self.amp_storage.step = self.amp_storage.num_samples = 0
+        self.optimizer.state.clear()
+        self.amp_normalizer_version = self.AMP_NORMALIZER_VERSION
+
     """
     Helper functions
     """
@@ -557,15 +635,16 @@ class AMPPPO:
     def broadcast_parameters(self):
         """Broadcast model parameters to all GPUs."""
         # obtain the model parameters on current GPU
-        model_params = [self.policy.state_dict()]
+        model_params = [self.policy.state_dict(), self.discriminator.state_dict()]
         if self.rnd:
             model_params.append(self.rnd.predictor.state_dict())
         # broadcast the model parameters
         torch.distributed.broadcast_object_list(model_params, src=0)
         # load the model parameters on all GPUs from source GPU
         self.policy.load_state_dict(model_params[0])
+        self.discriminator.load_state_dict(model_params[1])
         if self.rnd:
-            self.rnd.predictor.load_state_dict(model_params[1])
+            self.rnd.predictor.load_state_dict(model_params[2])
 
     def get_policy(self):
         """Return the policy module."""
@@ -588,6 +667,7 @@ class AMPPPO:
             "optimizer_state_dict": self.optimizer.state_dict(),
             "discriminator_state_dict": self.discriminator.state_dict(),
             "amp_normalizer": self.amp_normalizer,
+            "amp_normalizer_version": self.amp_normalizer_version,
         }
         return result
 
@@ -629,6 +709,9 @@ class AMPPPO:
             self.discriminator.load_state_dict(loaded_dict["discriminator_state_dict"])
         if "amp_normalizer" in loaded_dict:
             self.amp_normalizer = loaded_dict["amp_normalizer"]
+        self.amp_normalizer_version = loaded_dict.get("amp_normalizer_version", 1)
+        if load_cfg.get("reset_amp", False):
+            self.reset_amp_training()
 
         return load_actor and load_critic
 
@@ -638,7 +721,8 @@ class AMPPPO:
         This function is called after the backward pass to synchronize the gradients across all GPUs.
         """
         # Create a tensor to store the gradients
-        grads = [param.grad.view(-1) for param in self.policy.parameters() if param.grad is not None]
+        trainable = list(chain(self.policy.parameters(), self.discriminator.parameters()))
+        grads = [param.grad.view(-1) for param in trainable if param.grad is not None]
         if self.rnd:
             grads += [param.grad.view(-1) for param in self.rnd.parameters() if param.grad is not None]
         all_grads = torch.cat(grads)
@@ -648,7 +732,7 @@ class AMPPPO:
         all_grads /= self.gpu_world_size
 
         # Get all parameters
-        all_params = self.policy.parameters()
+        all_params = iter(trainable)
         if self.rnd:
             all_params = chain(all_params, self.rnd.parameters())
 

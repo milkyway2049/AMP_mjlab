@@ -416,7 +416,7 @@ def main(
   video_output: str | None = None,
   render_entity_name: str | None = "robot",
   line_range: tuple[int, int] | None = None,
-  robot: Literal["g1", "hunter130", "hunter180"] = "g1",
+  robot: Literal["g1", "hunter130", "hunter180", "xq180"] = "g1",
 ):
   """Replay motion from CSV file and output to npz file.
 
@@ -454,13 +454,19 @@ def main(
   sim_cfg = SimulationCfg()
   sim_cfg.mujoco.timestep = 1.0 / output_fps
 
-  if robot in ("hunter130", "hunter180"):
+  if robot in ("hunter130", "hunter180", "xq180"):
     from mjlab.scene import SceneCfg
     from mjlab.terrains import TerrainEntityCfg
-    from src.assets.robots import get_hunter130_robot_cfg, get_hunter180_robot_cfg
+    from src.assets.robots import get_hunter130_robot_cfg, get_hunter180_robot_cfg, get_xq180_robot_cfg
+
+    robot_cfg = {
+      "hunter130": get_hunter130_robot_cfg,
+      "hunter180": get_hunter180_robot_cfg,
+      "xq180": get_xq180_robot_cfg,
+    }[robot]()
 
     scene_cfg = SceneCfg(
-      entities={"robot": (get_hunter130_robot_cfg() if robot == "hunter130" else get_hunter180_robot_cfg())}, num_envs=1, extent=2.0,
+      entities={"robot": robot_cfg}, num_envs=1, extent=2.0,
       terrain=TerrainEntityCfg(terrain_type="plane"),
     )
   else:
@@ -536,6 +542,10 @@ def main(
     from src.assets.robots.hunter180.hunter180_constants import HUNTER180_JOINT_NAMES
 
     joint_names = list(HUNTER180_JOINT_NAMES)
+  elif robot == "xq180":
+    from src.assets.robots.xq180.xq180_constants import XQ180_JOINT_NAMES
+
+    joint_names = list(XQ180_JOINT_NAMES)
 
   for i, (cur_input_file, cur_output_name) in enumerate(file_pairs):
     if len(file_pairs) > 1:
